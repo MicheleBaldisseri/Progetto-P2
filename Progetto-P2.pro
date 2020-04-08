@@ -27,10 +27,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    data.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    data.h
 
 FORMS += \
         mainwindow.ui
