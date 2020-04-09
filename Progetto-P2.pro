@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    data.cpp
+data.cpp \
+orario.cpp
 
 HEADERS += \
         mainwindow.h \
-    data.h
+    data.h \
+    orario.h
 
 FORMS += \
         mainwindow.ui

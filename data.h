@@ -2,21 +2,19 @@
 #define DATA_H
 
 #include <string>
+
 enum settimana {lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica};
 
 class data{
-private:
-    int giorno, mese, anno;
-    //settimana giorno_s; come gestirlo?
-
 public:
     //costruttori
-    data(int=1, int=1, int=1980);
-    data(const std::string&);
+    data(int gg, int mm, int aa);
+    data(const std::string& s);
+
     //costruttore di copia
-    data(const data&);
+    data(const data& d);
     //overload dell'operatore d'assegnazione
-    data& operator=(const data&);
+    data& operator=(const data& d);
     //distruttore
     ~data();
 
@@ -36,19 +34,24 @@ public:
 
     bool bisestile() const;
 
-    data operator+(const data&);
-    data operator-(const data&);
+    data operator+(const data& d);
+    data operator-(const data& d);
     //postfissi
     data operator++(int);
     data operator--(int);
     //prefissi
     data& operator++();
     data& operator--();
-    bool operator==(const data&);
-    bool operator!=(const data&);
-    bool operator<(const data&);
-    bool operator>(const data&);
+    bool operator==(const data& d);
+    bool operator!=(const data& d);
+    bool operator<(const data& d);
+    bool operator>(const data& d);
+private:
+    int giorno, mese, anno;
+    settimana giorno_settimana;
 };
+
 //overload operatore di output
 std::ostream& operator<<(std::ostream&, const data&);
+
 #endif // DATA_H
