@@ -2,14 +2,13 @@
 
 data::data():giorno(1),mese(1),anno(1980){}
 
-data::data(int gg, int mm, int aa){
+data::data(int gg, int mm, int aa):data(){
     if(mm<=12){
         mese=mm;
         if(gg<=getGiorniMese())
             giorno=gg;
         anno=aa;
     }
-    else data();
 }
 
 std::string data::getData() const{

@@ -50,20 +50,13 @@ public:
     void setAnno();
 
 
+
+
     //costruttore da stringa??
     data(const std::string& s);
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
-
-
-
-
-
-
     void setData(int, int, int);
-
-
-
     data operator+(const data&);
     data operator-(const data&);
     //postfissi
@@ -72,10 +65,10 @@ public:
     //prefissi
     data& operator++();
     data& operator--();
-    bool operator==(const data&);
-    bool operator!=(const data&);
-    bool operator<(const data&);
-    bool operator>(const data&);
+    bool operator==(const data&) const;
+    bool operator!=(const data&) const;
+    bool operator<(const data&) const;
+    bool operator>(const data&) const;
 private:
     int giorno, mese, anno;
     settimana giorno_settimana;

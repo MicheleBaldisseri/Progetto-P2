@@ -4,35 +4,42 @@
 using std::ostream;
 
 class orario{
-private:
-    int sec;//minuti,ore,secondi?
 public:
-    orario(int=0,int=0,int=0);
-    orario(const orario&);
-    orario& operator=(const orario&);
+    orario(int o=0,int m=0,int s=0);
+    orario(const orario& o);
+    orario& operator=(const orario& o);
     ~orario();
 
     int getOre() const;
     int getMinuti() const;
     int getSecondi() const;
 
-    void setOre();
-    void setMinuti();
-    void setSecondi();
+    void setOre(int o);
+    void setMinuti(int m);
+    void setSecondi(int s);
+
+    void avanzaOre(int o);
+
+
+
+
+
 
     operator int();
-    orario operator+();
-    orario operator-();
+    orario operator+(const orario& o) const;
+    orario operator-(const orario& o) const;
     //postfissi
     orario operator++(int);
     orario operator--(int); //sensato?
     //prefissi
     orario& operator++();
     orario& operator--();
-    bool operator==(const orario&);
-    bool operator!=(const orario&);
-    bool operator<(const orario&);
-    bool operator>(const orario&);
+    bool operator==(const orario& o);
+    bool operator!=(const orario& o);
+    bool operator<(const orario& o);
+    bool operator>(const orario& o);
+private:
+    int sec;
 };
 //overload operatore di output
 std::ostream& operator<<(std::ostream&, const orario&);

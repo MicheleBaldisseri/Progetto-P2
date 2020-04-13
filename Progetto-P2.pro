@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
 data.cpp \
-orario.cpp
+orario.cpp \
+    dataora.cpp
 
 HEADERS += \
         mainwindow.h \
     data.h \
-    orario.h
+    orario.h \
+    dataora.h
 
 FORMS += \
         mainwindow.ui

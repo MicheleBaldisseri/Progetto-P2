@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <iostream>
 #include "data.h"
+#include "orario.h"
+#include "dataora.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,5 +28,10 @@ int main(int argc, char *argv[])
       std::cout<<"aggiungo 11 mesi alla variabile domani "<<domani<<std::endl;
       if(domani.bisestile()) std::cout<<"bisestile"<<std::endl;
       else std::cout<<"non bisestile"<<std::endl;
+      orario o(22,8,15);
+      dataora x(13,4,2020,22,8,15);
+      x.avanzaOre(2);
+      x.avanzaGiorni(1);
+      std::cout<<x<<std::endl;
     return 0;
 }
