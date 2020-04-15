@@ -1,5 +1,6 @@
 #include <iostream>
 #include "dataora.h"
+#include "evento.h"
 using namespace std;
 template <class T> class lista;
 template <class T> ostream& operator<<(ostream&, const lista<T>&);
