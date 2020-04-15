@@ -3,7 +3,7 @@
 #include<iostream>
 #include <string>
 
-enum settimana {lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica};
+enum settimana {sabato=0, domenica=1, lunedi=2, martedi=3, mercoledi=4, giovedi=5, venerdi=6};
 
 class data;
 std::ostream& operator<<(std::ostream&, const data&);
@@ -27,12 +27,10 @@ public:
     bool bisestile() const;
     //restituisce la data completa sottoforma di stringa
     std::string getData() const;
-    //restituisce i giorni del mese dell'oggetto d'invocazione
-    int getGiorniMese() const;
     //modifica l'oggetto d'invocazione aumentandolo di g giorni
-    void avanzaGiorni(int g);
+    void avanzaGiorni(unsigned int g);
     //modifica l'oggetto d'invocazione aumentandolo di m mesi
-    void avanzaMesi(int m);
+    void avanzaMesi(unsigned int m);
     //modifica l'oggetto d'invocazione aumentandolo di a anni
     void avanzaAnni(int a);
 
@@ -43,11 +41,16 @@ public:
     int getGiorno() const;
     //ritorna l'anno dell'oggetto d'invocazione
     int getAnno() const;
+    //restituisce i giorni del mese dell'oggetto d'invocazione
+    int getGiorniMese() const;
+    //ritorna il giorno della settimana
+    int getGiornoSettimana() const;
+    //ritorna la data annuale del giorno considerato, ovvero il numero di giorni trascorsi dall'inizio dell'anno fino al giorno stesso (compreso)
+    int getGiornoDellAnno() const;
 
-
-    void setGiorno();
-    void setMese();
-    void setAnno();
+    void setGiorno(int x);
+    void setMese(int x);
+    void setAnno(int x);
 
 
 
@@ -70,7 +73,7 @@ public:
     bool operator<(const data&) const;
     bool operator>(const data&) const;
 private:
-    int giorno, mese, anno;
+    unsigned int giorno, mese, anno;
     settimana giorno_settimana;
 };
 //overload operatore di output

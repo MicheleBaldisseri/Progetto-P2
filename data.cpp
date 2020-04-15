@@ -1,6 +1,6 @@
 #include "data.h"
 
-data::data():giorno(1),mese(1),anno(1980){}
+data::data():giorno(1),mese(1),anno(1980),giorno_settimana((settimana)3){}//sistemare
 
 data::data(int gg, int mm, int aa):data(){
     if(mm<=12){
@@ -9,6 +9,7 @@ data::data(int gg, int mm, int aa):data(){
             giorno=gg;
         anno=aa;
     }
+    //giorno_settimana=(settimana)getGiornoSettimana();
 }
 
 std::string data::getData() const{
@@ -35,7 +36,7 @@ void data::avanzaAnni(int a){
     anno+=a;
 }
 
-void data::avanzaMesi(int m){
+void data::avanzaMesi(unsigned int m){
     for(unsigned int i=0; i<m; i++){
         //se sono all'ultimo mese dell'anno passo all'anno successivo
         if(getMese()==12){
@@ -46,9 +47,9 @@ void data::avanzaMesi(int m){
     }
 }
 
-void data::avanzaGiorni(int g){
+void data::avanzaGiorni(unsigned int g){
     //salvo i giorni del mese corrente in una variabile
-    int ggMese=getGiorniMese();
+    unsigned int ggMese=getGiorniMese();
     //aggiungo i giorni con un ciclo
     for(unsigned int i=0; i<g; i++){
         giorno++;
@@ -83,6 +84,53 @@ int data::getGiorno() const{
 
 int data::getAnno() const{
     return anno;
+}
+
+int data::getGiornoSettimana() const {
+    return (anno+ ((anno-1)/4) - ((anno-1)/100) + ((anno-1)/400) + getGiornoDellAnno()) % 7;
+    /*
+    0	sabato
+    1	domenica
+    2	lunedì
+    3	martedì
+    4	mercoledì
+    5	giovedì
+    6	venerdì
+    */
+}
+
+int data::getGiornoDellAnno() const
+{
+    unsigned int mm=getMese(), gg=0;
+    //faccio una copia dell'obj d'invocazione per avere informazioni sull'anno di appartenenza (bisestile o meno)
+    data aux(*this);
+    for(unsigned int i=1; i<=mm; i++){
+        //calcolo in base all'anno di appart. i giorni dei mesi precedenti a quello in cui mi trovo
+        if(getMese() != i){
+            aux.setMese(i);
+            gg+=aux.getGiorniMese();
+        }
+        //aggiungo il giorno del mese in cui si trova la data
+        else gg+=giorno;
+    }
+    return gg;
+}
+
+void data::setGiorno(int x)
+{
+    if(x>0 && x<getGiorniMese())
+        giorno=x;
+}
+
+void data::setMese(int x)
+{
+    if(x>0 && x<12)
+        mese=x;
+}
+
+void data::setAnno(int x)
+{
+    anno=x;
 }
 
 data::~data(){}

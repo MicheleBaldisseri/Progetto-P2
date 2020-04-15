@@ -33,5 +33,7 @@ int main(int argc, char *argv[])
       x.avanzaOre(2);
       x.avanzaGiorni(1);
       std::cout<<x<<std::endl;
+      data weekDay(15,4,2020), weekDayYearLater(15,4,2021);
+      std::cout<<weekDay.getGiornoSettimana()<<" "<<weekDayYearLater.getGiornoSettimana()<<std::endl;
     return 0;
 }
