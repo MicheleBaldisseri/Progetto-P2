@@ -16,7 +16,7 @@ private:
 		dataora data;
 		nodo* next;
 		nodo(const T& t=T(),nodo* n=0): info(t), next(n){}
-		~nodo(){delete next;} //ricorsivamente richiama il distruttore di nodo su tutta la lista
+		~nodo(){delete next;} 
 	};
 	nodo* first, *last;
 	static bool isBefore(nodo* a, nodo* b){
@@ -48,7 +48,7 @@ public:
 	//distruttore
 	~lista(){delete first; delete last;}
 	//Deve essere disponibile un metodo void insert(const T&) con il seguente comportamento: c.insert(t) inserisce
-	//l’elemento t in lista a c in tempo costante.
+	//l’elemento t in lista.
 	void insert(const T& t){
 		nodo* nuovo;
 		if(!first){
