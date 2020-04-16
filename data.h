@@ -14,7 +14,7 @@ public:
     //costruttore di default
     data();
     //costruttore a 3 parametri
-    data(int gg, int mm, int aa);
+    data(unsigned int gg, unsigned int mm, unsigned int aa);
     //distruttore
     ~data();
     //costruttore di copia
@@ -32,34 +32,42 @@ public:
     //modifica l'oggetto d'invocazione aumentandolo di m mesi
     void avanzaMesi(unsigned int m);
     //modifica l'oggetto d'invocazione aumentandolo di a anni
-    void avanzaAnni(int a);
+    void avanzaAnni(unsigned int a);
 
 
     //ritorna il mese dell'oggetto d'invocazione
-    int getMese() const;
+    unsigned int getMese() const;
     //ritorna il giorno dell'oggetto d'invocazione
-    int getGiorno() const;
+    unsigned int getGiorno() const;
     //ritorna l'anno dell'oggetto d'invocazione
-    int getAnno() const;
+    unsigned int getAnno() const;
     //restituisce i giorni del mese dell'oggetto d'invocazione
-    int getGiorniMese() const;
+    unsigned int getGiorniMese() const;
     //ritorna il giorno della settimana
-    int getGiornoSettimana() const;
+    unsigned int getGiornoSettimana() const;
     //ritorna la data annuale del giorno considerato, ovvero il numero di giorni trascorsi dall'inizio dell'anno fino al giorno stesso (compreso)
-    int getGiornoDellAnno() const;
+    unsigned int getGiornoDellAnno() const;
+    //ritorna il giorno della settimana sottoforma di stringa
+    std::string getStringGs(int g) const;
 
-    void setGiorno(int x);
-    void setMese(int x);
-    void setAnno(int x);
+    //setters
+    void setGiorno(unsigned int x);
+    void setMese(unsigned int x);
+    void setAnno(unsigned int x);
+    void setData(unsigned int gg,unsigned int mm,unsigned int aa);
 
 
+    //overload operatori
+    bool operator==(const data& d) const;
+    bool operator!=(const data& d) const;
+    bool operator<(const data& d) const;
+    bool operator>(const data& d) const;
 
 
     //costruttore da stringa??
     data(const std::string& s);
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
-    void setData(int, int, int);
     data operator+(const data&);
     data operator-(const data&);
     //postfissi
@@ -68,10 +76,7 @@ public:
     //prefissi
     data& operator++();
     data& operator--();
-    bool operator==(const data&) const;
-    bool operator!=(const data&) const;
-    bool operator<(const data&) const;
-    bool operator>(const data&) const;
+
 private:
     unsigned int giorno, mese, anno;
     settimana giorno_settimana;

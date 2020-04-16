@@ -1,22 +1,23 @@
 #include "data.h"
 
-data::data():giorno(1),mese(1),anno(1980),giorno_settimana((settimana)3){}//sistemare
+data::data():giorno(1),mese(1),anno(1980),giorno_settimana(martedi){}
 
-data::data(int gg, int mm, int aa):data(){
+//se l'input non è valido viene richiamato il costruttore di default
+data::data(unsigned int gg, unsigned int mm, unsigned int aa):data(){
     if(mm<=12){
         mese=mm;
         if(gg<=getGiorniMese())
             giorno=gg;
         anno=aa;
     }
-    //giorno_settimana=(settimana)getGiornoSettimana();
+    giorno_settimana=(settimana)getGiornoSettimana();
 }
 
 std::string data::getData() const{
-    return std::to_string(giorno)+"/"+std::to_string(mese)+"/"+std::to_string(anno);
+    return getStringGs(getGiornoSettimana())+" "+std::to_string(giorno)+"/"+std::to_string(mese)+"/"+std::to_string(anno);
 }
 
-int data::getGiorniMese() const{
+unsigned int data::getGiorniMese() const{
     int gg;
     switch(mese){
         case(1): case(3): case(5): case(7): case(8): case(10): case(12):
@@ -32,7 +33,7 @@ int data::getGiorniMese() const{
     return gg;
 }
 
-void data::avanzaAnni(int a){
+void data::avanzaAnni(unsigned int a){
     anno+=a;
 }
 
@@ -74,19 +75,19 @@ void data::avanzaGiorni(unsigned int g){
 }
 
 
-int data::getMese() const{
+unsigned int data::getMese() const{
     return mese;
 }
 
-int data::getGiorno() const{
+unsigned int data::getGiorno() const{
     return giorno;
 }
 
-int data::getAnno() const{
+unsigned int data::getAnno() const{
     return anno;
 }
 
-int data::getGiornoSettimana() const {
+unsigned int data::getGiornoSettimana() const {
     return (anno+ ((anno-1)/4) - ((anno-1)/100) + ((anno-1)/400) + getGiornoDellAnno()) % 7;
     /*
     0	sabato
@@ -99,7 +100,7 @@ int data::getGiornoSettimana() const {
     */
 }
 
-int data::getGiornoDellAnno() const
+unsigned int data::getGiornoDellAnno() const
 {
     unsigned int mm=getMese(), gg=0;
     //faccio una copia dell'obj d'invocazione per avere informazioni sull'anno di appartenenza (bisestile o meno)
@@ -116,32 +117,83 @@ int data::getGiornoDellAnno() const
     return gg;
 }
 
-void data::setGiorno(int x)
+std::string data::getStringGs(int g) const{
+    std::string gs[7]={"sabato","domenica","lunedi","martedi","mercoledi","giovedi","venerdi"};
+    return gs[g];
+}
+
+void data::setGiorno(unsigned int x)
 {
     if(x>0 && x<getGiorniMese())
         giorno=x;
 }
 
-void data::setMese(int x)
+void data::setMese(unsigned int x)
 {
     if(x>0 && x<12)
         mese=x;
 }
 
-void data::setAnno(int x)
+void data::setAnno(unsigned int x)
 {
     anno=x;
 }
 
+void data::setData(unsigned int gg, unsigned int mm, unsigned int aa)
+{
+    giorno=gg;
+    mese=mm;
+    anno=aa;
+}
+
+bool data::operator==(const data &d) const
+{
+    return giorno==d.giorno && mese==d.mese && anno==d.anno;
+}
+
+bool data::operator!=(const data &d) const
+{
+    return giorno!=d.giorno || mese!=d.mese || anno!=d.anno;
+}
+
+bool data::operator<(const data &d) const
+{
+    return anno<d.anno?
+                true : (
+                    anno==d.anno?
+                        (mese<d.mese?
+                             true : (
+                                 mese==d.mese?
+                                     (giorno<d.giorno?
+                                          true : false)
+                                   : false))
+                      : false);
+}
+
+bool data::operator>(const data &d) const
+{
+    return anno>d.anno?
+                true : (
+                    anno==d.anno?
+                        (mese>d.mese?
+                             true : (
+                                 mese==d.mese?
+                                     (giorno>d.giorno?
+                                          true : false)
+                                   : false))
+                      : false);
+}
+
 data::~data(){}
 
-data::data(const data &d): giorno(d.giorno), mese(d.mese), anno(d.anno){}
+data::data(const data &d): giorno(d.giorno), mese(d.mese), anno(d.anno), giorno_settimana(d.giorno_settimana){}
 
 data &data::operator=(const data &d){
     if(this!=&d){
         giorno=d.giorno;
         mese=d.mese;
         anno=d.anno;
+        giorno_settimana=d.giorno_settimana;
     }
     return *this;
 }
@@ -158,6 +210,6 @@ bool data::bisestile() const{
 }
 
 std::ostream &operator<<(std::ostream &os, const data &d){
-    std::cout<<d.giorno<<"/"<<d.mese<<"/"<<d.anno<<std::endl;
+    std::cout<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.giorno<<"/"<<d.mese<<"/"<<d.anno<<std::endl;
     return os;
 }
