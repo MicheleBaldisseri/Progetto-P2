@@ -15,9 +15,9 @@ public:
     Evento();
     Evento(string, dataora, Color=white);//costruttore per classi derivate
 
-    string descrizione() const = 0;
+    virtual string descrizione() const = 0;
 
-    Color setColore() const = 0;
+    virtual Color setColore() const = 0;
     Color getColore() const;
     string getTitolo() const;
     dataora getDataora() const;
