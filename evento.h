@@ -13,18 +13,21 @@ private:
     Color colore;
 public:
     Evento();
-    Evento(string, dataora, Color=white);//costruttore per classi derivate
+    Evento(string, dataora, Color);//costruttore per classi derivate
 
     virtual string descrizione() const = 0;
 
-    virtual Color setColore() const = 0;
+    Color setColore(Color) const;
     Color getColore() const;
     string getTitolo() const;
-    dataora getDataora() const;
+    dataora getDataInizio() const;
 
-    virtual bool operator==(const Evento& e) const;
+    virtual bool operator==(const Evento&) const;
+    virtual bool operator!=(const Evento&) const;
+    virtual bool operator>(const Evento&) const;//per la Dataora iniziale, ma estendibile dalla classe con durata che implementa una Dataora finale
+    virtual bool operator<(const Evento&) const;
 
-    virtual ~Evento(){}
+    virtual ~Evento() = default;
     virtual Evento* clone() const = 0;
 };
 
