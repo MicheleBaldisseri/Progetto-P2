@@ -37,6 +37,13 @@ void data::avanzaAnni(unsigned int a){
     anno+=a;
 }
 
+unsigned int data::giorniFineMese() const
+{
+    unsigned int g= getGiorniMese();
+    g-=getGiorno();
+    return g;
+}
+
 void data::avanzaMesi(unsigned int m){
     for(unsigned int i=0; i<m; i++){
         //se sono all'ultimo mese dell'anno passo all'anno successivo

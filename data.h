@@ -33,6 +33,8 @@ public:
     void avanzaMesi(unsigned int m);
     //modifica l'oggetto d'invocazione aumentandolo di a anni
     void avanzaAnni(unsigned int a);
+    //ritorna il numero di giorno per arrivare a fine mese dal giorno corrente
+    unsigned int giorniFineMese() const;
 
 
     //ritorna il mese dell'oggetto d'invocazione
@@ -64,12 +66,15 @@ public:
     bool operator>(const data& d) const;
 
 
+
+
+
     //costruttore da stringa??
     data(const std::string& s);
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
-    data operator+(const data&);
-    data operator-(const data&);
+    data operator+(const data& d) const;
+    data operator-(const data& d) const;
     //postfissi
     data operator++(int);
     data operator--(int);

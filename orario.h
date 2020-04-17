@@ -20,24 +20,25 @@ public:
 
     void avanzaOre(int o);
 
-
-
+    orario operator+(const orario& o) const;
+    orario operator-(const orario& o) const;
+    bool operator==(const orario& o) const;
+    bool operator!=(const orario& o) const;
+    bool operator<(const orario& o) const;
+    bool operator>(const orario& o) const;
 
 
 
     operator int();
-    orario operator+(const orario& o) const;
-    orario operator-(const orario& o) const;
+
     //postfissi
     orario operator++(int);
     orario operator--(int); //sensato?
     //prefissi
     orario& operator++();
     orario& operator--();
-    bool operator==(const orario& o);
-    bool operator!=(const orario& o);
-    bool operator<(const orario& o);
-    bool operator>(const orario& o);
+
+
 private:
     int sec;
 };
