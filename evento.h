@@ -17,14 +17,14 @@ public:
 
     virtual string descrizione() const = 0;
 
-    Color setColore(Color) const;
+    void setColore(const Color&);
     Color getColore() const;
     string getTitolo() const;
     dataora getDataInizio() const;
 
     virtual bool operator==(const Evento&) const;
     virtual bool operator!=(const Evento&) const;
-    virtual bool operator>(const Evento&) const;//per la Dataora iniziale, ma estendibile dalla classe con durata che implementa una Dataora finale
+    virtual bool operator>(const Evento&) const;//per la Dataora iniziale, ma estendibile dall'a classe con'evento con durata che implementa una Dataora finale
     virtual bool operator<(const Evento&) const;
 
     virtual ~Evento() = default;

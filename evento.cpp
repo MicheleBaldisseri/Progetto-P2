@@ -1,52 +1,39 @@
 #include "evento.h"
+#include <iostream>
+using std::string;
 
+Evento::Evento() : titolo(""), dataInizio(), colore(white){}
 
-Evento::Evento() : titolo(), dataInizio(), colore(white)
-{
+Evento::Evento(string s, dataora di, Color c):titolo(s), dataInizio(di), colore(c){}
 
+void Evento::setColore(const Color& c){
+    colore=c;
 }
 
-Evento::Evento(std::string, dataora, Color)
-{
-
+Color Evento::getColore() const{
+    return colore;
 }
 
-Color Evento::setColore(Color) const
-{
-
+std::string Evento::getTitolo() const{
+    return titolo;
 }
 
-Color Evento::getColore() const
-{
-
+dataora Evento::getDataInizio() const{
+    return dataInizio;
 }
 
-std::string Evento::getTitolo() const
-{
-
+bool Evento::operator==(const Evento & e) const{
+    return e.getTitolo()==titolo && e.getColore()==colore && e.getDataInizio()==dataInizio;
 }
 
-dataora Evento::getDataInizio() const
-{
-
+bool Evento::operator!=(const Evento & e) const{
+    return !(*this==e);
 }
 
-bool Evento::operator==(const Evento &) const
-{
-
+bool Evento::operator>(const Evento & e) const{
+    return dataInizio>e.getDataInizio();
 }
 
-bool Evento::operator!=(const Evento &) const
-{
-
-}
-
-bool Evento::operator>(const Evento &) const
-{
-
-}
-
-bool Evento::operator<(const Evento &) const
-{
-
+bool Evento::operator<(const Evento & e) const{
+    return dataInizio<e.getDataInizio();
 }
