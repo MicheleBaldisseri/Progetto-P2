@@ -27,6 +27,7 @@ int orario::getSecondi() const{
     return sec%60;
 }
 
+/*
 void orario::setOre(int o){
     sec=o*3600+getMinuti()*60+getSecondi();
 }
@@ -38,10 +39,38 @@ void orario::setMinuti(int m){
 void orario::setSecondi(int s){
     sec=getOre()*3600+getMinuti()*60+s;
 }
-
+*/
 void orario::avanzaOre(int o){
     sec=(sec+3600*o)%86400;
 }
+
+unsigned int orario::operator-(const orario &o) const
+{
+    return (sec-o.sec)%86400;
+}
+
+bool orario::operator==(const orario &o) const
+{
+    return sec==o.sec;
+}
+
+bool orario::operator!=(const orario &o) const
+{
+    return sec!=o.sec;
+}
+
+bool orario::operator<(const orario &o) const
+{
+    if(sec<o.sec) return true;
+    else return false;
+}
+
+bool orario::operator>(const orario &o) const
+{
+    if(sec>o.sec) return true;
+    else return false;
+}
+
 
 ostream& operator<<(ostream& os, const orario& o) {
     return os<<o.getOre()<<":"<<o.getMinuti()<<":"<<o.getSecondi();
