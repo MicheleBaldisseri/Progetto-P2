@@ -24,17 +24,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    appuntamento.cpp \
+    compleanno.cpp \
+    evento.cpp \
+    eventodurata.cpp \
+    eventoricorrente.cpp \
+    impegno.cpp \
         main.cpp \
         mainwindow.cpp \
 data.cpp \
 orario.cpp \
-    dataora.cpp
+    dataora.cpp \
+    promemoria.cpp
 
 HEADERS += \
+    appuntamento.h \
+    compleanno.h \
+    evento.h \
+    eventodurata.h \
+    eventoricorrente.h \
+    impegno.h \
         mainwindow.h \
     data.h \
     orario.h \
-    dataora.h
+    dataora.h \
+    promemoria.h
 
 FORMS += \
         mainwindow.ui
