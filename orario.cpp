@@ -46,7 +46,20 @@ void orario::avanzaOre(int o){
 
 unsigned int orario::operator-(const orario &o) const
 {
-    return (sec-o.sec)%86400;
+    int ore=getOre()-o.getOre(),
+            minuti=getMinuti()-o.getMinuti(),
+            secondi=getSecondi()-o.getSecondi();
+    bool nonContareGiorno=false;
+    if(ore<0){
+        ore=24+ore;
+        nonContareGiorno=true;
+    }
+    if(minuti<0)
+        minuti=60+minuti;
+    if(secondi<0)
+        secondi=60+secondi;
+    if(nonContareGiorno) secondi -= 86400;
+    return (ore*3600+minuti*60+secondi)%86400;
 }
 
 bool orario::operator==(const orario &o) const
