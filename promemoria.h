@@ -8,9 +8,10 @@ private:
     static Color colorePred;
 public:
     Promemoria();
-    Promemoria(string, dataora, Color=colorePred);
+    Promemoria(string, dataora, string, Color=colorePred);
 
     string descrizione() const;
+    string getDesc() const;
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

@@ -6,7 +6,7 @@ Compleanno::Compleanno(std::string s, dataora di, vector<dataora> v, string p, d
     : EventoRicorrente(s,di,v,c), persona(p), dataNascita(dn){}
 
 std::string Compleanno::descrizione() const{
-    return "Descrizione";
+    return "Compleanno";
 }
 
 std::string Compleanno::getPersona() const{

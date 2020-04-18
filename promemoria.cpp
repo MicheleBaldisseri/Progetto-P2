@@ -1,31 +1,31 @@
 #include "promemoria.h"
 
-Promemoria::Promemoria()
-{
+Promemoria::Promemoria():Evento(), desc() {}
 
+Promemoria::Promemoria(std::string s, dataora di, std::string d, Color c)
+    : Evento(s,di,c), desc(d) {}
+
+std::string Promemoria::descrizione() const{
+    return "Promemoria";
 }
 
-Promemoria::Promemoria(std::string, dataora, Color)
-{
-
+std::string Promemoria::getDesc() const{
+    return desc;
 }
 
-std::string Promemoria::descrizione() const
-{
-
+bool Promemoria::operator==(const Evento & e) const{
+    const Promemoria* p = dynamic_cast<const Promemoria*>(&e);
+    if(p){
+        return Evento::operator==(e) && desc==p->getDesc();
+    }else{
+        return false;
+    }
 }
 
-bool Promemoria::operator==(const Evento &) const
-{
-
+bool Promemoria::operator!=(const Evento & e) const{
+    return !(*this==e);
 }
 
-bool Promemoria::operator!=(const Evento &) const
-{
-
-}
-
-Promemoria *Promemoria::clone() const
-{
-
+Promemoria *Promemoria::clone() const{
+    return new Promemoria(*this);
 }
