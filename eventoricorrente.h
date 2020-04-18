@@ -13,8 +13,8 @@ public:
 
     virtual string descrizione() const = 0;
 
-    void addRicorrenza(dataora);
-    vector<dataora> getRicorrenze() const;
+    void addRicorrenza(const dataora&);
+    vector<dataora>* getRicorrenze() const;
 
     virtual bool operator==(const Evento&) const;
     virtual bool operator!=(const Evento&) const;

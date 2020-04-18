@@ -1,31 +1,35 @@
 #include "compleanno.h"
 
-Compleanno::Compleanno()
-{
+Compleanno::Compleanno() : EventoRicorrente(), persona(""), dataNascita(){}
 
+Compleanno::Compleanno(std::string s, dataora di, vector<dataora> v, string p, data dn, Color c)
+    : EventoRicorrente(s,di,v,c), persona(p), dataNascita(dn){}
+
+std::string Compleanno::descrizione() const{
+    return "Descrizione";
 }
 
-Compleanno::Compleanno(std::string, dataora, vector<dataora> string, data, Color)
-{
-
+std::string Compleanno::getPersona() const{
+    return persona;
 }
 
-std::string Compleanno::descrizione() const
-{
-
+data Compleanno::getDataNascita() const{
+    return dataNascita;
 }
 
-bool Compleanno::operator==(const Evento &) const
-{
-
+bool Compleanno::operator==(const Evento & e) const{
+    const Compleanno* c = dynamic_cast<const Compleanno*>(&e);
+    if(c){
+        return EventoRicorrente::operator==(e) && persona==c->getPersona() && dataNascita==c->getDataNascita();
+    }else{
+        return false;
+    }
 }
 
-bool Compleanno::operator!=(const Evento &) const
-{
-
+bool Compleanno::operator!=(const Evento & e) const{
+    return !(*this==e);
 }
 
-Compleanno *Compleanno::clone() const
-{
-
+Compleanno *Compleanno::clone() const{
+    return new Compleanno(*this);
 }

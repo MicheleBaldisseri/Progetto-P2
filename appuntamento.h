@@ -11,6 +11,7 @@ public:
     Appuntamento(string, dataora, dataora, string, Color=colorePred);
 
     virtual string descrizione() const;
+    string getLuogo() const;
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

@@ -1,32 +1,32 @@
 #include "appuntamento.h"
 
 
-Appuntamento::Appuntamento()
-{
+Appuntamento::Appuntamento() : EventoDurata(), luogo(""){}
 
+Appuntamento::Appuntamento(std::string s, dataora di, dataora df, std::string l, Color c)
+    : EventoDurata(s,di,df,c), luogo(l){}
+
+std::string Appuntamento::descrizione() const{
+    return "Appuntamento";
 }
 
-Appuntamento::Appuntamento(std::string, dataora, dataora, std::string, Color)
-{
-
+std::string Appuntamento::getLuogo() const{
+    return luogo;
 }
 
-std::string Appuntamento::descrizione() const
-{
-
+bool Appuntamento::operator==(const Evento & e) const{
+    const Appuntamento* a = dynamic_cast<const Appuntamento*>(&e);
+    if(a){
+        return EventoDurata::operator==(e) && luogo==a->getLuogo();
+    }else{
+        return false;
+    }
 }
 
-bool Appuntamento::operator==(const Evento &) const
-{
-
+bool Appuntamento::operator!=(const Evento& e) const{
+    return !(*this==e);
 }
 
-bool Appuntamento::operator!=(const Evento &) const
-{
-
-}
-
-Appuntamento *Appuntamento::clone() const
-{
-
+Appuntamento *Appuntamento::clone() const{
+    return new Appuntamento(*this);
 }

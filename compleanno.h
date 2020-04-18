@@ -9,9 +9,11 @@ private:
     static Color colorePred;
 public:
     Compleanno();
-    Compleanno(string, dataora, vector<dataora> string, data, Color=colorePred);
+    Compleanno(string, dataora, vector<dataora>, string, data, Color=colorePred);
 
     string descrizione() const;
+    string getPersona() const;
+    data getDataNascita() const;
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

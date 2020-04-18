@@ -65,7 +65,7 @@ public:
     //prefissi
     data& operator++();
     data& operator--();
-    bool operator==(const data&) const;
+    bool operator==(const data&) const{return true;}
     bool operator!=(const data&) const;
     bool operator<(const data&) const;
     bool operator>(const data&) const;

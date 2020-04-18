@@ -4,7 +4,8 @@ using std::string;
 
 Evento::Evento() : titolo(""), dataInizio(), colore(white){}
 
-Evento::Evento(string s, dataora di, Color c):titolo(s), dataInizio(di), colore(c){}
+Evento::Evento(string s, dataora di, Color c)
+    : titolo(s), dataInizio(di), colore(c){}
 
 void Evento::setColore(const Color& c){
     colore=c;
