@@ -8,10 +8,6 @@ public:
     dataora();
     dataora(int gg, int mm, int aa, int o, int m, int s);
     void stampaData();
-    bool operator==(const dataora&) const{return true;}
-    bool operator!=(const dataora&) const{return true;}
-    bool operator>(const dataora&) const{return true;}
-    bool operator<(const dataora&) const{return true;}
 };
 //overload operatore di output
 std::ostream& operator<<(std::ostream& os, const dataora& d);
