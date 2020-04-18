@@ -57,7 +57,8 @@ unsigned int dataora::operator-(const dataora &d) const
 
 double dataora::secondsToHours(unsigned int s)
 {
-    return (s/3600);
+    double sec=s, secInHour=3600;
+    return (sec/secInHour);
 }
 
 std::ostream &operator<<(std::ostream &os, const dataora &d)

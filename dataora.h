@@ -17,8 +17,10 @@ public:
     bool operator<(const dataora& d) const;
     bool operator>(const dataora& d) const;
 
-private:
     static double secondsToHours(unsigned int s);
+
+private:
+
 };
 //overload operatore di output
 std::ostream& operator<<(std::ostream& os, const dataora& d);
