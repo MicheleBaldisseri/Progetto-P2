@@ -19,6 +19,6 @@ public:
     Impegno* clone() const;
 };
 
-Color Impegno::colorePred = blue;
+
 
 #endif // IMPEGNO_H

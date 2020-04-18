@@ -20,6 +20,6 @@ public:
     Promemoria* clone() const;
 };
 
-Color Promemoria::colorePred = yellow;
+
 
 #endif // PROMEMORIA_H

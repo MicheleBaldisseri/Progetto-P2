@@ -30,3 +30,5 @@ bool Appuntamento::operator!=(const Evento& e) const{
 Appuntamento *Appuntamento::clone() const{
     return new Appuntamento(*this);
 }
+
+Color Appuntamento::colorePred = green;

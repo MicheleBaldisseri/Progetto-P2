@@ -29,3 +29,5 @@ bool Promemoria::operator!=(const Evento & e) const{
 Promemoria *Promemoria::clone() const{
     return new Promemoria(*this);
 }
+
+Color Promemoria::colorePred = yellow;

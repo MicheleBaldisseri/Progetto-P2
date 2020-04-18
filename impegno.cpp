@@ -27,3 +27,5 @@ bool Impegno::operator!=(const Evento & e) const{
 Impegno *Impegno::clone() const{
     return new Impegno(*this);
 }
+
+Color Impegno::colorePred = blue;

@@ -22,6 +22,4 @@ public:
     Compleanno* clone() const;
 };
 
-Color Compleanno::colorePred = red;
-
 #endif // COMPLEANNO_H

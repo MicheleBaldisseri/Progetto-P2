@@ -20,6 +20,4 @@ public:
     Appuntamento* clone() const;
 };
 
-Color Appuntamento::colorePred = green;
-
 #endif // APPUNTAMENTO_H
