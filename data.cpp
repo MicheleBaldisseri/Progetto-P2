@@ -191,6 +191,37 @@ bool data::operator>(const data &d) const
                       : false);
 }
 
+unsigned int data::operator-(const data &d) const
+{
+    // conta il numero di giorni prima della data dell'oggetto d'invocazione
+    data aux(*this);
+    unsigned int n1 = aux.getAnno()*365 + aux.getGiornoDellAnno();
+
+    // Since every leap year is of 366 days,
+    // Add a day for every leap year
+    n1 += countLeapYears(aux);
+
+    unsigned int n2 = d.getAnno()*365 + d.getGiornoDellAnno();
+    n2 += countLeapYears(d);
+
+    // return difference between two counts
+    return (n1 - n2);
+}
+
+unsigned int data::countLeapYears(const data &d)
+{
+    int years = d.getAnno();
+
+    // Check if the current year needs to be considered
+    // for the count of leap years or not
+    if (d.getMese() <= 2)
+        years--;
+
+    // An year is a leap year if it is a multiple of 4,
+    // multiple of 400 and not a multiple of 100.
+    return years / 4 - years / 100 + years / 400;
+}
+
 data::~data(){}
 
 data::data(const data &d): giorno(d.giorno), mese(d.mese), anno(d.anno), giorno_settimana(d.giorno_settimana){}

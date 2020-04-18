@@ -35,6 +35,7 @@ public:
     void avanzaAnni(unsigned int a);
     //ritorna il numero di giorno per arrivare a fine mese dal giorno corrente
     unsigned int giorniFineMese() const;
+    //conta gli anni bisestili prima della data d
 
 
     //ritorna il mese dell'oggetto d'invocazione
@@ -65,6 +66,7 @@ public:
     bool operator<(const data& d) const;
     bool operator>(const data& d) const;
 
+    unsigned int operator-(const data& d) const;
 
 
 
@@ -74,7 +76,6 @@ public:
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
     data operator+(const data& d) const;
-    data operator-(const data& d) const;
     //postfissi
     data operator++(int);
     data operator--(int);
@@ -85,6 +86,8 @@ public:
 private:
     unsigned int giorno, mese, anno;
     settimana giorno_settimana;
+
+    static unsigned int countLeapYears(const data& d);
 };
 //overload operatore di output
 std::ostream& operator<<(std::ostream& os, const data& d);

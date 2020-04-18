@@ -21,7 +21,7 @@ public:
     void avanzaOre(int o);
 
     orario operator+(const orario& o) const;
-    orario operator-(const orario& o) const;
+    unsigned int operator-(const orario& o) const;
     bool operator==(const orario& o) const;
     bool operator!=(const orario& o) const;
     bool operator<(const orario& o) const;
@@ -40,7 +40,7 @@ public:
 
 
 private:
-    int sec;
+    unsigned int sec;
 };
 //overload operatore di output
 std::ostream& operator<<(std::ostream&, const orario&);

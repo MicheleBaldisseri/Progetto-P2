@@ -14,7 +14,10 @@ int main(int argc, char *argv[])
 
     return a.exec();
     */
-    dataora x(17,4,2020,23,12,30), y(17,4,2020,23,13,30);
-    std::cout<<(y-x)<<std::endl;
+    dataora x(17,4,2020,22,0,0), y(19,4,2020,23,30,30);
+    orario z(22,0,0), w(23,30,30);
+    unsigned int prova=w-z;
+    float sth=(y-x)/3600;
+    std::cout<<(y-x)<<" "<<sth<<std::endl;
     return 0;
 }

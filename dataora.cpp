@@ -7,31 +7,6 @@ dataora::dataora(int gg, int mm, int aa, int o, int m, int s):data(gg,mm,aa),ora
 
 dataora::dataora(const dataora &d):data(d.getGiorno(),d.getMese(),d.getAnno()), orario(d.getOre(),d.getMinuti(),d.getSecondi()){}
 
-unsigned int dataora::operator-(const dataora &d) const
-{
-    dataora aux(d), obj(*this);
-    unsigned int sec=0;
-    if(obj > aux){
-        unsigned int gg=0;
-        if(d.getSecondi()<getSecondi())
-            while(d.getSecondi()==getSecondi())
-                sec++;
-        //se l'orario è dopo ad obj arrivo fino a mezzanotte
-        if(d.getSecondi()>getSecondi()){
-            while(d.getSecondi()==86400)
-                sec++;
-            //sono arrivato a mezzanotte quindi passo al giorno successivo
-            aux.avanzaGiorni(1);
-        }
-        while(aux != obj){
-            gg++;
-            aux.avanzaGiorni(1);
-        }
-        sec += gg*86400;
-    }
-    return sec;
-}
-
 bool dataora::operator==(const dataora &d) const
 {
     orario o1(getOre(),getMinuti(),getSecondi());
@@ -66,6 +41,23 @@ bool dataora::operator>(const dataora &d) const
     orario o2(d.getOre(),d.getMinuti(),d.getSecondi());
     data d2(d.getGiorno(),d.getMese(),d.getAnno());
     return d1>d2? true : (d1==d2? (o1>o2? true : false ) : false );
+}
+
+unsigned int dataora::operator-(const dataora &d) const
+{
+    data d1(getGiorno(),getMese(),getAnno()),
+            d2(d.getGiorno(),d.getMese(),d.getAnno());
+    orario o1(getOre(),getMinuti(),getSecondi()),
+            o2(d.getOre(),d.getMinuti(),d.getSecondi());
+    unsigned int gg=d1-d2, sec=o1-o2;
+    sec= sec+ (gg*86400);
+    return sec;
+
+}
+
+double dataora::secondsToHours(unsigned int s)
+{
+    return (s/3600);
 }
 
 std::ostream &operator<<(std::ostream &os, const dataora &d)

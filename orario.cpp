@@ -44,18 +44,9 @@ void orario::avanzaOre(int o){
     sec=(sec+3600*o)%86400;
 }
 
-orario orario::operator+(const orario &o) const
+unsigned int orario::operator-(const orario &o) const
 {
-    orario aux;
-    aux.sec=(sec+o.sec)%86400;
-    return aux;
-}
-
-orario orario::operator-(const orario &o) const
-{
-    orario aux;
-    aux.sec=(sec-o.sec)%86400;
-    return aux;
+    return (sec-o.sec)%86400;
 }
 
 bool orario::operator==(const orario &o) const
@@ -79,6 +70,7 @@ bool orario::operator>(const orario &o) const
     if(sec>o.sec) return true;
     else return false;
 }
+
 
 ostream& operator<<(ostream& os, const orario& o) {
     return os<<o.getOre()<<":"<<o.getMinuti()<<":"<<o.getSecondi();
