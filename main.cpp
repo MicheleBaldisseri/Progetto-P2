@@ -11,6 +11,7 @@
 
 using std::vector;
 using std::cout;
+using std::endl;
 
 int main(int argc, char *argv[])
 {
@@ -30,10 +31,10 @@ int main(int argc, char *argv[])
     Evento* eC = new Compleanno("???",dataora(7,9,2009,20,40,00),v,"Michele Baldisseri",data(7,9,1999));
     Evento* eI = new Impegno("conferenza",dataora(11,5,2020,11,11,11),dataora(11,5,2020,12,12,12),v);
 
-    cout<<eA->descrizione();
-    cout<<eP->descrizione();
-    cout<<eC->descrizione();
-    cout<<eI->descrizione();
+    cout<<eA->descrizione()<<endl;
+    cout<<eP->descrizione()<<endl;
+    cout<<eC->descrizione()<<endl;
+    cout<<eI->descrizione()<<endl;
 
 return 0;
 }

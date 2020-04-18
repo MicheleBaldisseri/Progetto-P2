@@ -1,8 +1,10 @@
 #ifndef EVENTO_H
 #define EVENTO_H
 #include <iostream>
+#include <sstream>
 #include "dataora.h"
 using std::string;
+using std::stringstream;
 
 enum Color  {white, red, green, yellow, orange, black, blue, purple, grey};
 

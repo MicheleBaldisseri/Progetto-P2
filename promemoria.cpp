@@ -6,7 +6,9 @@ Promemoria::Promemoria(std::string s, dataora di, std::string d, Color c)
     : Evento(s,di,c), desc(d) {}
 
 std::string Promemoria::descrizione() const{
-    return "Promemoria";
+    std::stringstream text;
+    text<<getTitolo()<<" || "<<getDataInizio()<<" || "<<desc<<" "<<getColore();
+    return text.str();
 }
 
 std::string Promemoria::getDesc() const{
