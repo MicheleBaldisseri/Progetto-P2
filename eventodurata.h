@@ -9,7 +9,8 @@ public:
     EventoDurata();
     EventoDurata(string, dataora, dataora, Color);
 
-    virtual string descrizione() const = 0;
+    virtual string descrizioneMin() const = 0;
+    virtual string descrizioneFull() const = 0;
 
     dataora getDataFine() const;
     int durata() const;

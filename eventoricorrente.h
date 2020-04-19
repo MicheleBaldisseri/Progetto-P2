@@ -11,7 +11,8 @@ public:
     EventoRicorrente();
     EventoRicorrente(string, dataora, vector<dataora>, Color);
 
-    virtual string descrizione() const = 0;
+    virtual string descrizioneMin() const = 0;
+    virtual string descrizioneFull() const = 0;
 
     void addRicorrenza(const dataora&);
     vector<dataora>* getRicorrenze() const;

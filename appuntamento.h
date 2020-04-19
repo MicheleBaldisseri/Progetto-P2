@@ -10,7 +10,8 @@ public:
     Appuntamento();
     Appuntamento(string, dataora, dataora, string, Color=colorePred);
 
-    string descrizione() const;
+    string descrizioneMin() const;
+    string descrizioneFull() const;
     string getLuogo() const;
 
     bool operator==(const Evento&) const;
