@@ -1,16 +1,22 @@
 #include "compleanno.h"
 
-Compleanno::Compleanno() : EventoRicorrente(), persona(""), dataNascita(){}
+Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
-Compleanno::Compleanno(std::string s, dataora di, vector<dataora> v, string p, data dn, Color c)
-    : EventoRicorrente(s,di,v,c), persona(p), dataNascita(dn){}
+Compleanno::Compleanno(std::string s, dataora di, vector<dataora> v, data dn, Color c)
+    : Evento(s,di,c), EventoRicorrente(s,di,v,c), dataNascita(dn){}
 
-std::string Compleanno::descrizione() const{
-    return "Compleanno";
+std::string Compleanno::descrizioneMin() const{
+    std::stringstream text;
+    text<<"Compleanno di "<<getTitolo()<<"\nEta': "<<((getDataInizio().getAnno())-(getDataNascita().getAnno()));
+    return text.str();
 }
 
-std::string Compleanno::getPersona() const{
-    return persona;
+std::string Compleanno::descrizioneFull() const{
+    std::stringstream text;
+    text<<"Compleanno"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
+    text<<getDataNascita().getGiorno()<<"|"<<getDataNascita().getMese()<<"|"<<getDataNascita().getAnno()<<"|"<<getColore();
+    return text.str();
 }
 
 data Compleanno::getDataNascita() const{
@@ -20,7 +26,7 @@ data Compleanno::getDataNascita() const{
 bool Compleanno::operator==(const Evento & e) const{
     const Compleanno* c = dynamic_cast<const Compleanno*>(&e);
     if(c){
-        return EventoRicorrente::operator==(e) && persona==c->getPersona() && dataNascita==c->getDataNascita();
+        return EventoRicorrente::operator==(e) && dataNascita==c->getDataNascita();
     }else{
         return false;
     }

@@ -7,8 +7,19 @@ Impegno::Impegno(){
 Impegno::Impegno(std::string s, dataora di, dataora df, vector<dataora> v, Color c)
     : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c){}
 
-std::string Impegno::descrizione() const{
-    return "Impegno";
+std::string Impegno::descrizioneMin() const{
+    std::stringstream text;
+    text<<getDataInizio().getOrario()<<" - "<<getDataFine().getOrario()<<"\n"<<getTitolo();
+    return text.str();
+}
+
+std::string Impegno::descrizioneFull() const{
+    std::stringstream text;
+    text<<"Impegno"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
+    text<<getDataFine().getGiorno()<<"|"<<getDataFine().getMese()<<"|"<<getDataFine().getAnno()<<"|";
+    text<<getDataFine().getOre()<<"|"<<getDataFine().getMinuti()<<"|"<<getDataFine().getSecondi()<<"|"<<getColore();
+    return text.str();
 }
 
 bool Impegno::operator==(const Evento & e) const{

@@ -10,7 +10,8 @@ public:
     Promemoria();
     Promemoria(string, dataora, string, Color=colorePred);
 
-    string descrizione() const;
+    string descrizioneMin() const;
+    string descrizioneFull() const;
     string getDesc() const;
 
     bool operator==(const Evento&) const;
@@ -19,7 +20,5 @@ public:
     ~Promemoria()=default;
     Promemoria* clone() const;
 };
-
-
 
 #endif // PROMEMORIA_H

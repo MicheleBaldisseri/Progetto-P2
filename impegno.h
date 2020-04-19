@@ -10,7 +10,8 @@ public:
     Impegno();
     Impegno(string, dataora, dataora, vector<dataora>, Color=colorePred);
 
-    string descrizione() const;
+    string descrizioneMin() const;
+    string descrizioneFull() const;
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

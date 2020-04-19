@@ -38,3 +38,7 @@ bool Evento::operator>(const Evento & e) const{
 bool Evento::operator<(const Evento & e) const{
     return dataInizio<e.getDataInizio();
 }
+
+std::ostream &operator<<(std::ostream & os, const Evento & e){
+    return os<<e.descrizioneFull();
+}

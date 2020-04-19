@@ -5,8 +5,18 @@ Promemoria::Promemoria():Evento(), desc() {}
 Promemoria::Promemoria(std::string s, dataora di, std::string d, Color c)
     : Evento(s,di,c), desc(d) {}
 
-std::string Promemoria::descrizione() const{
-    return "Promemoria";
+std::string Promemoria::descrizioneMin() const{
+    std::stringstream text;
+    text<<getDataInizio().getOrario()<<"\n"<<getTitolo()<<" - "<<desc;
+    return text.str();
+}
+
+std::string Promemoria::descrizioneFull() const{
+    std::stringstream text;
+    text<<"Promemoria"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
+    text<<getDesc()<<"|"<<getColore();
+    return text.str();
 }
 
 std::string Promemoria::getDesc() const{

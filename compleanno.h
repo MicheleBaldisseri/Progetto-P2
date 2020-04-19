@@ -4,15 +4,14 @@
 
 class Compleanno : public EventoRicorrente {
 private:
-    string persona;
     data dataNascita;
     static Color colorePred;
 public:
     Compleanno();
-    Compleanno(string, dataora, vector<dataora>, string, data, Color=colorePred);
+    Compleanno(string, dataora, vector<dataora>, data, Color=colorePred);
 
-    string descrizione() const;
-    string getPersona() const;
+    string descrizioneMin() const;
+    string descrizioneFull() const;
     data getDataNascita() const;
 
     bool operator==(const Evento&) const;
