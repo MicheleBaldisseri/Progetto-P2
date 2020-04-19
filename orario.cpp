@@ -1,29 +1,29 @@
 #include "orario.h"
 
-orario::orario(int o, int m, int s){
+Orario::Orario(int o, int m, int s){
     if(o<0 || o>23 || m<0 || m>59 || s<0 || s>59) sec=0;
     else sec= o*3600+ m*60+ s;
 }
 
-orario::orario(const orario & o):sec(o.sec){}
+Orario::Orario(const Orario & o):sec(o.sec){}
 
-orario &orario::operator=(const orario &o){
+Orario &Orario::operator=(const Orario &o){
     if(this!=&o)
         sec=o.sec;
     return *this;
 }
 
-orario::~orario(){}
+Orario::~Orario(){}
 
-int orario::getOre() const{
+int Orario::getOre() const{
     return sec/3600;
 }
 
-int orario::getMinuti() const{
+int Orario::getMinuti() const{
     return (sec/60) %60;
 }
 
-int orario::getSecondi() const{
+int Orario::getSecondi() const{
     return sec%60;
 }
 
@@ -40,11 +40,11 @@ void orario::setSecondi(int s){
     sec=getOre()*3600+getMinuti()*60+s;
 }
 */
-void orario::avanzaOre(int o){
+void Orario::avanzaOre(int o){
     sec=(sec+3600*o)%86400;
 }
 
-unsigned int orario::operator-(const orario &o) const
+unsigned int Orario::operator-(const Orario &o) const
 {
     int ore=getOre()-o.getOre(),
             minuti=getMinuti()-o.getMinuti(),
@@ -62,30 +62,30 @@ unsigned int orario::operator-(const orario &o) const
     return (ore*3600+minuti*60+secondi)%86400;
 }
 
-bool orario::operator==(const orario &o) const
+bool Orario::operator==(const Orario &o) const
 {
     return sec==o.sec;
 }
 
-bool orario::operator!=(const orario &o) const
+bool Orario::operator!=(const Orario &o) const
 {
     return sec!=o.sec;
 }
 
-bool orario::operator<(const orario &o) const
+bool Orario::operator<(const Orario &o) const
 {
     if(sec<o.sec) return true;
     else return false;
 }
 
-bool orario::operator>(const orario &o) const
+bool Orario::operator>(const Orario &o) const
 {
     if(sec>o.sec) return true;
     else return false;
 }
 
 
-ostream& operator<<(ostream& os, const orario& o) {
+ostream& operator<<(ostream& os, const Orario& o) {
     return os<<o.getOre()<<":"<<o.getMinuti()<<":"<<o.getSecondi();
 }
 /*

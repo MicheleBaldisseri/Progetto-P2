@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
 
     return a.exec();
     */
-    dataora x(17,4,2020,0,0,0), y(18,4,2020,2,30,0);
-    orario z(22,0,0), w(23,30,30);
-
-    std::cout<<(y-x)<<" "<<dataora::secondsToHours(y-x)<<std::endl;
+    Dataora x(17,4,2020,0,0,0), y(18,4,2020,2,30,0);
+    Orario z(22,0,0), w(23,30,30);
+    std::cout<<x<<std::endl;
+    std::cout<<(y-x)<<" "<<Dataora::secondsToHours(y-x)<<" "<< x<<std::endl;
     return 0;
 }

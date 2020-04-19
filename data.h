@@ -5,22 +5,18 @@
 
 enum settimana {sabato=0, domenica=1, lunedi=2, martedi=3, mercoledi=4, giovedi=5, venerdi=6};
 
-class data;
-std::ostream& operator<<(std::ostream&, const data&);
-
-class data{
-    friend std::ostream& operator<<(std::ostream& os, const data& d);
+class Data{
 public:
     //costruttore di default
-    data();
+    Data();
     //costruttore a 3 parametri
-    data(unsigned int gg, unsigned int mm, unsigned int aa);
+    Data(unsigned int gg, unsigned int mm, unsigned int aa);
     //distruttore
-    ~data();
+    ~Data();
     //costruttore di copia
-    data(const data& d);
+    Data(const Data& d);
     //overload dell'operatore d'assegnazione
-    data& operator=(const data& d);
+    Data& operator=(const Data& d);
 
 
     //restituisce true se l'anno d'invocazione è bisestile
@@ -61,34 +57,34 @@ public:
 
 
     //overload operatori
-    bool operator==(const data& d) const;
-    bool operator!=(const data& d) const;
-    bool operator<(const data& d) const;
-    bool operator>(const data& d) const;
+    bool operator==(const Data& d) const;
+    bool operator!=(const Data& d) const;
+    bool operator<(const Data& d) const;
+    bool operator>(const Data& d) const;
 
-    unsigned int operator-(const data& d) const;
+    unsigned int operator-(const Data& d) const;
 
 
 
 
     //costruttore da stringa??
-    data(const std::string& s);
+    Data(const std::string& s);
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
-    data operator+(const data& d) const;
+    Data operator+(const Data& d) const;
     //postfissi
-    data operator++(int);
-    data operator--(int);
+    Data operator++(int);
+    Data operator--(int);
     //prefissi
-    data& operator++();
-    data& operator--();
+    Data& operator++();
+    Data& operator--();
 
 private:
     unsigned int giorno, mese, anno;
     settimana giorno_settimana;
 
-    static unsigned int countLeapYears(const data& d);
+    static unsigned int countLeapYears(const Data &d);
 };
 //overload operatore di output
-std::ostream& operator<<(std::ostream& os, const data& d);
+std::ostream& operator<<(std::ostream& os, const Data& d);
 #endif // DATA_H
