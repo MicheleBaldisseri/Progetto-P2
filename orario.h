@@ -6,6 +6,7 @@ using std::ostream;
 class Orario{
 public:
     Orario(int o=0,int m=0,int s=0);
+    Orario(unsigned int s);
     Orario(const Orario& o);
     Orario& operator=(const Orario& o);
     ~Orario();
@@ -20,25 +21,13 @@ public:
 
     void avanzaOre(int o);
 
-    Orario operator+(const Orario& o) const;
-    unsigned int operator-(const Orario& o) const;
+    Orario operator-(const Orario& o) const;
     bool operator==(const Orario& o) const;
     bool operator!=(const Orario& o) const;
     bool operator<(const Orario& o) const;
     bool operator>(const Orario& o) const;
 
-
-
-    operator int();
-
-    //postfissi
-    Orario operator++(int);
-    Orario operator--(int); //sensato?
-    //prefissi
-    Orario& operator++();
-    Orario& operator--();
-
-
+    unsigned int getCampoDati() const;
 private:
     unsigned int sec;
 };

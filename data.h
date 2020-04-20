@@ -71,7 +71,6 @@ public:
     Data(const std::string& s);
     //costruttore a 4 parametri?
     //data(int gg, int mm, int aa, settimana gs);
-    Data operator+(const Data& d) const;
     //postfissi
     Data operator++(int);
     Data operator--(int);

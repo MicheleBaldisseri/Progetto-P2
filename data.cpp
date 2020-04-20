@@ -193,16 +193,22 @@ bool Data::operator>(const Data &d) const
 
 unsigned int Data::operator-(const Data &d) const
 {
+    Data d1, d2;
+    if(*this > d){
+        d1=*this; d2=d;
+    }
+    else{
+        d1=d; d2=*this;
+    }
     // conta il numero di giorni prima della data dell'oggetto d'invocazione
-    Data aux(*this);
-    unsigned int n1 = aux.getAnno()*365 + aux.getGiornoDellAnno();
+    unsigned int n1 = d1.getAnno()*365 + d1.getGiornoDellAnno();
 
     // Since every leap year is of 366 days,
     // Add a day for every leap year
-    n1 += countLeapYears(aux);
+    n1 += countLeapYears(d1);
 
-    unsigned int n2 = d.getAnno()*365 + d.getGiornoDellAnno();
-    n2 += countLeapYears(d);
+    unsigned int n2 = d2.getAnno()*365 + d2.getGiornoDellAnno();
+    n2 += countLeapYears(d2);
 
     // return difference between two counts
     return (n1 - n2);
