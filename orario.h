@@ -21,6 +21,8 @@ public:
 
     void avanzaOre(int o);
 
+    std::string getOrario() const;
+
     Orario operator-(const Orario& o) const;
     bool operator==(const Orario& o) const;
     bool operator!=(const Orario& o) const;

@@ -2,16 +2,15 @@
 
 EventoDurata::EventoDurata() : Evento(), dataFine(){}
 
-EventoDurata::EventoDurata(std::string s, dataora di, dataora df, Color c)
+EventoDurata::EventoDurata(std::string s, Dataora di, Dataora df, Color c)
     : Evento(s,di,c), dataFine(df){}
 
-dataora EventoDurata::getDataFine() const{
+Dataora EventoDurata::getDataFine() const{
     return dataFine;
 }
 
 int EventoDurata::durata() const{
-    //return (dataFine-dataInizio).secToHour();
-    return 1;
+    return Dataora::secondsToHours((dataFine-getDataInizio()));
 }
 
 bool EventoDurata::operator==(const Evento & e) const{

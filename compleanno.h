@@ -4,15 +4,15 @@
 
 class Compleanno : public EventoRicorrente {
 private:
-    data dataNascita;
+    Data dataNascita;
     static Color colorePred;
 public:
     Compleanno();
-    Compleanno(string, dataora, vector<dataora>, data, Color=colorePred);
+    Compleanno(string, Dataora, vector<Dataora>, Data, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;
-    data getDataNascita() const;
+    Data getDataNascita() const;
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

@@ -4,12 +4,12 @@ Impegno::Impegno(){
 
 }
 
-Impegno::Impegno(std::string s, dataora di, dataora df, vector<dataora> v, Color c)
+Impegno::Impegno(std::string s, Dataora di, Dataora df, vector<Dataora> v, Color c)
     : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c){}
 
 std::string Impegno::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<" - "<<getDataFine().getOrario()<<"\n"<<getTitolo();
+    text<<getDataInizio().getOrario()<<"-"<<getDataFine().getOrario()<<" Durata: "<<durata()<<" Ora/e\n"<<getTitolo();
     return text.str();
 }
 

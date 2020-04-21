@@ -11,11 +11,11 @@ enum Color  {white, red, green, yellow, orange, black, blue, purple, grey};
 class Evento{
 private:
     string titolo;
-    dataora dataInizio;
+    Dataora dataInizio;
     Color colore;
 public:
     Evento();
-    Evento(string, dataora, Color);//costruttore per classi derivate
+    Evento(string, Dataora, Color);//costruttore per classi derivate
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
@@ -23,7 +23,7 @@ public:
     void setColore(const Color&);
     Color getColore() const;
     string getTitolo() const;
-    dataora getDataInizio() const;
+    Dataora getDataInizio() const;
 
     virtual bool operator==(const Evento&) const;
     virtual bool operator!=(const Evento&) const;

@@ -8,7 +8,7 @@ private:
     static Color colorePred;
 public:
     Appuntamento();
-    Appuntamento(string, dataora, dataora, string, Color=colorePred);
+    Appuntamento(string, Dataora, Dataora, string, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

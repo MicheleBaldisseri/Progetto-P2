@@ -2,7 +2,7 @@
 
 Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
-Compleanno::Compleanno(std::string s, dataora di, vector<dataora> v, data dn, Color c)
+Compleanno::Compleanno(std::string s, Dataora di, vector<Dataora> v, Data dn, Color c)
     : Evento(s,di,c), EventoRicorrente(s,di,v,c), dataNascita(dn){}
 
 std::string Compleanno::descrizioneMin() const{
@@ -19,7 +19,7 @@ std::string Compleanno::descrizioneFull() const{
     return text.str();
 }
 
-data Compleanno::getDataNascita() const{
+Data Compleanno::getDataNascita() const{
     return dataNascita;
 }
 

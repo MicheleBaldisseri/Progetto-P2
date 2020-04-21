@@ -8,7 +8,7 @@ private:
     static Color colorePred;
 public:
     Promemoria();
-    Promemoria(string, dataora, string, Color=colorePred);
+    Promemoria(string, Dataora, string, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

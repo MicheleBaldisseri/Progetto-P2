@@ -4,15 +4,15 @@
 
 class EventoDurata : virtual public Evento{
 private:
-    dataora dataFine;
+    Dataora dataFine;
 public:
     EventoDurata();
-    EventoDurata(string, dataora, dataora, Color);
+    EventoDurata(string, Dataora, Dataora, Color);
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
 
-    dataora getDataFine() const;
+    Dataora getDataFine() const;
     int durata() const;
 
     virtual bool operator==(const Evento&) const;

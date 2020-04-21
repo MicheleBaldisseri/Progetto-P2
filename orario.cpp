@@ -51,6 +51,11 @@ void Orario::avanzaOre(int o){
     sec=(sec+3600*o)%86400;
 }
 
+std::string Orario::getOrario() const{
+    return std::to_string(getOre())+":"+std::to_string(getMinuti())+":"+std::to_string(getSecondi());
+}
+
+
 Orario Orario::operator-(const Orario &o) const
 {
 

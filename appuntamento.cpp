@@ -3,12 +3,12 @@
 
 Appuntamento::Appuntamento() : EventoDurata(), luogo(""){}
 
-Appuntamento::Appuntamento(std::string s, dataora di, dataora df, std::string l, Color c)
+Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c)
     : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){}
 
 std::string Appuntamento::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<" - "<<getDataFine().getOrario()<<"\n"<<getTitolo()<<"\nLuogo: "<<getLuogo();
+    text<<getDataInizio().getOrario()<<"-"<<getDataFine().getOrario()<<" Durata: "<<durata()<<" Ora/e\n"<<getTitolo()<<"\nLuogo: "<<getLuogo();
     return text.str();
 }
 

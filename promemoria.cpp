@@ -2,7 +2,7 @@
 
 Promemoria::Promemoria():Evento(), desc() {}
 
-Promemoria::Promemoria(std::string s, dataora di, std::string d, Color c)
+Promemoria::Promemoria(std::string s, Dataora di, std::string d, Color c)
     : Evento(s,di,c), desc(d) {}
 
 std::string Promemoria::descrizioneMin() const{

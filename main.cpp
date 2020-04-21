@@ -23,19 +23,24 @@ int main(int argc, char *argv[])
 
     return a.exec();*/
 
-    vector<dataora> v;
-    v.push_back(dataora());
-    v.push_back(dataora());
+    vector<Dataora> v;
+    v.push_back(Dataora());
+    v.push_back(Dataora());
 
-    Evento* eA = new Appuntamento("Ex",dataora(20,10,2010,10,10,10),dataora(20,10,2010,12,10,10),"Ufficio");
-    Evento* eP = new Promemoria("Denti",dataora(3,5,2015,5,11,47),"Lavati i denti");
-    Evento* eC = new Compleanno("Michele Baldisseri",dataora(7,9,2009,20,40,00),v,data(7,9,1999));
-    Evento* eI = new Impegno("conferenza",dataora(11,5,2020,11,11,11),dataora(11,5,2020,12,12,12),v);
+    Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
+    Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");
+    Evento* eC = new Compleanno("Michele Baldisseri",Dataora(7,9,2009,20,40,00),v,Data(7,9,1999));
+    Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),v);
 
     cout<<*eA<<endl;
     cout<<*eP<<endl;
     cout<<*eC<<endl;
-    cout<<*eI<<endl;
+    cout<<*eI<<endl<<endl;
+
+    cout<<eA->descrizioneMin()<<endl<<endl;
+    cout<<eP->descrizioneMin()<<endl<<endl;
+    cout<<eC->descrizioneMin()<<endl<<endl;
+    cout<<eI->descrizioneMin()<<endl<<endl;
 
 return 0;
 

@@ -6,16 +6,16 @@ using std::vector;
 
 class EventoRicorrente : virtual public Evento{
 private:
-    vector<dataora> ricorrenze;
+    vector<Dataora> ricorrenze;
 public:
     EventoRicorrente();
-    EventoRicorrente(string, dataora, vector<dataora>, Color);
+    EventoRicorrente(string, Dataora, vector<Dataora>, Color);
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
 
-    void addRicorrenza(const dataora&);
-    vector<dataora>* getRicorrenze() const;
+    void addRicorrenza(const Dataora&);
+    vector<Dataora>* getRicorrenze() const;
 
     virtual bool operator==(const Evento&) const;
     virtual bool operator!=(const Evento&) const;
