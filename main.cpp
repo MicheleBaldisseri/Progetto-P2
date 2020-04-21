@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+
     return a.exec();*/
 
     vector<dataora> v;
@@ -37,4 +38,5 @@ int main(int argc, char *argv[])
     cout<<*eI<<endl;
 
 return 0;
+
 }

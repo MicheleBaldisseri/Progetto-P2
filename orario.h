@@ -3,12 +3,13 @@
 #include <iostream>
 using std::ostream;
 
-class orario{
+class Orario{
 public:
-    orario(int o=0,int m=0,int s=0);
-    orario(const orario& o);
-    orario& operator=(const orario& o);
-    ~orario();
+    Orario(int o=0,int m=0,int s=0);
+    Orario(unsigned int s);
+    Orario(const Orario& o);
+    Orario& operator=(const Orario& o);
+    ~Orario();
 
     int getOre() const;
     int getMinuti() const;
@@ -20,28 +21,16 @@ public:
 
     void avanzaOre(int o);
 
-    orario operator+(const orario& o) const;
-    unsigned int operator-(const orario& o) const;
-    bool operator==(const orario& o) const;
-    bool operator!=(const orario& o) const;
-    bool operator<(const orario& o) const;
-    bool operator>(const orario& o) const;
+    Orario operator-(const Orario& o) const;
+    bool operator==(const Orario& o) const;
+    bool operator!=(const Orario& o) const;
+    bool operator<(const Orario& o) const;
+    bool operator>(const Orario& o) const;
 
-
-
-    operator int();
-
-    //postfissi
-    orario operator++(int);
-    orario operator--(int); //sensato?
-    //prefissi
-    orario& operator++();
-    orario& operator--();
-
-
+    unsigned int getCampoDati() const;
 private:
     unsigned int sec;
 };
 //overload operatore di output
-std::ostream& operator<<(std::ostream&, const orario&);
+std::ostream& operator<<(std::ostream&, const Orario&);
 #endif // ORA_H
