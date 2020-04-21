@@ -37,7 +37,9 @@ void Data::avanzaAnni(unsigned int a){
     anno+=a;
 }
 
+
 unsigned int Data::giorniFineMese() const
+
 {
     unsigned int g= getGiorniMese();
     g-=getGiorno();
@@ -46,6 +48,7 @@ unsigned int Data::giorniFineMese() const
 
 void Data::avanzaMesi(unsigned int m){
     for(unsigned int i=0; i<m; i++){
+
         //se sono all'ultimo mese dell'anno passo all'anno successivo
         if(getMese()==12){
             mese=1;
@@ -59,7 +62,7 @@ void Data::avanzaGiorni(unsigned int g){
     //salvo i giorni del mese corrente in una variabile
     unsigned int ggMese=getGiorniMese();
     //aggiungo i giorni con un ciclo
-    for(unsigned int i=0; i<g; i++){
+    for(int i=0; i<g; i++){
         giorno++;
         //se arrivo a fine mese passo al successivo
         if(giorno>ggMese){

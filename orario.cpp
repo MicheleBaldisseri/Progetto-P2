@@ -53,6 +53,7 @@ void Orario::avanzaOre(int o){
 
 Orario Orario::operator-(const Orario &o) const
 {
+
     Orario aux;
     int secondi=sec-o.sec;
 
@@ -61,6 +62,7 @@ Orario Orario::operator-(const Orario &o) const
 
     aux.sec=secondi%86400;
     return aux;
+
 }
 
 bool Orario::operator==(const Orario &o) const
