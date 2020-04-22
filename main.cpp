@@ -23,9 +23,9 @@ int main(int argc, char *argv[])
 
     return a.exec();*/
 
-    vector<Dataora> v;
-    v.push_back(Dataora());
-    v.push_back(Dataora());
+    vector<Data> v;
+    v.push_back(Data());
+    v.push_back(Data());
 
     Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
     Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");

@@ -4,7 +4,7 @@ Impegno::Impegno(){
 
 }
 
-Impegno::Impegno(std::string s, Dataora di, Dataora df, vector<Dataora> v, Color c)
+Impegno::Impegno(std::string s, Dataora di, Dataora df, vector<Data> v, Color c)
     : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c){}
 
 std::string Impegno::descrizioneMin() const{
@@ -19,6 +19,9 @@ std::string Impegno::descrizioneFull() const{
     text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
     text<<getDataFine().getGiorno()<<"|"<<getDataFine().getMese()<<"|"<<getDataFine().getAnno()<<"|";
     text<<getDataFine().getOre()<<"|"<<getDataFine().getMinuti()<<"|"<<getDataFine().getSecondi()<<"|"<<getColore();
+    for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
+        text<<"|"<<d.getGiorno()<<"|"<<d.getMese()<<"|"<<d.getAnno();
+    }
     return text.str();
 }
 

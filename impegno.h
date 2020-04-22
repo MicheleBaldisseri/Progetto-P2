@@ -8,7 +8,7 @@ private:
     static Color colorePred;
 public:
     Impegno();
-    Impegno(string, Dataora, Dataora, vector<Dataora>, Color=colorePred);
+    Impegno(string, Dataora, Dataora, vector<Data>, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

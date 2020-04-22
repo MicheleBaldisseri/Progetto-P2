@@ -8,7 +8,7 @@ private:
     static Color colorePred;
 public:
     Compleanno();
-    Compleanno(string, Dataora, vector<Dataora>, Data, Color=colorePred);
+    Compleanno(string, Dataora, vector<Data>, Data, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

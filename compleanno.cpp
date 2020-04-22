@@ -2,7 +2,7 @@
 
 Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
-Compleanno::Compleanno(std::string s, Dataora di, vector<Dataora> v, Data dn, Color c)
+Compleanno::Compleanno(std::string s, Dataora di, vector<Data> v, Data dn, Color c)
     : Evento(s,di,c), EventoRicorrente(s,di,v,c), dataNascita(dn){}
 
 std::string Compleanno::descrizioneMin() const{
@@ -16,6 +16,9 @@ std::string Compleanno::descrizioneFull() const{
     text<<"Compleanno"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
     text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
     text<<getDataNascita().getGiorno()<<"|"<<getDataNascita().getMese()<<"|"<<getDataNascita().getAnno()<<"|"<<getColore();
+    for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
+        text<<"|"<<d.getGiorno()<<"|"<<d.getMese()<<"|"<<d.getAnno();
+    }
     return text.str();
 }
 
