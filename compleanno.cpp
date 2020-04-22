@@ -2,8 +2,13 @@
 
 Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
-Compleanno::Compleanno(std::string s, Dataora di, vector<Data> v, Data dn, Color c)
-    : Evento(s,di,c), EventoRicorrente(s,di,v,c), dataNascita(dn){}
+Compleanno::Compleanno(std::string s, Dataora di, Data dn, int limit, Color c) : Evento(s,di,c), dataNascita(dn){
+    Data d=getDataInizio();
+    for(int i=0;i<limit;i++){
+        d.avanzaAnni(1);
+        addRicorrenza(d);
+    }
+}
 
 std::string Compleanno::descrizioneMin() const{
     std::stringstream text;
