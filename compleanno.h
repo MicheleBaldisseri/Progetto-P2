@@ -8,7 +8,7 @@ private:
     static Color colorePred;
 public:
     Compleanno();
-    Compleanno(string, Dataora, Data, int, Color=colorePred);
+    Compleanno(string, Dataora, Data, int=20, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

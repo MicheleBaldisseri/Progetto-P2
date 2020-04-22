@@ -29,7 +29,8 @@ bool EventoDurata::operator!=(const Evento & e) const{
 bool EventoDurata::operator>(const Evento & e) const{
     const EventoDurata* ed = dynamic_cast<const EventoDurata*>(&e);
     if(ed){
-        return Evento::operator>(e) && dataFine>ed->getDataFine();
+        if(getDataInizio()==e.getDataInizio())return dataFine>ed->getDataFine();
+        else return Evento::operator >(e);
     }else{
         return Evento::operator>(e);
     }
@@ -38,7 +39,8 @@ bool EventoDurata::operator>(const Evento & e) const{
 bool EventoDurata::operator<(const Evento & e) const{
     const EventoDurata* ed = dynamic_cast<const EventoDurata*>(&e);
     if(ed){
-        return Evento::operator<(e) && dataFine<ed->getDataFine();
+        if(getDataInizio()==e.getDataInizio())return dataFine<ed->getDataFine();
+        else return Evento::operator <(e);
     }else{
         return Evento::operator<(e);
     }
