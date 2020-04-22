@@ -3,12 +3,15 @@
 #include "eventodurata.h"
 #include "eventoricorrente.h"
 
+enum ModeRicorrenza {giorno,settimana,mese};
+
 class Impegno : public EventoDurata, public EventoRicorrente{
 private:
     static Color colorePred;
 public:
     Impegno();
     Impegno(string, Dataora, Dataora, vector<Data>, Color=colorePred);
+    Impegno(string, Dataora, Dataora, ModeRicorrenza, int, int, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

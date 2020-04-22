@@ -1,11 +1,36 @@
 #include "impegno.h"
 
-Impegno::Impegno(){
-
-}
+Impegno::Impegno() : Evento() {}
 
 Impegno::Impegno(std::string s, Dataora di, Dataora df, vector<Data> v, Color c)
-    : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c){}
+    : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c) {}
+
+Impegno::Impegno(std::string s, Dataora di, Dataora df, ModeRicorrenza mode, int interval, int nRic, Color c) : Evento(s,di,c), EventoDurata(s,di,df,c){
+    Data d=getDataInizio();
+    switch (mode) {
+    case 0:
+        for(int i=0;i<nRic;i++){
+            d.avanzaGiorni(interval);
+            addRicorrenza(d);
+        }
+        break;
+    case 1:
+        for(int i=0;i<nRic;i++){
+            d.avanzaGiorni(interval*7);
+            addRicorrenza(d);
+        }
+        break;
+    case 2:
+        for(int i=0;i<nRic;i++){
+            d.avanzaMesi(interval);
+            addRicorrenza(d);
+        }
+        break;
+    default:
+        //some kind of error
+        break;
+    }
+}
 
 std::string Impegno::descrizioneMin() const{
     std::stringstream text;
