@@ -2,15 +2,18 @@
 
 EventoDurata::EventoDurata() : Evento(), dataFine(){}
 
-EventoDurata::EventoDurata(std::string s, Dataora di, Dataora df, Color c)
-    : Evento(s,di,c), dataFine(df){}
+EventoDurata::EventoDurata(std::string s, Dataora di, Dataora df, Color c) : Evento(s,di,c), dataFine(df){
+    if(dataFine<di){
+        throw new std::logic_error("DataFine < DataInizio");
+    }
+}
 
 Dataora EventoDurata::getDataFine() const{
     return dataFine;
 }
 
 int EventoDurata::durata() const{
-    return Dataora::secondsToHours((dataFine-getDataInizio()));
+    return dataFine-getDataInizio();
 }
 
 bool EventoDurata::operator==(const Evento & e) const{

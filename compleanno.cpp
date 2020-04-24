@@ -4,7 +4,7 @@ Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
 Compleanno::Compleanno(std::string s, Dataora di, Data dn, int limit, Color c) : Evento(s,di,c), dataNascita(dn){
     Data d=getDataInizio();
-    for(int i=0;i<limit;i++){
+    for(int i=0;i<limit;i++){//creazione delle ricorrenze
         d.avanzaAnni(1);
         addRicorrenza(d);
     }

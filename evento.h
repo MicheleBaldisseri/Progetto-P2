@@ -25,6 +25,7 @@ public:
     //Stampa di tutte le informazioni
     virtual string descrizioneFull() const = 0;
 
+
     void setColore(const Color&);
     Color getColore() const;
     string getTitolo() const;

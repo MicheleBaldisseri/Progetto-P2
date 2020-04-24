@@ -40,5 +40,6 @@ bool Evento::operator<(const Evento & e) const{
 }
 
 std::ostream &operator<<(std::ostream & os, const Evento & e){
+    //richiama la stampa polimorfa di tutti i campi dati
     return os<<e.descrizioneFull();
 }

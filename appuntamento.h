@@ -5,7 +5,7 @@
 class Appuntamento : public EventoDurata{
 private:
     string luogo;
-    static Color colorePred;
+    static Color colorePred; //Colore predefinito, per creare tutti i tipi eventi con lo stesso colore
 public:
     Appuntamento();
     Appuntamento(string, Dataora, Dataora, string, Color=colorePred);

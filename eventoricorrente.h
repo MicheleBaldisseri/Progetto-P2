@@ -6,6 +6,7 @@ using std::vector;
 
 class EventoRicorrente : virtual public Evento{
 private:
+    //vettore di Date, poichè gli eventi ricorrenti mantengono l'orario dell'evento originale
     vector<Data> ricorrenze;
 public:
     EventoRicorrente();
@@ -15,6 +16,7 @@ public:
     virtual string descrizioneFull() const = 0;
 
     void addRicorrenza(const Data&);
+    //ritorna il vettore delle ricorrenze
     vector<Data>* getRicorrenze() const;
 
     virtual bool operator==(const Evento&) const;
