@@ -7,13 +7,12 @@ template <class T> ostream& operator<<(ostream&, const lista<T>&);
 
 template <class T=Evento>
 class lista{
-	//friend class constiterator;
+	friend class constiterator;
 	friend ostream& operator<< <T>(ostream&, const lista<T>&);
 private:
 	class nodo{
 	public:
 		T info;
-		dataora data;
 		nodo* next;
 		nodo(const T& t=T(),nodo* n=0): info(t), next(n){}
 		~nodo(){delete next;} 
@@ -22,7 +21,7 @@ private:
 	static bool isBefore(nodo* a, nodo* b){
 		if(!a) return true;
 		if(!b) return false;
-		return a->data < b->data;
+		return a->info->data < b->info->data;
 	}
 	static nodo* copy(nodo* a, nodo*& b){
 		if(!a) return 0;
@@ -47,16 +46,77 @@ public:
 	}
 	//distruttore
 	~lista(){delete first; delete last;}
-	//Deve essere disponibile un metodo void insert(const T&) con il seguente comportamento: c.insert(t) inserisce
-	//l’elemento t in lista.
-	void insert(const T& t){
+	
+		void insert(const T& t){
 		nodo* nuovo;
 		if(!first){
 			nuovo=new nodo(t);
 			last=first=nuovo;
 		}
 		else{
-			nuovo=new nodo(t,first->next);
-			first=nuovo;
+			nuovo=new nodo(t);
+			if(isBefore(nuovo,first)){
+				nodo* inizio=nuovo;//caso in cui l'evento è il primo nella lista
+				nuovo->next=first;
+				first=nuovo;
+			}
+			if(isBefore(last, nuovo)){
+				nuovo->next=last->next;//caso in cui l'evento è l'ultimo nella lista
+				last->next=nuovo;
+				last=nuovo;
+			}
+			nodo* prec=first;
+			for(const_iterator cit=begin()->next; cit!=end(); ++cit){
+				if(nuovo<cit){
+					prec->next=nuovo;
+					nuovo->next=cit;
+				}
+				prec=prec->next;
+			}
 		}
 	}
+	bool operator<(const lista& c) const {
+		return isBefore(first,c.first);
+	}
+}
+	
+class const_iterator{
+	public:
+		nodo* punt;
+		//operator++ prefisso
+		const_iterator& operator++() {
+			if (punt)
+				punt = punt->next;
+			return *this;
+		}
+		
+		const_iterator operator++(int) {
+			const_iterator aux = *this;
+			if (punt)
+				punt = punt->next;
+			return aux;
+		}
+		bool operator==(const const_iterator& x) const {
+		  return punt==x.punt;
+		}
+
+		bool operator!=(const const_iterator& x) const {
+		  return punt!=x.punt;
+		}
+		const T& operator*() const {
+		  return punt->info;
+		}
+	 };
+
+	const_iterator begin() const {
+		const_iterator aux;
+		aux.punt = first;
+		return aux;
+	}
+
+	const_iterator end() const {
+		const_iterator aux;
+		aux.punt = last;
+		return aux;
+	}
+};
