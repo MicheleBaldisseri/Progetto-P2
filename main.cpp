@@ -40,7 +40,9 @@ int main(int argc, char *argv[])
     cout<<eC->descrizioneMin()<<endl<<endl;
     cout<<eI->descrizioneMin()<<endl<<endl;
 
-    cout<<(*eA1>*eA);
+    cout<<(*eA1>*eA)<<endl<<endl;
+    Dataora a(12,4,2020,11,30,0), b(12,4,2020,11,30,0);
+    cout<<(a==b);
 
 return 0;
 

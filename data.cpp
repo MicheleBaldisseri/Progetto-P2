@@ -206,14 +206,12 @@ unsigned int Data::operator-(const Data &d) const
     // conta il numero di giorni prima della data dell'oggetto d'invocazione
     unsigned int n1 = d1.getAnno()*365 + d1.getGiornoDellAnno();
 
-    // Since every leap year is of 366 days,
-    // Add a day for every leap year
+    //aggiungo un giorno per ogni anno bisestile
     n1 += countLeapYears(d1);
 
     unsigned int n2 = d2.getAnno()*365 + d2.getGiornoDellAnno();
     n2 += countLeapYears(d2);
 
-    // return difference between two counts
     return (n1 - n2);
 }
 
@@ -221,13 +219,11 @@ unsigned int Data::countLeapYears(const Data &d)
 {
     int years = d.getAnno();
 
-    // Check if the current year needs to be considered
-    // for the count of leap years or not
+    //Se non sono oltre a febbraio non mi serve considerare se l'anno è bisestile
     if (d.getMese() <= 2)
         years--;
 
-    // An year is a leap year if it is a multiple of 4,
-    // multiple of 400 and not a multiple of 100.
+    //Un anno è bisestile se è multiplo di 4, di 400 ma non di 100
     return years / 4 - years / 100 + years / 400;
 }
 
