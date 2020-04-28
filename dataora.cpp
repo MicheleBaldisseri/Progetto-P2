@@ -75,6 +75,5 @@ double Dataora::secondsToMinutes(unsigned int s)
 
 std::ostream &operator<<(std::ostream &os, const Dataora &d)
 {
-    std::cout<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.getGiorno()<<"/"<<d.getMese()<<"/"<<d.getAnno()<<" "<<d.getOre()<<":"<<d.getMinuti()<<":"<<d.getSecondi();
-    return os;
+    return os<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.getGiorno()<<"/"<<d.getMese()<<"/"<<d.getAnno()<<" "<<d.getOre()<<":"<<d.getMinuti()<<":"<<d.getSecondi();
 }

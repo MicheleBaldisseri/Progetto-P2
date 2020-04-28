@@ -5,7 +5,11 @@
 
 enum settimana {sabato=0, domenica=1, lunedi=2, martedi=3, mercoledi=4, giovedi=5, venerdi=6};
 
+class Data;
+std::ostream& operator<<(std::ostream&, const Data&);
+
 class Data{
+    friend std::ostream& operator<<(std::ostream&, const Data&);
 public:
     //costruttore di default
     Data();

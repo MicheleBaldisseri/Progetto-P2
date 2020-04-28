@@ -9,8 +9,9 @@ Data::Data(unsigned int gg, unsigned int mm, unsigned int aa):Data(){
         if(gg<=getGiorniMese())
             giorno=gg;
         anno=aa;
+        giorno_settimana=(settimana)getGiornoSettimana();
     }
-    giorno_settimana=(settimana)getGiornoSettimana();
+    else throw std::invalid_argument("Input data non valido");
 }
 
 std::string Data::getData() const{
@@ -253,6 +254,6 @@ bool Data::bisestile() const{
 }
 
 std::ostream &operator<<(std::ostream &os, const Data &d){
-    std::cout<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.getGiorno()<<"/"<<d.getMese()<<"/"<<d.getAnno();
+    std::cout<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.giorno<<"/"<<d.mese<<"/"<<d.anno;
     return os;
 }

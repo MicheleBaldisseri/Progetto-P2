@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     cout<<eI->descrizioneMin()<<endl<<endl;
 
     cout<<(*eA1>*eA)<<endl<<endl;
-    Dataora a(12,4,2020,11,30,0), b(12,4,2020,11,30,0);
+    Dataora a(12,12,2020,23,30,0), b(12,4,2020,11,30,0);
     cout<<(a==b);
 
 return 0;

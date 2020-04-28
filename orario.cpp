@@ -1,7 +1,8 @@
 #include "orario.h"
 
 Orario::Orario(int o, int m, int s){
-    if(o<0 || o>23 || m<0 || m>59 || s<0 || s>59) sec=0;
+    if(o<0 || o>23 || m<0 || m>59 || s<0 || s>59)
+        throw std::invalid_argument("Input orario non valido");
     else sec= o*3600+ m*60+ s;
 }
 
