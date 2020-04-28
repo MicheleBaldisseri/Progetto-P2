@@ -11,38 +11,22 @@ Dataora::Dataora(const Data &d, const Orario &o):Data(d.getGiorno(),d.getMese(),
 
 bool Dataora::operator==(const Dataora &d) const
 {
-    Orario o1(getOre(),getMinuti(),getSecondi());
-    Data d1(getGiorno(),getMese(),getAnno());
-    Orario o2(d.getOre(),d.getMinuti(),d.getSecondi());
-    Data d2(d.getGiorno(),d.getMese(),d.getAnno());
-    return d1==d2 && o1==o2;
+    return this->Data::operator ==(d) && this->Orario::operator ==(d);
 }
 
 bool Dataora::operator!=(const Dataora &d) const
 {
-    Orario o1(getOre(),getMinuti(),getSecondi());
-    Data d1(getGiorno(),getMese(),getAnno());
-    Orario o2(d.getOre(),d.getMinuti(),d.getSecondi());
-    Data d2(d.getGiorno(),d.getMese(),d.getAnno());
-    return d1!=d2 || o1!=o2;
+    return this->Data::operator !=(d) || this->Orario::operator !=(d);
 }
 
 bool Dataora::operator<(const Dataora &d) const
 {
-    Orario o1(getOre(),getMinuti(),getSecondi());
-    Data d1(getGiorno(),getMese(),getAnno());
-    Orario o2(d.getOre(),d.getMinuti(),d.getSecondi());
-    Data d2(d.getGiorno(),d.getMese(),d.getAnno());
-    return d1<d2? true : (d1==d2? (o1<o2? true : false ) : false );
+    return this->Data::operator<(d)? true : (this->Data::operator ==(d)? (this->Orario::operator <(d)? true : false) : false);
 }
 
 bool Dataora::operator>(const Dataora &d) const
 {
-    Orario o1(getOre(),getMinuti(),getSecondi());
-    Data d1(getGiorno(),getMese(),getAnno());
-    Orario o2(d.getOre(),d.getMinuti(),d.getSecondi());
-    Data d2(d.getGiorno(),d.getMese(),d.getAnno());
-    return d1>d2? true : (d1==d2? (o1>o2? true : false ) : false );
+    return this->Data::operator >(d)? true : (this->Data::operator ==(d)? (this->Orario::operator >(d)? true : false) : false);
 }
 
 unsigned int Dataora::operator-(const Dataora &d) const
@@ -91,6 +75,5 @@ double Dataora::secondsToMinutes(unsigned int s)
 
 std::ostream &operator<<(std::ostream &os, const Dataora &d)
 {
-    std::cout<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.getGiorno()<<"/"<<d.getMese()<<"/"<<d.getAnno()<<" "<<d.getOre()<<":"<<d.getMinuti()<<":"<<d.getSecondi();
-    return os;
+    return os<<d.getStringGs(d.getGiornoSettimana())<<" "<<d.getGiorno()<<"/"<<d.getMese()<<"/"<<d.getAnno()<<" "<<d.getOre()<<":"<<d.getMinuti()<<":"<<d.getSecondi();
 }

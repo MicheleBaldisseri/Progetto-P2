@@ -5,10 +5,11 @@
 class Compleanno : public EventoRicorrente {
 private:
     Data dataNascita;
-    static Color colorePred;
+    static Color colorePred; //Colore predefinito, per creare tutti i tipi eventi con lo stesso colore
 public:
     Compleanno();
-    Compleanno(string, Dataora, vector<Dataora>, Data, Color=colorePred);
+    //parametro int: limite di creazione di ricorrenze
+    Compleanno(string, Dataora, Data, int=20, Color=colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

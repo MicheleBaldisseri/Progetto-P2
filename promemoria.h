@@ -4,8 +4,8 @@
 
 class Promemoria : public Evento {
 private:
-    string desc;
-    static Color colorePred;
+    string desc; //descrizione più estesa
+    static Color colorePred; //Colore predefinito, per creare tutti i tipi eventi con lo stesso colore
 public:
     Promemoria();
     Promemoria(string, Dataora, string, Color=colorePred);

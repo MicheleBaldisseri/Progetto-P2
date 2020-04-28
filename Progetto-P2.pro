@@ -35,7 +35,9 @@ SOURCES += \
 data.cpp \
 orario.cpp \
     dataora.cpp \
-    promemoria.cpp
+    promemoria.cpp \
+    model.cpp \
+    controller.cpp
 
 HEADERS += \
     appuntamento.h \
@@ -48,7 +50,9 @@ HEADERS += \
     data.h \
     orario.h \
     dataora.h \
-    promemoria.h
+    promemoria.h \
+    model.h \
+    controller.h
 
 FORMS += \
         mainwindow.ui

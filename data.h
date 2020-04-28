@@ -5,7 +5,11 @@
 
 enum settimana {sabato=0, domenica=1, lunedi=2, martedi=3, mercoledi=4, giovedi=5, venerdi=6};
 
+class Data;
+std::ostream& operator<<(std::ostream&, const Data&);
+
 class Data{
+    friend std::ostream& operator<<(std::ostream&, const Data&);
 public:
     //costruttore di default
     Data();
@@ -55,33 +59,17 @@ public:
     void setAnno(unsigned int x);
     void setData(unsigned int gg,unsigned int mm,unsigned int aa);
 
-
     //overload operatori
     bool operator==(const Data& d) const;
     bool operator!=(const Data& d) const;
     bool operator<(const Data& d) const;
     bool operator>(const Data& d) const;
-
     unsigned int operator-(const Data& d) const;
-
-
-
-
-    //costruttore da stringa??
-    Data(const std::string& s);
-    //costruttore a 4 parametri?
-    //data(int gg, int mm, int aa, settimana gs);
-    //postfissi
-    Data operator++(int);
-    Data operator--(int);
-    //prefissi
-    Data& operator++();
-    Data& operator--();
 
 private:
     unsigned int giorno, mese, anno;
     settimana giorno_settimana;
-
+    //ritorna il numero di anni bisestili tra l'anno 0 e quello dell'obj
     static unsigned int countLeapYears(const Data &d);
 };
 //overload operatore di output
