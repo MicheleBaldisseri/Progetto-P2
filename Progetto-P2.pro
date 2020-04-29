@@ -54,5 +54,4 @@ HEADERS += \
     model.h \
     controller.h
 
-FORMS += \
-        mainwindow.ui
+FORMS +=

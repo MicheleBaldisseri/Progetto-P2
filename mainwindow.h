@@ -1,22 +1,31 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QCalendarWidget>
+#include <QListView>
+#include <QFrame>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QWidget{
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow()=default;
 
 private:
-    Ui::MainWindow *ui;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *itemLayout;
+    QVBoxLayout *buttonLayout;
+
+    void addMainItems();
+
+    void addButtons();
+
+    void setWindowStyle();
+
 };
 
 #endif // MAINWINDOW_H
