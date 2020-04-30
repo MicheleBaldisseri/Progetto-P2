@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     setLayout(mainLayout);
 }
 
-void MainWindow::addMainItems(){
+void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
 
     QDate currentDate = QDate::currentDate();
     QLabel* date = new QLabel(currentDate.toString("dd-MM-yyyy"));
@@ -30,7 +30,7 @@ void MainWindow::addMainItems(){
     line1->setFrameShape(QFrame::VLine);
     itemLayout->addWidget(line1);
 
-    QCalendarWidget* calendar = new QCalendarWidget(); //si può spostare come campo privato se necessario
+    QCalendarWidget* calendar = new QCalendarWidget();
     itemLayout->addWidget(calendar);
 
     QFrame *line2 = new QFrame();
@@ -55,14 +55,25 @@ void MainWindow::addList(){
 
 void MainWindow::addButtons(){
     QLabel *menu = new QLabel("Menù");
-    QPushButton* inserisci = new QPushButton("Inserisci nuovo evento");
+    QPushButton* inserisci = new QPushButton("Inserisci nuovo evento",this);
     QPushButton* salva = new QPushButton("Salva eventi");
     QPushButton* colori = new QPushButton("Cambia colore eventi");
 
     menuLayout->addWidget(menu);
+    menuLayout->addSpacerItem(new QSpacerItem(150,20,QSizePolicy::Minimum,QSizePolicy::Minimum));
     menuLayout->addWidget(inserisci);
     menuLayout->addWidget(salva);
     menuLayout->addWidget(colori);
+    menuLayout->addSpacerItem(new QSpacerItem(150,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
+
+    menu->setFont(QFont("AdobeHeitiStd-Regular",30,QFont::Bold));
+
+    menuLayout->setAlignment(menu,Qt::AlignCenter);
+    menuLayout->setAlignment(inserisci,Qt::AlignTop);
+    menuLayout->setAlignment(salva,Qt::AlignTop);
+    menuLayout->setAlignment(colori,Qt::AlignTop);
+    menuLayout->setContentsMargins(0,20,0,0);
+
 }
 
 void MainWindow::setWindowStyle(){
