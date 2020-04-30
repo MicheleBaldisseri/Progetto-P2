@@ -44,7 +44,7 @@ public:
 		else{
 			nuovo=new nodo(t);
 			if(nuovo<first){
-				nodo* inizio=nuovo;//caso in cui l'evento è il primo nella lista
+				//caso in cui l'evento è il primo nella lista
 				nuovo->next=first;
 				first=nuovo;
 			}
