@@ -1,11 +1,4 @@
 #include <iostream>
-#include "dataora.h"
-#include "evento.h"
-#include "lista.h"
-using namespace std;
-
-class const_iterator;
-
 
 template <class T>
 class lista{
@@ -19,11 +12,6 @@ private:
 	};
 	nodo* first, *last;
 public:
-	static bool isBefore(nodo* a, nodo* b){
-		if(!a) return true;
-		if(!b) return false;
-		return a->info/*->data*/ < b->info/*->data*/;
-	}
 	static nodo* copy(nodo* a, nodo*& b){
 		if(!a) return 0;
 		if(!a->next){
@@ -55,12 +43,12 @@ public:
 		}
 		else{
 			nuovo=new nodo(t);
-			if(isBefore(nuovo,first)){
+			if(nuovo<first){
 				nodo* inizio=nuovo;//caso in cui l'evento è il primo nella lista
 				nuovo->next=first;
 				first=nuovo;
 			}
-			if(isBefore(last, nuovo)){
+			if(last<nuovo){
 				nuovo->next=last->next;//caso in cui l'evento è l'ultimo nella lista
 				last->next=nuovo;
 				last=nuovo;
@@ -75,8 +63,18 @@ public:
 			}
 		}
 	}
-	bool operator<(const lista& c) const {
-		return isBefore(first,c.first);
+	nodo& operator[](const unsigned int i) const {
+		unsigned int j=0;
+		const_iterator cit=cit.begin();
+		while(j<i||cit!=cit.end()){
+			++j;
+			++cit;
+		}
+		if(j==i) return *cit;
+		else{
+			std::cout<<"error: out of bound"<<std::endl;
+			return *((cit.end())->next);
+		}
 	}
 	class const_iterator{
 		public:
