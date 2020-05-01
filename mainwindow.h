@@ -10,6 +10,8 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QDateTime>
+#include <QFile>
+#include <QTimer>
 
 class MainWindow : public QWidget{
     Q_OBJECT
@@ -17,6 +19,10 @@ class MainWindow : public QWidget{
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow()=default;
+
+public slots:
+    void showTime();
+
 
 private:
     QVBoxLayout *mainLayout;
