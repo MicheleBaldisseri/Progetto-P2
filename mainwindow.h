@@ -12,6 +12,8 @@
 #include <QDateTime>
 #include <QFile>
 #include <QTimer>
+#include <QToolButton>
+#include <QMenu>
 
 class MainWindow : public QWidget{
     Q_OBJECT
