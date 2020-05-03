@@ -45,7 +45,4 @@ int main(int argc, char *argv[])
     cout<<(a==b);
 */
 
-
-return 0;
-
 }

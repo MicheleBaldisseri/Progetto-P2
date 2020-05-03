@@ -14,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     setWindowStyle();
 
-    openPromWindow();
+    /*openPromWindow();
     openAppunWindow();
-    openImpWindow();
+    openImpWindow();*/
 
     setLayout(mainLayout);
 
@@ -30,7 +30,7 @@ void MainWindow::showTime()
     static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
 }
 
-void MainWindow::openPromWindow()
+/*void MainWindow::openPromWindow()
 {
     promW= new PromWindow;
     promW->show();
@@ -46,6 +46,30 @@ void MainWindow::openImpWindow()
 {
     impW= new ImpWindow;
     impW->show();
+}*/
+
+void MainWindow::inserisciEvento(int type)
+{
+    QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+    switch (type) {
+    case 0:
+        promW= new PromWindow;
+        promW->show();
+        break;
+    case 1:
+        appunW= new AppunWindow;
+        appunW->show();
+        break;
+    case 2:
+        impW= new ImpWindow;
+        impW->show();
+        break;
+    case 3:
+
+        break;
+    default:
+        break;
+    }
 }
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
@@ -103,6 +127,11 @@ void MainWindow::addButtons(){
     menu->addAction(appuntamento);
     menu->addAction(impegno);
     menu->addAction(compleanno);
+
+    connect(promemoria, &QAction::triggered, this, [this]{ inserisciEvento(0);});
+    connect(appuntamento, &QAction::triggered, this, [this]{ inserisciEvento(1);});
+    connect(impegno, &QAction::triggered, this, [this]{ inserisciEvento(2);});
+    connect(compleanno, &QAction::triggered, this, [this]{ inserisciEvento(3);});
 
 
     QPushButton* salva = new QPushButton("Salva eventi",this);

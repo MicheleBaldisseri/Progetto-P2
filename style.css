@@ -42,7 +42,7 @@ QToolButton#inserisci::menu-indicator{
     left: -6px;
 }
 
-QAbstractButton:hover {
+QAbstractButton:hover{
     background: #353535;
 }
 

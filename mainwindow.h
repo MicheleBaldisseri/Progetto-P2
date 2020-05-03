@@ -27,9 +27,11 @@ public:
 
 public slots:
     void showTime();
-    void openPromWindow();
+    /*void openPromWindow();
     void openAppunWindow();
-    void openImpWindow();
+    void openImpWindow();*/
+
+    void inserisciEvento(int type);
 
 private:
     QVBoxLayout *mainLayout;
