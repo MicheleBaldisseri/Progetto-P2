@@ -12,6 +12,9 @@
 #include <QDateTime>
 #include <QFile>
 #include <QTimer>
+#include <promwindow.h>
+#include <appunwindow.h>
+#include <impwindow.h>
 
 class MainWindow : public QWidget{
     Q_OBJECT
@@ -22,7 +25,9 @@ public:
 
 public slots:
     void showTime();
-
+    void openPromWindow();
+    void openAppunWindow();
+    void openImpWindow();
 
 private:
     QVBoxLayout *mainLayout;
@@ -30,6 +35,10 @@ private:
     QVBoxLayout *menuLayout;
     QVBoxLayout *listLayout;
     QHBoxLayout *buttonListLayout;
+
+    PromWindow* promW;
+    AppunWindow* appunW;
+    ImpWindow* impW;
 
     void addMainItems();
 

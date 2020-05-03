@@ -37,7 +37,10 @@ orario.cpp \
     dataora.cpp \
     promemoria.cpp \
     model.cpp \
-    controller.cpp
+    controller.cpp \
+    promwindow.cpp \
+    appunwindow.cpp \
+    impwindow.cpp
 
 HEADERS += \
     appuntamento.h \
@@ -52,7 +55,10 @@ HEADERS += \
     dataora.h \
     promemoria.h \
     model.h \
-    controller.h
+    controller.h \
+    promwindow.h \
+    appunwindow.h \
+    impwindow.h
 
 FORMS +=
 

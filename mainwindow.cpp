@@ -14,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     setWindowStyle();
 
+    openPromWindow();
+    openAppunWindow();
+    openImpWindow();
+
     setLayout(mainLayout);
 
     QTimer *timer = new QTimer(this);
@@ -23,7 +27,25 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
 void MainWindow::showTime()
 {
-   static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+    static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
+}
+
+void MainWindow::openPromWindow()
+{
+    promW= new PromWindow;
+    promW->show();
+}
+
+void MainWindow::openAppunWindow()
+{
+    appunW= new AppunWindow;
+    appunW->show();
+}
+
+void MainWindow::openImpWindow()
+{
+    impW= new ImpWindow;
+    impW->show();
 }
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
@@ -71,7 +93,6 @@ void MainWindow::addButtons(){
     menuLayout->addSpacerItem(new QSpacerItem(150,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
 
     //menu->setFont(QFont("AdobeHeitiStd-Regular",30,QFont::Bold));
-
 
     menuLayout->setAlignment(inserisci,Qt::AlignTop);
     menuLayout->setAlignment(salva,Qt::AlignTop);
