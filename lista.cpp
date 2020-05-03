@@ -57,7 +57,7 @@ void Lista<T>::push_back(const T &t)
 }
 
 template<class T>
-T& Lista<T>::operator[](int i) const {
+T& Lista<T>::operator[](int i) const { //se non esiste, throw overflow error
     int j=0;
     Lista<T>::const_iterator cit=begin();
     bool out=false;
@@ -74,8 +74,7 @@ T& Lista<T>::operator[](int i) const {
         return cit.punt->info;
     }
     else{
-        std::cout<<"error: out of bound"<<std::endl;
-        return last->info;
+        throw new std::overflow_error("Out of Bounds");
     }
 }
 
@@ -117,6 +116,9 @@ typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc
         first=first->next;
         canc.punt->next=nullptr;
         delete canc.punt;
+
+        if(first==nullptr)last=nullptr; //lista vuota
+
         return first;
     }
     else{   //nodo da cancellare e' in mezzo
@@ -129,7 +131,11 @@ typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc
 
         succ=canc.punt->next;
         prec.punt->next=succ;
+
+        if(last==canc.punt)last=prec.punt; //cancellato ultimo elemento, last si sposta indietro
+
         canc.punt->next=nullptr;
+        delete canc.punt;
 
         return succ;
     }

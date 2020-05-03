@@ -65,8 +65,6 @@ int main(int argc, char *argv[])
     cit=eventi.erase(cit);
     cit=eventi.erase(cit);
 
-
-
     Lista<Evento*>::const_iterator cit1=eventi.begin();
     for(;cit1!=eventi.end();cit1++){
         cout<<**cit1<<endl;
@@ -74,7 +72,20 @@ int main(int argc, char *argv[])
 
     cout<<endl;
     Evento* got= eventi[0];
-    cout<<*got<<endl;
+    cout<<*got<<endl<<endl;
+
+    cit=eventi.begin();
+    cit=eventi.erase(cit);
+    cit=eventi.erase(cit);
+
+    eventi.push_back(eI);
+    eventi.push_back(eC);
+
+    Lista<Evento*>::const_iterator cit2=eventi.begin();
+    for(;cit2!=eventi.end();cit2++){
+        cout<<**cit2<<endl;
+    }
+
 
 return 0;
 
