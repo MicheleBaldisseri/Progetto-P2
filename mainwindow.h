@@ -15,6 +15,8 @@
 #include <promwindow.h>
 #include <appunwindow.h>
 #include <impwindow.h>
+#include <QToolButton>
+#include <QMenu>
 
 class MainWindow : public QWidget{
     Q_OBJECT
