@@ -1,37 +1,67 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <iostream>
-#include "data.h"
-#include "orario.h"
+#include <vector>
 #include "dataora.h"
+#include "evento.h"
+#include "appuntamento.h"
+#include "promemoria.h"
+#include "compleanno.h"
+#include "impegno.h"
+#include "lista.h"
+
+using std::vector;
+using std::cout;
+using std::endl;
 
 int main(int argc, char *argv[])
 {
-    /*
+/*
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    return a.exec();
-    */
-    data oggi,domani(11,20,2021);
-      std::string dataoggi=oggi.getData();
-      std::cout<<dataoggi<<std::endl;
-      oggi=domani;
-      int ggmese=oggi.getGiorniMese();
-      data prova(oggi);
-      std::cout<<oggi<<prova<<std::endl;
-      std::cout<<"giorni che ha il mese di aprile "<<ggmese<<std::endl;
-      oggi.avanzaGiorni(20);
-      domani.avanzaMesi(11);
-      std::cout<<"aggiungo 20 giorni alla variabile oggi "<<oggi<<std::endl;
-      std::cout<<"aggiungo 11 mesi alla variabile domani "<<domani<<std::endl;
-      if(domani.bisestile()) std::cout<<"bisestile"<<std::endl;
-      else std::cout<<"non bisestile"<<std::endl;
-      orario o(22,8,15);
-      dataora x(13,4,2020,22,8,15);
-      x.avanzaOre(2);
-      x.avanzaGiorni(1);
-      std::cout<<x<<std::endl;
-    return 0;
+
+    return a.exec();*/
+
+
+    Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
+    Evento* eA1 = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,11,10,10),"Ufficio");
+    Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");
+    Evento* eC = new Compleanno("Michele Baldisseri",Dataora(7,9,2009,20,40,00),Data(7,9,1999));
+    Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,1,5);
+
+    /*cout<<*eA<<endl;
+    cout<<*eP<<endl;
+    cout<<*eC<<endl;
+    cout<<*eI<<endl<<endl;
+
+    cout<<eA->descrizioneMin()<<endl<<endl;
+    cout<<eP->descrizioneMin()<<endl<<endl;
+    cout<<eC->descrizioneMin()<<endl<<endl;
+    cout<<eI->descrizioneMin()<<endl<<endl;
+
+    cout<<(*eA1>*eA)<<endl<<endl;
+    Dataora a(12,12,2020,23,30,0), b(12,4,2020,11,30,0);
+    cout<<(a==b);*/
+
+    Lista<Evento*> eventi;
+
+    //eventi.push_back(eA);
+    eventi.push_front(eA1);
+    eventi.push_back(eP);
+    eventi.push_back(eC);
+    eventi.push_back(eI);
+
+    Lista<Evento*>::const_iterator cit=eventi.begin();
+    cout<<*cit.punt->info<<endl;
+    cit=eventi.erase(cit);
+    //cit=eventi.begin();
+    //cit++;
+    cout<<*cit.punt->info<<endl;
+    Evento* got= eventi[1];
+    cout<<*got<<endl;
+
+return 0;
+
 }

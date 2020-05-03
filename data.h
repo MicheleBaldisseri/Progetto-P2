@@ -3,76 +3,75 @@
 #include<iostream>
 #include <string>
 
-enum settimana {lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica};
+enum settimana {sabato=0, domenica=1, lunedi=2, martedi=3, mercoledi=4, giovedi=5, venerdi=6};
 
-class data;
-std::ostream& operator<<(std::ostream&, const data&);
+class Data;
+std::ostream& operator<<(std::ostream&, const Data&);
 
-class data{
-    friend std::ostream& operator<<(std::ostream& os, const data& d);
+class Data{
+    friend std::ostream& operator<<(std::ostream&, const Data&);
 public:
     //costruttore di default
-    data();
+    Data();
     //costruttore a 3 parametri
-    data(int gg, int mm, int aa);
+    Data(unsigned int gg, unsigned int mm, unsigned int aa);
     //distruttore
-    ~data();
+    ~Data();
     //costruttore di copia
-    data(const data& d);
+    Data(const Data& d);
     //overload dell'operatore d'assegnazione
-    data& operator=(const data& d);
+    Data& operator=(const Data& d);
 
 
     //restituisce true se l'anno d'invocazione è bisestile
     bool bisestile() const;
     //restituisce la data completa sottoforma di stringa
     std::string getData() const;
-    //restituisce i giorni del mese dell'oggetto d'invocazione
-    int getGiorniMese() const;
     //modifica l'oggetto d'invocazione aumentandolo di g giorni
-    void avanzaGiorni(int g);
+    void avanzaGiorni(unsigned int g);
     //modifica l'oggetto d'invocazione aumentandolo di m mesi
-    void avanzaMesi(int m);
+    void avanzaMesi(unsigned int m);
     //modifica l'oggetto d'invocazione aumentandolo di a anni
-    void avanzaAnni(int a);
+    void avanzaAnni(unsigned int a);
+    //ritorna il numero di giorno per arrivare a fine mese dal giorno corrente
+    unsigned int giorniFineMese() const;
+    //conta gli anni bisestili prima della data d
 
 
     //ritorna il mese dell'oggetto d'invocazione
-    int getMese() const;
+    unsigned int getMese() const;
     //ritorna il giorno dell'oggetto d'invocazione
-    int getGiorno() const;
+    unsigned int getGiorno() const;
     //ritorna l'anno dell'oggetto d'invocazione
-    int getAnno() const;
+    unsigned int getAnno() const;
+    //restituisce i giorni del mese dell'oggetto d'invocazione
+    unsigned int getGiorniMese() const;
+    //ritorna il giorno della settimana
+    unsigned int getGiornoSettimana() const;
+    //ritorna la data annuale del giorno considerato, ovvero il numero di giorni trascorsi dall'inizio dell'anno fino al giorno stesso (compreso)
+    unsigned int getGiornoDellAnno() const;
+    //ritorna il giorno della settimana sottoforma di stringa
+    std::string getStringGs(int g) const;
 
+    //setters
+    void setGiorno(unsigned int x);
+    void setMese(unsigned int x);
+    void setAnno(unsigned int x);
+    void setData(unsigned int gg,unsigned int mm,unsigned int aa);
 
-    void setGiorno();
-    void setMese();
-    void setAnno();
+    //overload operatori
+    bool operator==(const Data& d) const;
+    bool operator!=(const Data& d) const;
+    bool operator<(const Data& d) const;
+    bool operator>(const Data& d) const;
+    unsigned int operator-(const Data& d) const;
 
-
-
-
-    //costruttore da stringa??
-    data(const std::string& s);
-    //costruttore a 4 parametri?
-    //data(int gg, int mm, int aa, settimana gs);
-    void setData(int, int, int);
-    data operator+(const data&);
-    data operator-(const data&);
-    //postfissi
-    data operator++(int);
-    data operator--(int);
-    //prefissi
-    data& operator++();
-    data& operator--();
-    bool operator==(const data&) const;
-    bool operator!=(const data&) const;
-    bool operator<(const data&) const;
-    bool operator>(const data&) const;
 private:
-    int giorno, mese, anno;
+    unsigned int giorno, mese, anno;
     settimana giorno_settimana;
+    //ritorna il numero di anni bisestili tra l'anno 0 e quello dell'obj
+    static unsigned int countLeapYears(const Data &d);
 };
 //overload operatore di output
-std::ostream& operator<<(std::ostream& os, const data& d);
+std::ostream& operator<<(std::ostream& os, const Data& d);
 #endif // DATA_H
