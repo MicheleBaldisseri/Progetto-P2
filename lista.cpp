@@ -64,7 +64,7 @@ T& Lista<T>::operator[](int i) const {
 
     while(j!=i && !out){
         if(cit==end())
-            out==true;
+            out=true;
         else{
             ++j;
             ++cit;
@@ -144,15 +144,11 @@ typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc
 template<class T>
 typename Lista<T>::const_iterator Lista<T>::begin() const
 {
-    Lista<T>::const_iterator aux;
-    aux.punt=this->first;
-    return aux;
+    return first;
 }
 
 template<class T>
 typename Lista<T>::const_iterator Lista<T>::end() const
 {
-    Lista<T>::const_iterator aux;
-    aux.punt=(*this).last;
-    return aux;
+    return nullptr;
 }

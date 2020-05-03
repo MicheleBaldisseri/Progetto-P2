@@ -1,7 +1,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 #include <iostream>
-#include <lista.cpp>
+
 
 using namespace std;
 template <class T>
@@ -29,8 +29,10 @@ public:
         void push_back(const T& t);
         T& operator[](int i) const;
         class const_iterator{
-            public:
+            friend class Lista<T>;
+            private:
                 nodo* punt;
+            public:
                 //operator++ prefisso
                 const_iterator(nodo*n=nullptr):punt(n){}
                 const_iterator& operator++();
@@ -40,10 +42,12 @@ public:
                 bool operator==(const const_iterator& x) const;
                 bool operator!=(const const_iterator& x) const;
                 const T& operator*() const;
-
         };
         const_iterator erase(const_iterator&);
         const_iterator begin() const;
         const_iterator end() const;
     };
+
+
+
 #endif // LISTA_H
