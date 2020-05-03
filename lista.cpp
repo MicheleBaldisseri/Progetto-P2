@@ -110,34 +110,28 @@ const T &Lista<T>::const_iterator::operator*() const {
 }
 
 template<class T>
-typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc)
+typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc) //se iteratore non presente, undefined behavior
 {
-    Lista<T>::const_iterator aux;
-    if(canc==begin()){
-        aux=++canc;
-        first=aux.punt;
-        (*canc.punt).next=nullptr;
-        //delete canc.punt;
-        return aux;
+    nodo* succ;
+    if(canc==begin()){ //nodo da cancellare e' il primo
+        first=first->next;
+        canc.punt->next=nullptr;
+        delete canc.punt;
+        return first;
     }
-    else{
+    else{   //nodo da cancellare e' in mezzo
         Lista<T>::const_iterator prec=begin();
-        for(const_iterator cit=++prec;cit!=canc;++cit){
-            ++prec;
+        Lista<T>::const_iterator cit=begin();
+        cit++;
+        for(;cit!=canc;cit++){
+            prec++;
         }
 
-        if(canc==end()){
-            aux.punt=nullptr;
-            (*(prec.punt)).next=nullptr;
-            last=prec.punt;
-        }
-        else{
-            aux=(*canc.punt).next;
-            (*(prec.punt)).next=aux.punt;
-            (*canc.punt).next=nullptr;
-        }
-        delete canc.punt;
-        return aux;
+        succ=canc.punt->next;
+        prec.punt->next=succ;
+        canc.punt->next=nullptr;
+
+        return succ;
     }
 }
 
