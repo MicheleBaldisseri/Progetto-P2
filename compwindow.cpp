@@ -1,14 +1,11 @@
-#include "promwindow.h"
+#include "compwindow.h"
 
-PromWindow::PromWindow(QWidget *parent): QDialog(parent){
-
+CompWindow::CompWindow(QWidget *parent): QDialog(parent)
+{
     mainLayout = new QVBoxLayout;
-    formGroupBox = new QGroupBox(tr("Imposta promemoria"));
+    formGroupBox = new QGroupBox(tr("Imposta"));
 
-    addPromItems();
-
-    bigEditor = new QTextEdit;
-    bigEditor->setPlainText(tr("Inserisci qui la descrizione... "));
+    addCompItems();
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Close);
 
@@ -16,40 +13,38 @@ PromWindow::PromWindow(QWidget *parent): QDialog(parent){
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     mainLayout->addWidget(formGroupBox);
-    mainLayout->addWidget(bigEditor);
     mainLayout->addWidget(buttonBox);
 
     setLayout(mainLayout);
 
-    setWindowTitle(tr("Promemoria"));
+    setWindowTitle(tr("Compleanno"));
 }
 
-PromWindow::~PromWindow()
+CompWindow::~CompWindow()
 {
 
 }
 
-void PromWindow::addPromItems()
+void CompWindow::addCompItems()
 {
-
     QFormLayout *layout = new QFormLayout;
     QComboBox* colorChoise= new QComboBox(this);
     QLineEdit* title= new QLineEdit(this);
     layout->addRow(new QLabel(tr("Titolo:")), title);
     layout->addRow(new QLabel(tr("Colore:")), colorChoise);
 
-    colorChoise->addItem("Rosso - predefinito");
+    colorChoise->addItem("Arancione - predefinito");
     colorChoise->addItem("Giallo");
     colorChoise->addItem("Verde");
     colorChoise->addItem("Viola");
     colorChoise->addItem("Blu");
     colorChoise->addItem("Bianco");
-    colorChoise->addItem("Arancione");
+    colorChoise->addItem("Rosso");
     colorChoise->addItem("Nero");
     colorChoise->addItem("Grigio");
 
-    QTimeEdit* setTime= new QTimeEdit(this);
-    layout->addRow(new QLabel(tr("Orario:")), setTime);
+    QDateEdit* setDate= new QDateEdit(this);
+    layout->addRow(new QLabel(tr("Data di nascita:")), setDate);
 
     formGroupBox->setLayout(layout);
 }

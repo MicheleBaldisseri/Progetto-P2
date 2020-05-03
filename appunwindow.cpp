@@ -29,8 +29,8 @@ void AppunWindow::createFormGroupBox()
     formGroupBox = new QGroupBox(tr("Imposta appuntamento"));
     QFormLayout *layout = new QFormLayout;
     QComboBox* colorChoise= new QComboBox;
-    QLineEdit* title= new QLineEdit;
-    QLineEdit* location= new QLineEdit;
+    QLineEdit* title= new QLineEdit(this);
+    QLineEdit* location= new QLineEdit(this);
     //titolo, luogo, tendina colori
     layout->addRow(new QLabel(tr("Titolo:")), title);
     layout->addRow(new QLabel(tr("Luogo:")), location);
@@ -46,8 +46,8 @@ void AppunWindow::createFormGroupBox()
     colorChoise->addItem("Nero");
     colorChoise->addItem("Grigio");
     //orario di inizio e fine
-    QTimeEdit* setTimeBegin= new QTimeEdit;
-    QTimeEdit* setTimeEnd= new QTimeEdit;
+    QTimeEdit* setTimeBegin= new QTimeEdit(this);
+    QTimeEdit* setTimeEnd= new QTimeEdit(this);
     QHBoxLayout* time= new QHBoxLayout;
     QLabel* begin= new QLabel(tr("Orario inizio:"));
     QLabel* end= new QLabel(tr("Orario fine:"));

@@ -15,6 +15,7 @@
 #include <promwindow.h>
 #include <appunwindow.h>
 #include <impwindow.h>
+#include <compwindow.h>
 #include <QToolButton>
 #include <QMenu>
 
@@ -43,6 +44,7 @@ private:
     PromWindow* promW;
     AppunWindow* appunW;
     ImpWindow* impW;
+    CompWindow* compW;
 
     void addMainItems();
 

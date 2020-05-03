@@ -65,7 +65,8 @@ void MainWindow::inserisciEvento(int type)
         impW->show();
         break;
     case 3:
-
+        compW= new CompWindow;
+        compW->show();
         break;
     default:
         break;

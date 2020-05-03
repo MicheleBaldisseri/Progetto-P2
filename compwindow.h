@@ -1,5 +1,5 @@
-#ifndef PROMWINDOW_H
-#define PROMWINDOW_H
+#ifndef COMPWINDOW_H
+#define COMPWINDOW_H
 
 #include <QDialog>
 #include <QTextEdit>
@@ -20,13 +20,13 @@
 #include <QLineEdit>
 #include <QTimeEdit>
 
-class PromWindow : public QDialog
+class CompWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit PromWindow(QWidget *parent = 0);
-    ~PromWindow();
+    explicit CompWindow(QWidget *parent = 0);
+    ~CompWindow();
 
 private slots:
 
@@ -34,11 +34,7 @@ private:
     QDialogButtonBox *buttonBox;
     QVBoxLayout *mainLayout;
     QGroupBox *formGroupBox;
-    QTextEdit *bigEditor;
-    void addPromItems();
+    void addCompItems();
 
 };
-
-#endif // PROMWINDOW_H
-
-
+#endif // COMPWINDOW_H

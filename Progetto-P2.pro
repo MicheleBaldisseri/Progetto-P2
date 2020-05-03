@@ -40,7 +40,8 @@ orario.cpp \
     controller.cpp \
     promwindow.cpp \
     appunwindow.cpp \
-    impwindow.cpp
+    impwindow.cpp \
+    compwindow.cpp
 
 HEADERS += \
     appuntamento.h \
@@ -58,7 +59,8 @@ HEADERS += \
     controller.h \
     promwindow.h \
     appunwindow.h \
-    impwindow.h
+    impwindow.h \
+    compwindow.h
 
 FORMS +=
 
