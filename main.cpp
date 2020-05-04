@@ -11,7 +11,6 @@
 #include "lista.h"
 #include "lista.cpp"
 
-
 using std::vector;
 using std::cout;
 using std::endl;
@@ -85,7 +84,6 @@ int main(int argc, char *argv[])
     for(;cit2!=eventi.end();cit2++){
         cout<<**cit2<<endl;
     }
-
 
 return 0;
 

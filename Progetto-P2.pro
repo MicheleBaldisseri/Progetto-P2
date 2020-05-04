@@ -40,6 +40,7 @@ SOURCES += \
     controller.cpp \
     lista.cpp
 
+
 HEADERS += \
     appuntamento.h \
     compleanno.h \
@@ -54,7 +55,8 @@ HEADERS += \
     promemoria.h \
     model.h \
     controller.h \
-lista.h
+    lista.h
+
 
 FORMS += \
         mainwindow.ui
