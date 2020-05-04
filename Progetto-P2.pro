@@ -30,14 +30,16 @@ SOURCES += \
     eventodurata.cpp \
     eventoricorrente.cpp \
     impegno.cpp \
-        main.cpp \
-        mainwindow.cpp \
-data.cpp \
-orario.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    data.cpp \
+    orario.cpp \
     dataora.cpp \
     promemoria.cpp \
     model.cpp \
-    controller.cpp
+    controller.cpp \
+    lista.cpp
+
 
 HEADERS += \
     appuntamento.h \
@@ -46,13 +48,15 @@ HEADERS += \
     eventodurata.h \
     eventoricorrente.h \
     impegno.h \
-        mainwindow.h \
+    mainwindow.h \
     data.h \
     orario.h \
     dataora.h \
     promemoria.h \
     model.h \
-    controller.h
+    controller.h \
+    lista.h
+
 
 FORMS += \
         mainwindow.ui
