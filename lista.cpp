@@ -11,7 +11,7 @@ typename Lista<T>::nodo* Lista<T>::copy(Lista<T>::nodo *a, Lista<T>::nodo *&b){
 }
 
 template<class T>
-Lista<T>::Lista():first(0),last(0){}
+Lista<T>::Lista():first(nullptr),last(nullptr){}
 
 template<class T>
 Lista<T>::Lista(const Lista &c): first(copy(c.first, last)){}

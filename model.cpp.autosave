@@ -107,8 +107,13 @@ bool Model::importa()
         int n=150;
         char c='\n';
         while(lista.getline(s,n,c)){
-
-            cout<<s<<endl;
+            string b;
+            while(s){
+                if(*s!='|'){
+                    b=b+s;
+                }
+                else
+            }
         }
         lista.close();
         return true;
