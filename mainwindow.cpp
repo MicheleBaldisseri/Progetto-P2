@@ -14,10 +14,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     setWindowStyle();
 
-    /*openPromWindow();
-    openAppunWindow();
-    openImpWindow();*/
-
     setLayout(mainLayout);
 
     QTimer *timer = new QTimer(this);
@@ -25,28 +21,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     timer->start(1000);
 }
 
-void MainWindow::showTime()
-{
-    static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"));
-}
+void MainWindow::showTime(){
+    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
+    s[3] = s.at(3).toTitleCase();
+    static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(s);
 
-/*void MainWindow::openPromWindow()
-{
-    promW= new PromWindow;
-    promW->show();
 }
-
-void MainWindow::openAppunWindow()
-{
-    appunW= new AppunWindow;
-    appunW->show();
-}
-
-void MainWindow::openImpWindow()
-{
-    impW= new ImpWindow;
-    impW->show();
-}*/
 
 void MainWindow::inserisciEvento(int type)
 {
@@ -75,10 +55,18 @@ void MainWindow::inserisciEvento(int type)
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
 
-    QLabel* date = new QLabel(QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss"),this);
+    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
+    s[3] = s.at(3).toTitleCase();
+    QLabel* date = new QLabel(s,this);
     date->setObjectName("date");
     date->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(date);
+
+    QFrame *line = new QFrame();
+    line->setFrameShape(QFrame::HLine);
+    line->setObjectName("line");
+    mainLayout->addWidget(line);
+
     mainLayout->addLayout(itemLayout);
 
     itemLayout->addLayout(menuLayout);
@@ -136,26 +124,29 @@ void MainWindow::addButtons(){
 
 
     QPushButton* salva = new QPushButton("Salva eventi",this);
-    QPushButton* colori = new QPushButton("Cambia colore eventi",this);
+    QPushButton* esci = new QPushButton("Esci",this);
+
+    connect(esci,SIGNAL(clicked()),this,SLOT(close()));
 
     menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
     menuLayout->addWidget(inserisci);
     menuLayout->addWidget(salva);
-    menuLayout->addWidget(colori);
+    menuLayout->addWidget(esci);
     menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
 
     //menu->setFont(QFont("AdobeHeitiStd-Regular",30,QFont::Bold));
 
     menuLayout->setAlignment(inserisci,Qt::AlignTop);
     menuLayout->setAlignment(salva,Qt::AlignTop);
-    menuLayout->setAlignment(colori,Qt::AlignTop);
+    menuLayout->setAlignment(esci,Qt::AlignTop);
 
 }
 
 void MainWindow::setWindowStyle(){
     setWindowTitle(tr("Agenda"));
-    mainLayout->setContentsMargins(20,20,20,20);
-    mainLayout->setSpacing(30);
+
+    mainLayout->setContentsMargins(20,15,20,20);
+    mainLayout->setSpacing(10);
     setGeometry(200,200,900,350);
     itemLayout->setSpacing(35);
     itemLayout->setContentsMargins(5,0,0,0);
