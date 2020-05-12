@@ -38,6 +38,10 @@ SOURCES += \
     promemoria.cpp \
     model.cpp \
     controller.cpp \
+    promwindow.cpp \
+    appunwindow.cpp \
+    impwindow.cpp \
+    compwindow.cpp
     lista.cpp
 
 
@@ -55,8 +59,16 @@ HEADERS += \
     promemoria.h \
     model.h \
     controller.h \
+    promwindow.h \
+    appunwindow.h \
+    impwindow.h \
+    compwindow.h
     lista.h
 
 
-FORMS += \
-        mainwindow.ui
+FORMS +=
+
+DISTFILES +=
+
+RESOURCES += \
+    resources.qrc

@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    background: #191919;
+    color: #DDDDDD;
+    border: 1px solid #5A5A5A;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+QCalendarWidget QWidget { alternate-background-color: #5A5A5A; }
+
+QCalendarWidget QToolButton, QCalendarWidget QWidget#qt_calendar_navigationbar{
+    border: 0px;
+    min-width: 70px;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+    color: rgb(64, 64, 64);
+}
+
+QCalendarWidget QAbstractItemView{
+    selection-background-color: #003642;
+}
+
+QLabel{
+    border:0px;
+}
+
+QLabel#date{
+    font-size:30px;
+}
+
+QFrame#line{
+    margin:0,10,0,0;
+    border:3px solid #5A5A5A;
+}
+
+QPushButton, QToolButton#inserisci{
+    margin: 0;
+    padding: 6;
+    border: 1px solid #5A5A5A;
+}
+
+QToolButton#inserisci::menu-indicator{
+    subcontrol-position: right center;
+    left: -6px;
+}
+
+QAbstractButton:hover, QMenu::item:selected{
+    background: #353535;
+}
+
+QAbstractButton:pressed {
+    background: #5A5A5A;
+}

@@ -12,21 +12,21 @@
 #include "lista.cpp"
 #include "model.h"
 
+
 using std::vector;
 using std::cout;
 using std::endl;
 
 int main(int argc, char *argv[])
 {
-/*
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
 
-    return a.exec();*/
-
-
+    return a.exec();
+/*
     Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
     Evento* eA1 = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,11,10,10),"Ufficio");
     Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");
@@ -47,7 +47,10 @@ int main(int argc, char *argv[])
 
     cout<<(*eA1>*eA)<<endl<<endl;
     Dataora a(12,12,2020,23,30,0), b(12,4,2020,11,30,0);
+    cout<<(a==b);
     cout<<(a==b);*/
+  
+  /*
 
     Lista<Evento*> eventi;
     eventi.push_back(eI);
@@ -68,7 +71,7 @@ int main(int argc, char *argv[])
     for(;cit!=eventi.end();cit++){
         cout<<**cit<<endl;
     }
-    cout<<endl;/*
+    cout<<endl;
     cit=eventi.begin();
     cit++;
 
@@ -94,7 +97,7 @@ int main(int argc, char *argv[])
     Lista<Evento*>::const_iterator cit2=eventi.begin();
     for(;cit2!=eventi.end();cit2++){
         cout<<**cit2<<endl;
-    }*/
+    }
 
     Model m(&eventi);
     Lista<Evento*> sel=m.showEvent(Data(7,9,2010));
@@ -102,7 +105,7 @@ int main(int argc, char *argv[])
         cout<<**cit2<<endl;
     }
     cout<<"import"<<endl;
-    cout<<m.importa()<<endl;
+    cout<<m.importa()<<endl;*/
 return 0;
 
 }
