@@ -11,6 +11,7 @@
 #include "lista.h"
 #include "lista.cpp"
 #include "model.h"
+#include "controller.h"
 
 
 using std::vector;
@@ -21,10 +22,13 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-    MainWindow w;
+
+    Model m;
+    Controller c(&m);
+    MainWindow w(&c);
+    c.setView(&w);
+
     w.show();
-
-
     return a.exec();
 /*
     Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
@@ -35,7 +39,7 @@ int main(int argc, char *argv[])
     Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,1,5);
    Evento* eI2 = new Impegno("conf",Dataora(11,5,2020,15,11,11),Dataora(11,5,2020,16,12,12),giorno,1,5);
 
-    /*cout<<*eA<<endl;
+    cout<<*eA<<endl;
     cout<<*eP<<endl;
     cout<<*eC<<endl;
     cout<<*eI<<endl<<endl;
@@ -48,9 +52,9 @@ int main(int argc, char *argv[])
     cout<<(*eA1>*eA)<<endl<<endl;
     Dataora a(12,12,2020,23,30,0), b(12,4,2020,11,30,0);
     cout<<(a==b);
-    cout<<(a==b);*/
+    cout<<(a==b);
   
-  /*
+
 
     Lista<Evento*> eventi;
     eventi.push_back(eI);

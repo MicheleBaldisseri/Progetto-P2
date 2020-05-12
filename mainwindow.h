@@ -19,11 +19,13 @@
 #include <QToolButton>
 #include <QMenu>
 
+class Controller;
+
 class MainWindow : public QWidget{
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Controller* controller, QWidget *parent = nullptr);
     ~MainWindow()=default;
 
 public slots:
@@ -35,6 +37,8 @@ public slots:
     void inserisciEvento(int type);
 
 private:
+    Controller* controller;
+
     QVBoxLayout *mainLayout;
     QHBoxLayout *itemLayout;
     QVBoxLayout *menuLayout;

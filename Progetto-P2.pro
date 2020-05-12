@@ -41,7 +41,7 @@ SOURCES += \
     promwindow.cpp \
     appunwindow.cpp \
     impwindow.cpp \
-    compwindow.cpp
+    compwindow.cpp \
     lista.cpp
 
 
@@ -62,7 +62,7 @@ HEADERS += \
     promwindow.h \
     appunwindow.h \
     impwindow.h \
-    compwindow.h
+    compwindow.h \
     lista.h
 
 

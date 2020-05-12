@@ -1,6 +1,7 @@
 #include "mainwindow.h"
+#include "controller.h"
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
+MainWindow::MainWindow(Controller* c, QWidget *parent) : QWidget(parent), controller(c) {
     mainLayout = new QVBoxLayout(this);
     itemLayout = new QHBoxLayout();
     menuLayout = new QVBoxLayout();

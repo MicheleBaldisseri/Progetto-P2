@@ -8,7 +8,7 @@ class Model
 private:
     Lista<Evento*> l;
 public:
-    Model(Lista<Evento*>*);
+    Model();
     bool insert(Evento*);//prima verifica che non ci sia già l'evento
     Lista<Evento*>::const_iterator search(Evento*) const;//ricerca se evento è già presente nella lista. Se ricorrente ritorna solo il primo della lista. nullptr se non lo trova
     bool erase(Evento*);//cerca l'evento e se c'è cancella da iteratore. Se evento ricorrente cancella tutte le ricorrenze. True se ha successo, false altrimenti.

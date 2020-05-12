@@ -63,7 +63,7 @@ void Data::avanzaGiorni(unsigned int g){
     //salvo i giorni del mese corrente in una variabile
     unsigned int ggMese=getGiorniMese();
     //aggiungo i giorni con un ciclo
-    for(int i=0; i<g; i++){
+    for(unsigned int i=0; i<g; i++){
         giorno++;
         //se arrivo a fine mese passo al successivo
         if(giorno>ggMese){

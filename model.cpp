@@ -12,8 +12,7 @@
 #include <QTextStream>
 
 
-Model::Model(Lista<Evento*>* e){
-    l=*e;
+Model::Model(){
 }
 
 bool Model::insert(Evento *e)
@@ -101,7 +100,7 @@ bool Model::esporta()//inserire una lettera per identificare tipo
         return false;
     }
 }
-Evento* create(string& s){
+/*Evento* create(string& s){
     string nuova;
     if(s[0]=='A'){
         //Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
@@ -129,10 +128,10 @@ Evento* create(string& s){
         Evento *e=nuova;
         return e;
     }
-}
+}*/
 bool Model::importa()
 {
-    QFile lista("lista.txt");
+    /*QFile lista("lista.txt");
     int cont=0;
     if (!lista.open(QIODevice::ReadOnly | QIODevice::Text))
             return false;
@@ -144,6 +143,6 @@ bool Model::importa()
             if(!insert(e))
                 ++cont;
         }
-        if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;
+        if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;*/
         return true;
 }
