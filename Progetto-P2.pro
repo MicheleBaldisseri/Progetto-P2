@@ -30,10 +30,10 @@ SOURCES += \
     eventodurata.cpp \
     eventoricorrente.cpp \
     impegno.cpp \
-        main.cpp \
-        mainwindow.cpp \
-data.cpp \
-orario.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    data.cpp \
+    orario.cpp \
     dataora.cpp \
     promemoria.cpp \
     model.cpp \
@@ -42,6 +42,8 @@ orario.cpp \
     appunwindow.cpp \
     impwindow.cpp \
     compwindow.cpp
+    lista.cpp
+
 
 HEADERS += \
     appuntamento.h \
@@ -50,7 +52,7 @@ HEADERS += \
     eventodurata.h \
     eventoricorrente.h \
     impegno.h \
-        mainwindow.h \
+    mainwindow.h \
     data.h \
     orario.h \
     dataora.h \
@@ -61,6 +63,8 @@ HEADERS += \
     appunwindow.h \
     impwindow.h \
     compwindow.h
+    lista.h
+
 
 FORMS +=
 
