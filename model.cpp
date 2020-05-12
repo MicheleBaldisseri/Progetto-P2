@@ -8,6 +8,9 @@
 #include "compleanno.h"
 #include <iostream>
 #include <fstream>
+#include <QFile>
+#include <QTextStream>
+
 
 Model::Model(Lista<Evento*>* e){
     l=*e;
@@ -83,7 +86,7 @@ Lista<Evento *> Model::showEvent(const Data & d)
     return selezionati;
 }
 
-bool Model::esporta()
+bool Model::esporta()//inserire una lettera per identificare tipo
 {
     ofstream lista("lista.txt");
     if(lista.is_open()){
@@ -98,23 +101,49 @@ bool Model::esporta()
         return false;
     }
 }
-
+Evento* create(string& s){
+    string nuova;
+    if(s[0]=='A'){
+        //Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
+        nuova="new Appuntamento(\"";
+        unsigned int cont=0;
+        for(unsigned int i=0; s[i]!='\n'; ++i){
+            if(s[i]=='|') ++cont;
+            if(cont>1&&s[i]!='|')
+                nuova=nuova+s[i];
+            if(cont==2&&s[i]=='|')
+                nuova=nuova+"\",Dataora(";
+            if(cont>2&&cont<8&&s[i]=='|')
+                nuova=nuova+",";
+            if(cont==8&&s[i]=='|')
+                nuova=nuova+"),Dataora(";
+            if(cont>8&&cont<14&&s[i]=='|')
+                nuova=nuova+",";
+            if(cont==14&&s[i]=='|')
+                nuova=nuova+"),\"";
+            if(cont==15&&s[i]=='|')
+                nuova=nuova+"\",";
+        }
+        nuova=nuova+");";
+        cout<<"stringa "<<nuova<<endl;
+        Evento *e=nuova;
+        return e;
+    }
+}
 bool Model::importa()
 {
-    ifstream lista("lista.txt");
-    if(lista.is_open()){
-        char* s;
-        int n=150;
-        char c='\n';
-        while(lista.getline(s,n,c)){
-
-            cout<<s<<endl;
+    QFile lista("lista.txt");
+    int cont=0;
+    if (!lista.open(QIODevice::ReadOnly | QIODevice::Text))
+            return false;
+    QTextStream t(&lista);
+        while (!t.atEnd()) {
+            QString s = t.readLine();
+            cout << s.toStdString()<<endl;
+            Evento*e=create(s.toStdString());
+            if(!insert(e))
+                ++cont;
         }
-        lista.close();
+        if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;
         return true;
-    }
-    else{
-        throw new std::runtime_error("Impossibile aprire il file");
-        return false;
-    }
 }

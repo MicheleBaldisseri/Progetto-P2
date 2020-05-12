@@ -95,12 +95,13 @@ int main(int argc, char *argv[])
     for(;cit2!=eventi.end();cit2++){
         cout<<**cit2<<endl;
     }*/
+
     Model m(&eventi);
     Lista<Evento*> sel=m.showEvent(Data(7,9,2010));
-    cout<<"sel"<<endl;
     for(Lista<Evento*>::const_iterator cit2=sel.begin();cit2!=sel.end();cit2++){
         cout<<**cit2<<endl;
     }
+    cout<<"import"<<endl;
     cout<<m.importa()<<endl;
 return 0;
 
