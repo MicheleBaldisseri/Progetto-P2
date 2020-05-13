@@ -12,7 +12,10 @@
 #include <QTextStream>
 
 
-Model::Model(){
+
+bool Model::modify(Lista<Evento*>::const_iterator it, Evento *nuovo)
+{
+
 }
 
 bool Model::insert(Evento *e)
@@ -61,28 +64,27 @@ bool Model::erase(Evento *e)
     }
 }
 
-Lista<Evento *> Model::showEvent(const Data & d)
+void Model::showEvent(const Data & d)
 {
-    Lista<Evento *> selezionati;
+    selezionati.clear();
     for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){
         EventoRicorrente*r=dynamic_cast<EventoRicorrente*>(*cit);
         if(!r){//se evento è di tipo EventoDurata o Promemoria
             if(d==(*cit)->getDataInizio()){
-                selezionati.push_back(*cit);
+                selezionati.push_back(cit);
             }
         }
         else{//se evento è di tipo EventoRicorrente
             vector<Data>* v=r->getRicorrenze();
             for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){
                 if(*c==d)
-                    selezionati.push_back(r);
+                    selezionati.push_back(cit);
             }
         }
     }
-    if(selezionati.begin()==nullptr){
+    if(selezionati.size()==0){
         throw new std::invalid_argument("Nessun evento presente nella data specificata");
     }
-    return selezionati;
 }
 
 bool Model::esporta()//inserire una lettera per identificare tipo
