@@ -24,20 +24,36 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Model m;
+
+
+
+
     Controller c(&m);
     MainWindow w(&c);
     c.setView(&w);
 
     w.show();
+
+    Evento* eA = new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");
+    Evento* eP = new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
+    Evento* eC = new Compleanno("Michele Baldisseri",Dataora(16,5,2020,00,00,00),Data(16,5,1999));
+    Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,2,3);
+
+    m.insert(eA);
+    m.insert(eP);
+    m.insert(eC);
+    m.insert(eI);
+
+
     return a.exec();
-/*
-    Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
+
+
+   /*
     Evento* eA1 = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,11,10,10),"Ufficio");
-    Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");
-    Evento* eC = new Compleanno("Michele Baldisseri",Dataora(7,9,2009,20,40,00),Data(7,9,1999));
     Evento* eC1 = new Compleanno("Miche Baldisseri",Dataora(7,9,2009,20,40,00),Data(7,9,1999));
-    Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,1,5);
-   Evento* eI2 = new Impegno("conf",Dataora(11,5,2020,15,11,11),Dataora(11,5,2020,16,12,12),giorno,1,5);
+
+    Evento* eI2 = new Impegno("conf",Dataora(11,5,2020,15,11,11),Dataora(11,5,2020,16,12,12),giorno,1,5);
+
 
     cout<<*eA<<endl;
     cout<<*eP<<endl;
