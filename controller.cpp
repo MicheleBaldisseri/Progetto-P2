@@ -16,3 +16,11 @@ void Controller::updateList(const QDate& date){
         view->addEventList((*(v[i]))->descrizioneMin(),(*(v[i]))->getColore());
     }
 }
+
+void Controller::exportEvents()
+{
+    //richiamo model.export()
+    bool done=model->esporta();
+    //comunico alla vista il risultato per mostrare un messaggio all'utente
+    view->exportDone(done);
+}

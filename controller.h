@@ -19,6 +19,7 @@ public:
 
 public slots:
     void updateList(const QDate& date);
+    void exportEvents();
 };
 
 #endif // CONTROLLER_H

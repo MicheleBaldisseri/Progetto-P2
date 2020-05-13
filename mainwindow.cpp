@@ -71,6 +71,14 @@ void MainWindow::clearList(){
     list->clear();
 }
 
+void MainWindow::exportDone(bool done)
+{
+    if(done)
+        QMessageBox::information(this, "Salvataggio", "Tutti gli eventi sono stati salvati con successo!");
+    else
+        QMessageBox::warning(this, "Salvataggio", "Impossibile salvare il file.");
+}
+
 
 
 void MainWindow::showTime(){
@@ -181,6 +189,7 @@ void MainWindow::addButtons(){
     QPushButton* esci = new QPushButton("Esci",this);
 
     connect(esci,SIGNAL(clicked()),this,SLOT(close()));
+    connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents()));
 
     menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
     menuLayout->addWidget(inserisci);

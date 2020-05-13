@@ -20,6 +20,7 @@
 #include <QToolButton>
 #include <QMenu>
 #include <QListWidget>
+#include <QMessageBox>
 using std::string;
 
 class Controller;
@@ -34,7 +35,7 @@ public:
     void addEventList(string text,int color);
     void updateList();
     void clearList();
-
+    void exportDone(bool done);
 public slots:
     void showTime();
     void inserisciEvento(int type);
