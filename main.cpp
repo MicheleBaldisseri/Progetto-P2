@@ -24,10 +24,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Model m;
-
-
-
-
     Controller c(&m);
     MainWindow w(&c);
     c.setView(&w);
@@ -44,6 +40,7 @@ int main(int argc, char *argv[])
     m.insert(eC);
     m.insert(eI);
 
+    w.updateList();
     return a.exec();
 
 

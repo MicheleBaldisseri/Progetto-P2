@@ -57,3 +57,11 @@ QAbstractButton:pressed {
 QListWidget::item {
     margin: 15px;
 }
+
+QDateEdit::disabled, QComboBox::disabled, QSpinBox::disabled{
+    color: #333333;
+}
+
+ImpWindow QCheckBox{
+    border: 0px;
+}
