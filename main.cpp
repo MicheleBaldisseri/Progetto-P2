@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
     m.insert(eC);
     m.insert(eI);
 
+    m.esporta();
 
     return a.exec();
 
