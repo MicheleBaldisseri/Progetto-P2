@@ -13,9 +13,9 @@ std::string Promemoria::descrizioneMin() const{
 
 std::string Promemoria::descrizioneFull() const{
     std::stringstream text;
-    text<<"Promemoria"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
-    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
-    text<<getDesc()<<"|"<<getColore();
+    text<<"<Promemoria Titolo=\""<<getTitolo()<<"\" DataInizio=\""<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
+    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<"\" Desc=\"";
+    text<<getDesc()<<"\" Colore=\""<<getColore()<<"\"/>";
     return text.str();
 }
 
