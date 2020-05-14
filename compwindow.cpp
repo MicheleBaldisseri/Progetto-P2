@@ -18,6 +18,8 @@ CompWindow::CompWindow(QWidget *parent): QDialog(parent)
     setLayout(mainLayout);
 
     setWindowTitle(tr("Compleanno"));
+
+    setMinimumSize(280,180);
 }
 
 CompWindow::~CompWindow()
@@ -28,6 +30,7 @@ CompWindow::~CompWindow()
 void CompWindow::addCompItems()
 {
     QFormLayout *layout = new QFormLayout;
+    layout->setContentsMargins(10,18,10,10);
     QComboBox* colorChoise= new QComboBox(this);
     QLineEdit* title= new QLineEdit(this);
     layout->addRow(new QLabel(tr("Titolo:")), title);

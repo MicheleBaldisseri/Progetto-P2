@@ -22,6 +22,8 @@ PromWindow::PromWindow(QWidget *parent): QDialog(parent){
     setLayout(mainLayout);
 
     setWindowTitle(tr("Promemoria"));
+
+    setMinimumSize(280,250);
 }
 
 PromWindow::~PromWindow()
@@ -33,6 +35,7 @@ void PromWindow::addPromItems()
 {
 
     QFormLayout *layout = new QFormLayout;
+    layout->setContentsMargins(10,18,10,10);
     QComboBox* colorChoise= new QComboBox(this);
     QLineEdit* title= new QLineEdit(this);
     layout->addRow(new QLabel(tr("Titolo:")), title);

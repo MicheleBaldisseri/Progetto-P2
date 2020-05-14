@@ -53,3 +53,7 @@ QAbstractButton:hover, QMenu::item:selected{
 QAbstractButton:pressed {
     background: #5A5A5A;
 }
+
+QListWidget::item {
+    margin: 15px;
+}
