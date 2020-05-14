@@ -1,7 +1,7 @@
 #include "appunwindow.h"
 
 
-AppunWindow::AppunWindow()
+AppunWindow::AppunWindow(QWidget *parent): QDialog(parent)
 {
 
     createFormGroupBox();
@@ -21,6 +21,13 @@ AppunWindow::AppunWindow()
     setLayout(mainLayout);
 
     setWindowTitle(tr("Appuntamento"));
+
+    setMinimumSize(280,180);
+}
+
+AppunWindow::~AppunWindow()
+{
+
 }
 
 void AppunWindow::createFormGroupBox()
@@ -28,6 +35,7 @@ void AppunWindow::createFormGroupBox()
 
     formGroupBox = new QGroupBox(tr("Imposta appuntamento"));
     QFormLayout *layout = new QFormLayout;
+    layout->setContentsMargins(10,18,10,10);
     QComboBox* colorChoise= new QComboBox;
     QLineEdit* title= new QLineEdit(this);
     QLineEdit* location= new QLineEdit(this);

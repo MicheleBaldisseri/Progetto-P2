@@ -23,6 +23,8 @@ ImpWindow::ImpWindow(QWidget *parent) : QDialog(parent)
     setLayout(mainLayout);
 
     setWindowTitle(tr("Impegno"));
+
+    setMinimumSize(300,300);
 }
 
 ImpWindow::~ImpWindow()
@@ -64,8 +66,10 @@ void ImpWindow::addImpItems()
 {
     //layout del box informazioni generali
     QFormLayout *layout = new QFormLayout;
+    layout->setContentsMargins(10,18,10,10);
     //layout del box per settare ricorrenze
     QFormLayout *layoutR = new QFormLayout;
+    layoutR->setContentsMargins(10,18,10,10);
     //lista dei colori
     QComboBox* colorChoise= new QComboBox(this);
     title= new QLineEdit(this);

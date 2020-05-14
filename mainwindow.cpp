@@ -94,20 +94,20 @@ void MainWindow::inserisciEvento(int type)
 
     switch (type) {
     case 0:
-        promW= new PromWindow;
+        promW= new PromWindow(this);
         promW->show();
         break;
     case 1:
-        appunW= new AppunWindow;
+        appunW= new AppunWindow(this);
         appunW->show();
         break;
     case 2:
-        impW= new ImpWindow;
+        impW= new ImpWindow(this);
         connect(impW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
         impW->show();
         break;
     case 3:
-        compW= new CompWindow;
+        compW= new CompWindow(this);
         compW->show();
         break;
     default:

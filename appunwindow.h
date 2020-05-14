@@ -22,7 +22,8 @@ class AppunWindow : public QDialog
     Q_OBJECT
 
 public:
-    AppunWindow();
+    explicit AppunWindow(QWidget *parent = 0);
+    ~AppunWindow();
 
 private:
     void createFormGroupBox();
