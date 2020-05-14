@@ -22,6 +22,8 @@
 #include <QCheckBox>
 #include <QDateTimeEdit>
 #include <QSpinBox>
+#include "datievento.h"
+
 
 class ImpWindow : public QDialog
 {
@@ -32,9 +34,10 @@ public:
     ~ImpWindow();
 
 public slots:
-
     void inserisciManualmente(bool checked);
-
+    void creaEvento();
+signals:
+    void eventoInserito(DatiEvento*);
 private:
     QDialogButtonBox *buttonBox;
     QVBoxLayout *mainLayout;
@@ -42,13 +45,11 @@ private:
     QGroupBox *RicorrenzaGroupBox;
     void addImpItems();
 
-    QDateEdit* n1;
-    QDateEdit* n2;
-    QDateEdit* n3;
+    QDateEdit* n1, *n2, *n3;
     QComboBox* ricChoise;
-    QSpinBox* intOcc;
-    QSpinBox* intGiorni;
-
+    QSpinBox* intOcc, *intGiorni;
+    QLineEdit* title;
+    QTimeEdit* setTimeBegin, *setTimeEnd;
 };
 
 #endif // IMPWINDOW_H

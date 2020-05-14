@@ -1,6 +1,3 @@
 #include "datievento.h"
 
-DatiEvento::DatiEvento()
-{
-
-}
+DatiEvento::DatiEvento(){}

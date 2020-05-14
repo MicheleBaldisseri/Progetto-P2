@@ -21,6 +21,7 @@
 #include <QMenu>
 #include <QListWidget>
 #include <QMessageBox>
+#include "datievento.h"
 using std::string;
 
 class Controller;
@@ -39,7 +40,7 @@ public:
 public slots:
     void showTime();
     void inserisciEvento(int type);
-
+    void getEvento(DatiEvento *obj);
 private:
     Controller* controller;
 

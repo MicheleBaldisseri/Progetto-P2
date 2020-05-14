@@ -90,7 +90,8 @@ void MainWindow::showTime(){
 
 void MainWindow::inserisciEvento(int type)
 {
-    QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+    //QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+
     switch (type) {
     case 0:
         promW= new PromWindow;
@@ -102,6 +103,7 @@ void MainWindow::inserisciEvento(int type)
         break;
     case 2:
         impW= new ImpWindow;
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
         impW->show();
         break;
     case 3:
@@ -111,6 +113,11 @@ void MainWindow::inserisciEvento(int type)
     default:
         break;
     }
+}
+
+void MainWindow::getEvento(DatiEvento * obj)
+{
+    std::cout<<obj->titolo;
 }
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi

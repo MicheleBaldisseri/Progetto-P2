@@ -14,6 +14,8 @@ ImpWindow::ImpWindow(QWidget *parent) : QDialog(parent)
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
+    connect(buttonBox,SIGNAL(accepted()),this,SLOT(creaEvento()));
+
     mainLayout->addWidget(formGroupBox);
     mainLayout->addWidget(RicorrenzaGroupBox);
     mainLayout->addWidget(buttonBox);
@@ -48,6 +50,16 @@ void ImpWindow::inserisciManualmente(bool checked)
     }
 }
 
+void ImpWindow::creaEvento()
+{
+    DatiEvento* obj= new DatiEvento;
+    obj->titolo=title->text().toStdString();
+    obj->inizio=setTimeBegin->time();
+    obj->fine=setTimeEnd->time();
+    emit eventoInserito(obj);
+
+}
+
 void ImpWindow::addImpItems()
 {
     //layout del box informazioni generali
@@ -56,7 +68,7 @@ void ImpWindow::addImpItems()
     QFormLayout *layoutR = new QFormLayout;
     //lista dei colori
     QComboBox* colorChoise= new QComboBox(this);
-    QLineEdit* title= new QLineEdit(this);
+    title= new QLineEdit(this);
 
     //aggiungo titolo, tendina colori
     layout->addRow(new QLabel(tr("Titolo:")), title);
@@ -74,8 +86,8 @@ void ImpWindow::addImpItems()
     colorChoise->addItem("Grigio");
 
     //orario di inizio e fine
-    QTimeEdit* setTimeBegin= new QTimeEdit(this);
-    QTimeEdit* setTimeEnd= new QTimeEdit(this);
+    setTimeBegin= new QTimeEdit(this);
+    setTimeEnd= new QTimeEdit(this);
     QHBoxLayout* time= new QHBoxLayout;
     QLabel* begin= new QLabel(tr("Orario inizio:"));
     QLabel* end= new QLabel(tr("Orario fine:"));
@@ -134,5 +146,6 @@ void ImpWindow::addImpItems()
     RicorrenzaGroupBox->setLayout(layoutR);
 
     QObject::connect(flag, SIGNAL(clicked(bool)), this, SLOT(inserisciManualmente(bool)));
+
 
 }
