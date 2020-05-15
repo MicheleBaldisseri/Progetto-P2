@@ -19,6 +19,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QTimeEdit>
+#include <QColor>
 
 class PromWindow : public QDialog
 {

@@ -16,6 +16,7 @@
 #include <QMenuBar>
 #include <QPushButton>
 #include <QTimeEdit>
+#include <QColor>
 
 class AppunWindow : public QDialog
 {

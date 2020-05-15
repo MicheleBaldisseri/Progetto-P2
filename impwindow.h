@@ -23,7 +23,7 @@
 #include <QDateTimeEdit>
 #include <QSpinBox>
 #include "datievento.h"
-
+#include <QColor>
 
 class ImpWindow : public QDialog
 {
@@ -46,7 +46,7 @@ private:
     void addImpItems();
 
     QDateEdit* n1, *n2, *n3;
-    QComboBox* ricChoise;
+    QComboBox* ricChoise,* colorChoise;
     QSpinBox* intOcc, *intGiorni;
     QLineEdit* title;
     QTimeEdit* setTimeBegin, *setTimeEnd;

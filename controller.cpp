@@ -24,3 +24,10 @@ void Controller::exportEvents()
     //comunico alla vista il risultato per mostrare un messaggio all'utente
     view->exportDone(done);
 }
+
+void Controller::dataFromWindow(DatiEvento *obj)
+{
+    Evento* eI = new Impegno(obj->titolo,Dataora(25,5,2020,11,11,11),Dataora(25,5,2020,12,12,12),giorno,2,3);
+    model->insert(eI);
+    view->updateList();
+}

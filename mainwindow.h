@@ -41,6 +41,8 @@ public slots:
     void showTime();
     void inserisciEvento(int type);
     void getEvento(DatiEvento *obj);
+signals:
+    void DataToController(DatiEvento *obj);
 private:
     Controller* controller;
 

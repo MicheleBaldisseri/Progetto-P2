@@ -117,7 +117,8 @@ void MainWindow::inserisciEvento(int type)
 
 void MainWindow::getEvento(DatiEvento * obj)
 {
-    std::cout<<obj->titolo;
+    connect(this,SIGNAL(DataToController(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
+    emit DataToController(obj);
 }
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
