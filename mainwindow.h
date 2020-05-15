@@ -42,6 +42,7 @@ public slots:
     void inserisciEvento(int type);
     void getEvento(DatiEvento *obj);
     void eliminaEvento();
+    void modificaEvento();
 signals:
     void DataToController(DatiEvento *obj);
 private:
