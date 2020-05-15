@@ -24,13 +24,14 @@
 #include <QSpinBox>
 #include "datievento.h"
 #include <QColor>
+#include <QMessageBox>
 
 class ImpWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ImpWindow(QWidget *parent = 0);
+    explicit ImpWindow(QWidget *parent, QDate& selDate);
     ~ImpWindow();
 
 public slots:
@@ -43,8 +44,11 @@ private:
     QVBoxLayout *mainLayout;
     QGroupBox *formGroupBox;
     QGroupBox *RicorrenzaGroupBox;
+
+    QDate date;
     void addImpItems();
 
+    QCheckBox* flag;
     QDateEdit* n1, *n2, *n3;
     QComboBox* ricChoise,* colorChoise;
     QSpinBox* intOcc, *intGiorni;

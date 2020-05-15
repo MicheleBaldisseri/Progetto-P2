@@ -9,12 +9,13 @@
 class DatiEvento
 {
 public:
-    std::string titolo, luogo, colore;
+    std::string titolo, luogo;
     std::vector<QDate> ricorrenze;
-    int type;//1=promemoria,2=appuntamento,3=impegno,4=compleanno
-    QDate data;
+    int type;//0=promemoria,1=appuntamento,2=compleanno,3=impegno
+    QDate dataSelezionata;
     QTime inizio, fine;
     DatiEvento();
+    int ogni, tipo, per, colore;
 };
 
 #endif // DATIEVENTO_H

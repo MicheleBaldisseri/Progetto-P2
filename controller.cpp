@@ -31,8 +31,83 @@ void Controller::exportEvents()
 
 void Controller::dataFromWindow(DatiEvento *obj)
 {
-    Evento* eI = new Impegno(obj->titolo,Dataora(25,5,2020,11,11,11),Dataora(25,5,2020,12,12,12),giorno,2,3);
-    model->insert(eI);
+    Evento* newEvento;
+
+    switch (obj->type) {
+    case 0:
+
+        break;
+  //---------------------------------------------------------------
+    case 1:
+
+        break;
+  //---------------------------------------------------------------
+    case 2:
+
+        break;
+  //---------------------------------------------------------------
+    case 3:
+        //---- IMPEGNO-------
+        Dataora i,f;
+        //conversione QDate->Dataora
+        i.setData(obj->dataSelezionata.day(),obj->dataSelezionata.month(),obj->dataSelezionata.year());
+        i.setOre(obj->inizio.hour());
+        i.setMinuti(obj->inizio.minute());
+        i.setSecondi(obj->inizio.second());
+        f=i;
+        f.setOre(obj->fine.hour());
+        f.setMinuti(obj->fine.minute());
+        f.setSecondi(obj->fine.second());
+
+        //modalità ricorrenza
+        ModeRicorrenza mode;
+        if(obj->tipo==0)
+            mode=giorno;
+        else if(obj->tipo==1)
+            mode=settimana;
+        else
+            mode=mese;
+
+        //colore scelto dall'utente
+        Color c;
+        switch(obj->colore){
+        case 0://purple
+            c=(Color)7;
+            break;
+        case 1://yellow
+            c=(Color)3;
+            break;
+        case 2://red
+            c=(Color)1;
+            break;
+        case 3://green
+            c=(Color)2;
+            break;
+        case 4://cyan
+            c=(Color)6;
+            break;
+        case 5://white
+            c=(Color)0;
+            break;
+        case 6://orange
+            c=(Color)4;
+            break;
+        case 7://black
+            c=(Color)5;
+            break;
+        case 8://grey
+            c=(Color)8;
+            break;
+        }
+
+        //creazione nuovo evento
+        newEvento=new Impegno(obj->titolo,i,f,mode,obj->ogni,obj->per,c);
+
+        break;
+    }
+    //----------- end switch eventi -----------------
+
+    model->insert(newEvento);
     view->updateList();
 }
 

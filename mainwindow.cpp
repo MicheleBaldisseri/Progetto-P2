@@ -90,7 +90,7 @@ void MainWindow::showTime(){
 
 void MainWindow::inserisciEvento(int type)
 {
-    //QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+    QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
 
     switch (type) {
     case 0:
@@ -102,7 +102,7 @@ void MainWindow::inserisciEvento(int type)
         appunW->show();
         break;
     case 2:
-        impW= new ImpWindow(this);
+        impW= new ImpWindow(this, selDate);
         connect(impW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
         impW->show();
         break;
