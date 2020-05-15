@@ -74,6 +74,9 @@ void Model::showEvent(const Data & d)
             }
         }
         else{//se evento è di tipo EventoRicorrente
+            if(d==(*cit)->getDataInizio()){
+                selezionati.push_back(cit);
+            }
             vector<Data>* v=r->getRicorrenze();
             for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){
                 if(*c==d)
@@ -81,9 +84,9 @@ void Model::showEvent(const Data & d)
             }
         }
     }
-    if(selezionati.size()==0){
+    /*if(selezionati.size()==0){
         throw new std::invalid_argument("Nessun evento presente nella data specificata");
-    }
+    }*/
 }
 
 bool Model::esporta()//inserire una lettera per identificare tipo
@@ -159,5 +162,9 @@ bool Model::importa()
                 ++cont;
         }
         if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;*/
-        return true;
+    return true;
+}
+
+vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
+    return selezionati;
 }

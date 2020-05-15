@@ -22,6 +22,57 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) : QWidget(parent), contro
     timer->start(1000);
 }
 
+void MainWindow::addEventList(string text, int color){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(text),list);
+    QColor c = QColor();
+    switch(color){
+    case 0://white
+        c=QColor(255,255,255,20);
+        break;
+    case 1://red
+        c=QColor(255,0,0,20);
+        break;
+    case 2://green
+        c=QColor(0,255,0,20);
+        break;
+    case 3://yellow
+        c=QColor(255,255,0,20);
+        break;
+    case 4://orange
+        c=QColor(255,100,0,20);
+        break;
+    case 5://black
+        c=QColor(0,0,0,20);
+        break;
+    case 6://blue
+        c=QColor(0,0,255,20);
+        break;
+    case 7://purple
+        c=QColor(255,0,255,20);
+        break;
+    case 8://grey
+        c=QColor(105,105,105,20);
+        break;
+    }
+
+    item->setBackgroundColor(c);
+    list->addItem(item);
+}
+
+void MainWindow::updateList(){
+    QDate selDate = static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+    clearList();
+    controller->updateList(selDate);
+}
+
+void MainWindow::clearList(){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    list->clear();
+}
+
+
+
 void MainWindow::showTime(){
     QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
     s[3] = s.at(3).toTitleCase();
@@ -78,6 +129,8 @@ void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo
     calendar->setMinimumWidth(380);
     calendar->setMaximumHeight(320);
 
+
+    connect(calendar,SIGNAL(clicked(QDate)),controller,SLOT(updateList(QDate)));
     itemLayout->addLayout(listLayout);
 }
 
@@ -90,7 +143,7 @@ void MainWindow::addList(){
     buttonListLayout->addWidget(elimina);
     buttonListLayout->addWidget(modifica);
 
-    QListView *list = new QListView(this);
+    QListWidget *list = new QListWidget(this);
     listLayout->addWidget(list);
 }
 

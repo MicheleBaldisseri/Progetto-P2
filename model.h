@@ -17,6 +17,8 @@ public:
     bool esporta();//scrive lista su file, true se ha successo, false altrimenti
     bool importa();//legge da file, true se ha successo, false altrimenti
 
+    vector<Lista<Evento*>::const_iterator> getSelezionati() const;
+
 };
 
 #endif // MODEL_H

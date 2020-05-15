@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <iostream>
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -18,6 +19,8 @@
 #include <compwindow.h>
 #include <QToolButton>
 #include <QMenu>
+#include <QListWidget>
+using std::string;
 
 class Controller;
 
@@ -28,12 +31,12 @@ public:
     MainWindow(Controller* controller, QWidget *parent = nullptr);
     ~MainWindow()=default;
 
+    void addEventList(string text,int color);
+    void updateList();
+    void clearList();
+
 public slots:
     void showTime();
-    /*void openPromWindow();
-    void openAppunWindow();
-    void openImpWindow();*/
-
     void inserisciEvento(int type);
 
 private:
@@ -51,11 +54,8 @@ private:
     CompWindow* compW;
 
     void addMainItems();
-
     void addButtons();
-
     void addList();
-
     void setWindowStyle();
 
 };

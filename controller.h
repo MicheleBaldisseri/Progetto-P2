@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include <QObject>
+
 #include "mainwindow.h"
 #include "model.h"
 
@@ -14,8 +15,10 @@ private:
 
 public:
     explicit Controller(Model* model, QObject *parent = nullptr);
-
     void setView(MainWindow* v);
+
+public slots:
+    void updateList(const QDate& date);
 };
 
 #endif // CONTROLLER_H
