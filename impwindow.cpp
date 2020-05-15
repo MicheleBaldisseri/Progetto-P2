@@ -79,7 +79,7 @@ void ImpWindow::creaEvento()
 
     if(obj->fine < obj->inizio)
         QMessageBox::warning(this,"Input non valido","Errore: l'orario d'inizio non può essere inferiore a quello finale.");
-    else if((n1->date() < date) || (n2->date() < date) || (n3->date() < date))
+    else if(flag->isChecked() && ((n1->date() < date) || (n2->date() < date) || (n3->date() < date)))
         QMessageBox::warning(this,"Input non valido","Errore: la ricorrenza non si può verificare prima della data selezionata.");
     else
         emit eventoInserito(obj);

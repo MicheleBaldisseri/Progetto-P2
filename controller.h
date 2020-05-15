@@ -24,6 +24,7 @@ public slots:
     void exportEvents();
     void dataFromWindow(DatiEvento* obj);
     void eliminaEvento(const int& pos);
+    void modificaEvento(const int& pos);
 };
 
 #endif // CONTROLLER_H

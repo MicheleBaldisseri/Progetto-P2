@@ -121,3 +121,11 @@ void Controller::eliminaEvento(const int &pos){
     }
     view->updateList();
 }
+
+void Controller::modificaEvento(const int &pos){
+    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
+    Evento* e = (*(v[pos]))->clone();
+    std::cout<<e->descrizioneFull();
+}
+
+

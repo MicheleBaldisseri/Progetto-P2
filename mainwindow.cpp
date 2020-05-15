@@ -135,6 +135,16 @@ void MainWindow::eliminaEvento(){
     }
 }
 
+void MainWindow::modificaEvento(){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    if(!(selected.isEmpty())){
+        int pos = list->row(selected[0]);
+        controller->modificaEvento(pos); //da trasformare in segnale se necessario
+
+    }
+}
+
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
 
@@ -178,6 +188,7 @@ void MainWindow::addList(){
     listLayout->addWidget(list);
 
     connect(elimina,SIGNAL(clicked()),this,SLOT(eliminaEvento()));
+    connect(modifica,SIGNAL(clicked()),this,SLOT(modificaEvento()));
 }
 
 void MainWindow::addButtons(){
