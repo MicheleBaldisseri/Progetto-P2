@@ -63,7 +63,7 @@ void MainWindow::addEventList(string text, int color){
 void MainWindow::updateList(){
     QDate selDate = static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
     clearList();
-    controller->updateList(selDate);
+    controller->updateList(selDate); //da trasformare in segnale se necessario
 }
 
 void MainWindow::clearList(){
@@ -71,12 +71,12 @@ void MainWindow::clearList(){
     list->clear();
 }
 
-void MainWindow::exportDone(bool done)
+void MainWindow::showMessage(bool done, QString title, QString messagge)
 {
     if(done)
-        QMessageBox::information(this, "Salvataggio", "Tutti gli eventi sono stati salvati con successo!");
+        QMessageBox::information(this, title, messagge);
     else
-        QMessageBox::warning(this, "Salvataggio", "Impossibile salvare il file.");
+        QMessageBox::warning(this, title, messagge);
 }
 
 
@@ -121,6 +121,21 @@ void MainWindow::getEvento(DatiEvento * obj)
     emit DataToController(obj);
 }
 
+void MainWindow::eliminaEvento(){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    if(!(selected.isEmpty())){
+        int pos = list->row(selected[0]);
+
+        QMessageBox::StandardButton conferma;
+        conferma = QMessageBox::question(this,"Conferma eliminazione", "Vuoi eliminare l'evento selezionato?", QMessageBox::Yes|QMessageBox::No);
+        if (conferma == QMessageBox::Yes) {
+            controller->eliminaEvento(pos); //da trasformare in segnale se necessario
+        }
+    }
+}
+
+
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
 
     QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
@@ -161,6 +176,8 @@ void MainWindow::addList(){
 
     QListWidget *list = new QListWidget(this);
     listLayout->addWidget(list);
+
+    connect(elimina,SIGNAL(clicked()),this,SLOT(eliminaEvento()));
 }
 
 void MainWindow::addButtons(){

@@ -23,6 +23,7 @@ public slots:
     void updateList(const QDate& date);
     void exportEvents();
     void dataFromWindow(DatiEvento* obj);
+    void eliminaEvento(const int& pos);
 };
 
 #endif // CONTROLLER_H

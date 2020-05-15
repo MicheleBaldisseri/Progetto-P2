@@ -36,11 +36,12 @@ public:
     void addEventList(string text,int color);
     void updateList();
     void clearList();
-    void exportDone(bool done);
+    void showMessage(bool done, QString title, QString messagge);
 public slots:
     void showTime();
     void inserisciEvento(int type);
     void getEvento(DatiEvento *obj);
+    void eliminaEvento();
 signals:
     void DataToController(DatiEvento *obj);
 private:
