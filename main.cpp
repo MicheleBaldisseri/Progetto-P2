@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Model m;
-    Controller c(&m);
+   /* Controller c(&m);
     MainWindow w(&c);
     c.setView(&w);
 
-    w.show();
+    w.show();*/
 
     Evento* eA = new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");
     Evento* eP = new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     m.insert(eI);
 
 
-    return a.exec();
+    //return a.exec();
 
 
    /*

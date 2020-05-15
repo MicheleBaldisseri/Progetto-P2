@@ -101,17 +101,15 @@ bool Model::esporta()//inserire una lettera per identificare tipo
         {
             QXmlStreamWriter stream(&lista);
             stream.setAutoFormatting(true);
-
+            stream.writeStartDocument();
             for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-                stream.writeEmptyElement("Evento");
-                //string p=to_string((*cit)->getDataInizio());
 
-                //QString s=QStri(((*cit)->getDataInizio()));
-                //QXmlStreamAttribute s("Titolo",QString::fromStdString((*cit)->getTitolo()));
-                stream.writeAttribute(QXmlStreamAttribute("Titolo",QString::fromStdString((*cit)->getTitolo())));
-                stream.writeAttribute(QXmlStreamAttribute("DataInizio","7,9,2009,20,40,00"));
+                stringstream p;
+                p<<**cit;
+                stream.writeEntityReference(QString::fromStdString(p.str()));
+                stream.writeCharacters("\n");
             }
-
+            stream.writeEndDocument();
             lista.close();
             qDebug() << "Writing is done";
             return true;
