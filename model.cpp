@@ -8,11 +8,10 @@
 #include "compleanno.h"
 #include <iostream>
 #include <fstream>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 #include <QFile>
-#include <QTextStream>
-
-
-
+#include <QDebug>
 bool Model::modify(Lista<Evento*>::const_iterator it, Evento *nuovo)
 {
 
@@ -89,18 +88,32 @@ void Model::showEvent(const Data & d)
 
 bool Model::esporta()//inserire una lettera per identificare tipo
 {
-    ofstream lista("lista.txt");
-    if(lista.is_open()){
-        for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){
-            lista<<**cit<<"\n";
+    QFile lista("lista.xml");
+        if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            qDebug() << "Open the file for writing failed";
+            return false;
         }
-        lista.close();
-        return lista.good();
-    }
-    else{
-        throw new std::runtime_error("Impossibile aprire il file");
-        return false;
-    }
+        else
+        {
+            QXmlStreamWriter stream(&lista);
+            stream.setAutoFormatting(true);
+
+            for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
+                stream.writeEmptyElement("Evento");
+                //string p=to_string((*cit)->getDataInizio());
+
+                //QString s=QStri(((*cit)->getDataInizio()));
+                //QXmlStreamAttribute s("Titolo",QString::fromStdString((*cit)->getTitolo()));
+                stream.writeAttribute(QXmlStreamAttribute("Titolo",QString::fromStdString((*cit)->getTitolo())));
+                stream.writeAttribute(QXmlStreamAttribute("DataInizio","7,9,2009,20,40,00"));
+            }
+
+            lista.close();
+            qDebug() << "Writing is done";
+            return true;
+        }
+
 }
 /*Evento* create(string& s){
     string nuova;

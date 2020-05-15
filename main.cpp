@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Model m;
-    Controller c(&m);
-    MainWindow w(&c);
-    c.setView(&w);
+    //Controller c(&m);
+    //MainWindow w(&c);
+    //c.setView(&w);
 
-    w.show();
-    return a.exec();
-/*
+    //w.show();
+   // return a.exec();
+
     Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
     Evento* eA1 = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,11,10,10),"Ufficio");
     Evento* eP = new Promemoria("Denti",Dataora(3,5,2015,5,11,47),"Lavati i denti");
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,1,5);
    Evento* eI2 = new Impegno("conf",Dataora(11,5,2020,15,11,11),Dataora(11,5,2020,16,12,12),giorno,1,5);
 
-    cout<<*eA<<endl;
+    /*cout<<*eA<<endl;
     cout<<*eP<<endl;
     cout<<*eC<<endl;
     cout<<*eI<<endl<<endl;
@@ -52,25 +52,25 @@ int main(int argc, char *argv[])
     cout<<(*eA1>*eA)<<endl<<endl;
     Dataora a(12,12,2020,23,30,0), b(12,4,2020,11,30,0);
     cout<<(a==b);
-    cout<<(a==b);
+    cout<<(a==b);*/
   
 
 
     Lista<Evento*> eventi;
-    eventi.push_back(eI);
-    eventi.push_back(eI2);
+    m.insert(eI);
+    m.insert(eI2);
     //eventi.push_back(eA);
-    eventi.push_back(eA);
-    eventi.push_back(eP);
+    m.insert(eA);
+    m.insert(eP);
     //eventi.push_back(eP);
-    eventi.push_back(eP);
+    m.insert(eP);
 
     eventi.push_back(eC);
     //eventi.push_back(eI);
     //eventi.push_back(eC1);
     //eventi.push_back(eP);
 
-    Lista<Evento*>::const_iterator cit=eventi.begin();
+    /*Lista<Evento*>::const_iterator cit=eventi.begin();
     //cout<<**cit<<endl;
     for(;cit!=eventi.end();cit++){
         cout<<**cit<<endl;
@@ -103,13 +103,12 @@ int main(int argc, char *argv[])
         cout<<**cit2<<endl;
     }
 
-    Model m(&eventi);
     Lista<Evento*> sel=m.showEvent(Data(7,9,2010));
     for(Lista<Evento*>::const_iterator cit2=sel.begin();cit2!=sel.end();cit2++){
         cout<<**cit2<<endl;
-    }
-    cout<<"import"<<endl;
-    cout<<m.importa()<<endl;*/
+    }*/
+    cout<<"export"<<endl;
+    cout<<m.esporta()<<endl;
 return 0;
 
 }
