@@ -2,36 +2,37 @@
 #define COMPWINDOW_H
 
 #include <QDialog>
-#include <QTextEdit>
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QCalendarWidget>
-#include <QListView>
-#include <QFrame>
-#include <QPushButton>
-#include <QLabel>
-#include <QDateTime>
-#include <QFile>
 #include <QComboBox>
 #include <QGroupBox>
 #include <QDialogButtonBox>
 #include <QFormLayout>
 #include <QLineEdit>
-#include <QTimeEdit>
+#include <QLabel>
 #include <QColor>
+#include "datievento.h"
+#include <QSpinBox>
 
 class CompWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CompWindow(QWidget *parent = 0);
+    explicit CompWindow(QWidget *parent, const QDate& selDate);
     ~CompWindow();
-
-private slots:
-
+public slots:
+    void creaEvento();
+signals:
+    void eventoInserito(DatiEvento*);
 private:
+    QDate date;
+
+    QComboBox* colorChoise;
+    QLineEdit* title;
+    QSpinBox* setYear;
+
     QDialogButtonBox *buttonBox;
     QVBoxLayout *mainLayout;
     QGroupBox *formGroupBox;

@@ -95,31 +95,27 @@ void MainWindow::inserisciEvento(int type)
     switch (type) {
     case 0:
         promW= new PromWindow(this, selDate);
-        connect(promW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
         promW->show();
         break;
     case 1:
-        appunW= new AppunWindow(this);
+        appunW= new AppunWindow(this, selDate);
+        connect(appunW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
         appunW->show();
         break;
     case 2:
         impW= new ImpWindow(this, selDate);
-        connect(impW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
         impW->show();
         break;
     case 3:
-        compW= new CompWindow(this);
+        compW= new CompWindow(this,selDate);
+        connect(compW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
         compW->show();
         break;
     default:
         break;
     }
-}
-
-void MainWindow::getEvento(DatiEvento * obj)
-{
-    connect(this,SIGNAL(DataToController(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
-    emit DataToController(obj);
 }
 
 void MainWindow::eliminaEvento(){

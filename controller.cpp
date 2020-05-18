@@ -32,6 +32,7 @@ void Controller::exportEvents()
 void Controller::dataFromWindow(DatiEvento *obj)
 {
     Evento* newEvento;
+    Color c;
 
     switch (obj->type) {
     case 0:
@@ -44,8 +45,7 @@ void Controller::dataFromWindow(DatiEvento *obj)
         i.setMinuti(obj->inizio.minute());
         i.setSecondi(obj->inizio.second());
 
-        //colore scelto dall'utente  {white, red, green, yellow, orange, black, blue, purple, grey};
-        Color c;
+        //colore scelto dall'utente
         switch(obj->colore){
         case 0://red
             c=(Color)1;
@@ -83,12 +83,96 @@ void Controller::dataFromWindow(DatiEvento *obj)
   //---------------------------------------------------------------
     case 1:
     {
+        //---- APPUNTAMENTO -------
+        Dataora i,f;
+        i.setData(obj->dataSelezionata.day(),obj->dataSelezionata.month(),obj->dataSelezionata.year());
+        i.setOre(obj->inizio.hour());
+        i.setMinuti(obj->inizio.minute());
+        i.setSecondi(obj->inizio.second());
+        f=i;
+        f.setOre(obj->fine.hour());
+        f.setMinuti(obj->fine.minute());
+        f.setSecondi(obj->fine.second());
+
+        //colore scelto dall'utente
+        switch(obj->colore){
+        case 0://green
+            c=(Color)2;
+            break;
+        case 1://yellow
+            c=(Color)3;
+            break;
+        case 2://red
+            c=(Color)1;
+            break;
+        case 3://viola
+            c=(Color)7;
+            break;
+        case 4://cyan
+            c=(Color)6;
+            break;
+        case 5://white
+            c=(Color)0;
+            break;
+        case 6://orange
+            c=(Color)4;
+            break;
+        case 7://black
+            c=(Color)5;
+            break;
+        case 8://grey
+            c=(Color)8;
+            break;
+        }
+
+        //creazione evento
+        newEvento = new Appuntamento(obj->titolo,i,f,obj->luogo,c);
 
         break;
     }
   //---------------------------------------------------------------
     case 2:
     {
+        //---- COMPLEANNO -------
+        Dataora i;
+        //conversione QDate->Dataora
+        i.setData(obj->dataSelezionata.day(),obj->dataSelezionata.month(),obj->dataSelezionata.year());
+        Data nascita;
+        nascita.setData(obj->dataSelezionata.day(),obj->dataSelezionata.month(),obj->annoNascita);
+
+        //colore scelto dall'utente{white, red, green, yellow, orange, black, blue, purple, grey};
+        switch(obj->colore){
+        case 0://orange
+            c=(Color)4;
+            break;
+        case 1://yellow
+            c=(Color)3;
+            break;
+        case 2://red
+            c=(Color)1;
+            break;
+        case 3://green
+            c=(Color)2;
+            break;
+        case 4://cyan
+            c=(Color)6;
+            break;
+        case 5://white
+            c=(Color)0;
+            break;
+        case 6://purple
+            c=(Color)7;
+            break;
+        case 7://black
+            c=(Color)5;
+            break;
+        case 8://grey
+            c=(Color)8;
+            break;
+        }
+
+        //creazione evento
+        newEvento = new Compleanno(obj->titolo,i,nascita,20,c);
 
         break;
     }
@@ -117,7 +201,6 @@ void Controller::dataFromWindow(DatiEvento *obj)
             mode=mese;
 
         //colore scelto dall'utente
-        Color c;
         switch(obj->colore){
         case 0://purple
             c=(Color)7;
@@ -156,10 +239,9 @@ void Controller::dataFromWindow(DatiEvento *obj)
     }
     //----------- end switch eventi -----------------
 
-    model->insert(newEvento);
-    //bool done=model->insert(newEvento);
-    //if(done==false)
-    //    view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
+    bool done=model->insert(newEvento);
+    if(done==false)
+        view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
     view->updateList();
 }
 

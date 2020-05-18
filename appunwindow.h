@@ -17,16 +17,27 @@
 #include <QPushButton>
 #include <QTimeEdit>
 #include <QColor>
+#include "datievento.h"
+#include <QMessageBox>
 
 class AppunWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AppunWindow(QWidget *parent = 0);
+    explicit AppunWindow(QWidget *parent, const QDate& selDate);
     ~AppunWindow();
-
+public slots:
+    void creaEvento();
+signals:
+    void eventoInserito(DatiEvento*);
 private:
+    QDate date;
+
+    QComboBox* colorChoise;
+    QLineEdit* title, * location;
+    QTimeEdit* setTimeBegin,* setTimeEnd;
+
     void createFormGroupBox();
     QGroupBox *formGroupBox;
     QDialogButtonBox *buttonBox;

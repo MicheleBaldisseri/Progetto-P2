@@ -15,7 +15,7 @@ public:
     QDate dataSelezionata;
     QTime inizio, fine;
     DatiEvento();
-    int ogni, tipo, per, colore;
+    int ogni, tipo, per, colore, annoNascita;
 };
 
 #endif // DATIEVENTO_H
