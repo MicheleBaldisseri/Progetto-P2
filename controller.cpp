@@ -156,10 +156,10 @@ void Controller::dataFromWindow(DatiEvento *obj)
     }
     //----------- end switch eventi -----------------
 
-    model->insert(newEvento);
-    //bool done=model->insert(newEvento);
-    //if(done==false)
-    //    view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
+    //model->insert(newEvento);
+    bool done=model->insert(newEvento);
+    if(done==false)
+        view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
     view->updateList();
 }
 

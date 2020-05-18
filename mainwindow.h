@@ -40,11 +40,11 @@ public:
 public slots:
     void showTime();
     void inserisciEvento(int type);
-    void getEvento(DatiEvento *obj);
+    //void getEvento(DatiEvento *obj);
     void eliminaEvento();
     void modificaEvento();
-signals:
-    void DataToController(DatiEvento *obj);
+/*signals:
+    void DataToController(DatiEvento *obj);*/
 private:
     Controller* controller;
 
