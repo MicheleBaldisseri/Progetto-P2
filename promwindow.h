@@ -20,18 +20,27 @@
 #include <QLineEdit>
 #include <QTimeEdit>
 #include <QColor>
+#include <QMessageBox>
+#include "datievento.h"
 
 class PromWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit PromWindow(QWidget *parent = 0);
+    explicit PromWindow(QWidget *parent, const QDate& selDate);
     ~PromWindow();
 
-private slots:
-
+public slots:
+    void creaEvento();
+signals:
+    void eventoInserito(DatiEvento*);
 private:
+
+    QDate date;
+    QComboBox* colorChoise;
+    QLineEdit* title;
+    QTimeEdit* setTime;
     QDialogButtonBox *buttonBox;
     QVBoxLayout *mainLayout;
     QGroupBox *formGroupBox;

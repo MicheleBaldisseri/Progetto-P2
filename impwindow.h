@@ -35,7 +35,7 @@ public:
     ~ImpWindow();
 
 public slots:
-    void inserisciManualmente(bool checked);
+    //void inserisciManualmente(bool checked);
     void creaEvento();
 signals:
     void eventoInserito(DatiEvento*);
@@ -48,8 +48,8 @@ private:
     QDate date;
     void addImpItems();
 
-    QCheckBox* flag;
-    QDateEdit* n1, *n2, *n3;
+    //QCheckBox* flag;
+   // QDateEdit* n1, *n2, *n3;
     QComboBox* ricChoise,* colorChoise;
     QSpinBox* intOcc, *intGiorni;
     QLineEdit* title;

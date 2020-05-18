@@ -94,7 +94,8 @@ void MainWindow::inserisciEvento(int type)
 
     switch (type) {
     case 0:
-        promW= new PromWindow(this);
+        promW= new PromWindow(this, selDate);
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*)),this,SLOT(getEvento(DatiEvento*)));
         promW->show();
         break;
     case 1:

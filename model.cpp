@@ -34,7 +34,7 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
     Lista<Evento*>::const_iterator find;
     if(p||a){//p è di tipo promemoria oppure a è di tipo Appuntamento
         for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
-            if(*cit==e){
+            if(**cit==*e){
                 find=cit;
             }
         }

@@ -35,18 +35,66 @@ void Controller::dataFromWindow(DatiEvento *obj)
 
     switch (obj->type) {
     case 0:
+    {
+        //---- PROMEMORIA -------
+        Dataora i;
+        //conversione QDate->Dataora
+        i.setData(obj->dataSelezionata.day(),obj->dataSelezionata.month(),obj->dataSelezionata.year());
+        i.setOre(obj->inizio.hour());
+        i.setMinuti(obj->inizio.minute());
+        i.setSecondi(obj->inizio.second());
+
+        //colore scelto dall'utente  {white, red, green, yellow, orange, black, blue, purple, grey};
+        Color c;
+        switch(obj->colore){
+        case 0://red
+            c=(Color)1;
+            break;
+        case 1://yellow
+            c=(Color)3;
+            break;
+        case 2://green
+            c=(Color)2;
+            break;
+        case 3://viola
+            c=(Color)7;
+            break;
+        case 4://cyan
+            c=(Color)6;
+            break;
+        case 5://white
+            c=(Color)0;
+            break;
+        case 6://orange
+            c=(Color)4;
+            break;
+        case 7://black
+            c=(Color)5;
+            break;
+        case 8://grey
+            c=(Color)8;
+            break;
+        }
+
+        newEvento = new Promemoria(obj->titolo,i,obj->contenuto,c);
 
         break;
+    }
   //---------------------------------------------------------------
     case 1:
+    {
 
         break;
+    }
   //---------------------------------------------------------------
     case 2:
+    {
 
         break;
+    }
   //---------------------------------------------------------------
     case 3:
+    {
         //---- IMPEGNO-------
         Dataora i,f;
         //conversione QDate->Dataora
@@ -105,9 +153,13 @@ void Controller::dataFromWindow(DatiEvento *obj)
 
         break;
     }
+    }
     //----------- end switch eventi -----------------
 
     model->insert(newEvento);
+    //bool done=model->insert(newEvento);
+    //if(done==false)
+    //    view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
     view->updateList();
 }
 

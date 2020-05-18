@@ -7,6 +7,9 @@
 #include "impegno.h"
 #include "mainwindow.h"
 #include "model.h"
+#include "promemoria.h"
+#include "appuntamento.h"
+#include "compleanno.h"
 
 class Controller : public QObject
 {

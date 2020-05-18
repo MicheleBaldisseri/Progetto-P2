@@ -9,8 +9,8 @@
 class DatiEvento
 {
 public:
-    std::string titolo, luogo;
-    std::vector<QDate> ricorrenze;
+    std::string titolo, luogo, contenuto;
+    //std::vector<QDate> ricorrenze;
     int type;//0=promemoria,1=appuntamento,2=compleanno,3=impegno
     QDate dataSelezionata;
     QTime inizio, fine;
