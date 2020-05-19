@@ -113,14 +113,7 @@ bool Model::esporta()//inserire una lettera per identificare tipo
         }
 
 }
-void stringtoData(string& dat, unsigned int& g,unsigned int& m,unsigned int& a,unsigned int& o,unsigned int& mp,unsigned int& s){
-    g=stoi(dat.substr(0, dat.find(",", 0)));
-    m=stoi(dat.substr(0, dat.find(",", 0)));
-    a=stoi(dat.substr(0, dat.find(",", 0)));
-    o=stoi(dat.substr(0, dat.find(",", 0)));
-    mp=stoi(dat.substr(0, dat.find(",", 0)));
-    s=stoi(dat.substr(0, dat.find("\n", 0)));
-}
+
 bool Model::importa()
 {
     QFile lista("lista.xml");
@@ -132,10 +125,10 @@ bool Model::importa()
         QXmlStreamReader reader(&lista);
         Evento*e;
         while(reader.readNextStartElement()){
-            qDebug()<<reader.name();
             if(reader.name()=="Promemoria"){//new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
                 string tit,desc,col;
                 unsigned int g,m,a,o,mp,s;
+
                 for(int i=0; i<4&&reader.readNextStartElement();++i){
                     switch(i){
                     case 0:{
@@ -144,13 +137,7 @@ bool Model::importa()
                         break;
                     case 1:{
                         string dat=(reader.readElementText()).toStdString();
-                        //stringtoData(dat,g,m,a,o,mp,s);
-                        g=stoi(dat.substr(0, dat.find(",", 0)));
-                        m=stoi(dat.substr(0, dat.find(",", 0)));
-                        a=stoi(dat.substr(0, dat.find(",", 0)));
-                        o=stoi(dat.substr(0, dat.find(",", 0)));
-                        mp=stoi(dat.substr(0, dat.find(",", 0)));
-                        s=stoi(dat.substr(0, dat.find("\n", 0)));
+                        stringtoData(dat,g,m,a,o,mp,s);
                     }
                         break;
                     case 2:{
@@ -160,26 +147,105 @@ bool Model::importa()
                     case 3:{
                         col=reader.readElementText().toStdString();
                     }
+                        break;
                     }
                 }
                 e=new Promemoria(tit,Dataora(g,m,a,o,mp,s),desc);
-                insert(e);
+
             }
             else{
-                if(reader.name()=="Appuntamento"){
-                    reader.readNextStartElement();
-                    reader.readNextStartElement();
-                    reader.readNextStartElement();
-                    reader.readNextStartElement();
-                    reader.readNextStartElement();
-                    //reader.readNextStartElement();
+                if(reader.name()=="Appuntamento"){//new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");
+                    string tit,luogo,col;
+                    unsigned int g,m,a,o,mp,s;//dataora inizio
+                    unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
+                    for(int i=0; i<5&&reader.readNextStartElement();++i){
+                        switch(i){
+                        case 0:{
+                            tit=reader.readElementText().toStdString();
+                        }
+                            break;
+                        case 1:{
+                            string dat=(reader.readElementText()).toStdString();
+                            stringtoData(dat,g,m,a,o,mp,s);
+                        }
+                            break;
+                        case 2:{
+                            string dat=(reader.readElementText()).toStdString();
+                            stringtoData(dat,g2,m2,a2,o2,mp2,s2);
+                        }
+                            break;
+                        case 3:{
+                            luogo=reader.readElementText().toStdString();
+                        }
+                            break;
+                        case 4:{
+                            col=reader.readElementText().toStdString();
+                        }
+                            break;
+                        }
+                    }
+                    e=new Appuntamento(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo);
+
                 }
                 else{
-                    if(reader.name()=="Impegno"){
-                        reader.readNextStartElement();
+                    if(reader.name()=="Impegno"){//new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,2,3);
+                        string tit,luogo,col;
+                        unsigned int g,m,a,o,mp,s;//dataora inizio
+                        unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
+                        for(int i=0; i<4&&reader.readNextStartElement();++i){
+                            switch(i){
+                            case 0:{
+                                tit=reader.readElementText().toStdString();
+                            }
+                                break;
+                            case 1:{
+                                string dat=(reader.readElementText()).toStdString();
+                                stringtoData(dat,g,m,a,o,mp,s);
+                            }
+                                break;
+                            case 2:{
+                                string dat=(reader.readElementText()).toStdString();
+                                stringtoData(dat,g2,m2,a2,o2,mp2,s2);
+                            }
+                                break;
+                            case 3:{
+                                col=reader.readElementText().toStdString();
+                            }
+                                break;
+                            }
+                        }
+                        //e=new Impegno(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo);
+
                     }
-                    else{//compleanno
-                        reader.readNextStartElement();
+                    else{//compleanno new Compleanno("Michele Baldisseri",Dataora(16,5,2020,00,00,00),Data(16,5,1999));
+                        string tit,col;
+                        unsigned int g,m,a,o,mp,s;//dataora inizio
+                        unsigned int g2,m2,a2;//data compleanno
+                        for(int i=0; i<4&&reader.readNextStartElement();++i){
+                            switch(i){
+                            case 0:{
+                                tit=reader.readElementText().toStdString();
+                            }
+                                break;
+                            case 1:{
+                                string dat=(reader.readElementText()).toStdString();
+                                stringtoData(dat,g,m,a,o,mp,s);
+                            }
+                                break;
+                            case 2:{
+                                string dat=(reader.readElementText()).toStdString();
+                                //stringtoData(dat,g2,m2,a2);
+                            }
+                                break;
+                            case 3:{
+                                col=reader.readElementText().toStdString();
+                            }
+                                break;
+                            }
+                        }
+                        e=new Compleanno(tit,Dataora(g,m,a,o,mp,s),Data(g2,m2,a2));
+
+
                     }
                 }
             }
@@ -188,6 +254,29 @@ bool Model::importa()
         lista.close();
         return true;
     }
+}
+
+void Model::stringtoData(string dat, unsigned int &g, unsigned int &m, unsigned int &a, unsigned int &o, unsigned int &mp, unsigned int &s)
+{
+    int prova=0;
+    int lim=dat.find(",", prova);
+    g=stoi(dat.substr(prova, lim));
+
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    m=stoi(dat.substr(prova, lim));
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    a=stoi(dat.substr(prova, lim));
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    o=stoi(dat.substr(prova, lim));
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    mp=stoi(dat.substr(prova, lim));
+    prova=lim+1;
+    lim=dat.find("\n", prova);
+    s=stoi(dat.substr(prova, lim));
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
