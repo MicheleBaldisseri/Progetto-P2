@@ -18,13 +18,13 @@ std::string Compleanno::descrizioneMin() const{
 
 std::string Compleanno::descrizioneFull() const{
     std::stringstream text;
-    text<<"<Compleanno Titolo=\""<<getTitolo()<<"\" DataInizio=\""<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
-    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<"\" DataNascita=\"";
-    text<<getDataNascita().getGiorno()<<","<<getDataNascita().getMese()<<","<<getDataNascita().getAnno()<<"\" Colore=\""<<getColore()<<"\" Ricorrenze=\"";
+    text<<"<Compleanno>\n <Titolo>"<<getTitolo()<<"</Titolo>\n <DataInizio>("<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
+    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<")</DataInizio>\n <DataNascita>(";
+    text<<getDataNascita().getGiorno()<<","<<getDataNascita().getMese()<<","<<getDataNascita().getAnno()<<")</DataNascita>\n <Colore>"<<getColore()<<"</Colore>\n <Ricorrenze>";
     for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
         text<<"("<<d.getGiorno()<<","<<d.getMese()<<","<<d.getAnno()<<")";
     }
-    text<<"\"/>";
+    text<<"</Ricorrenze>\n</Compleanno>";
     return text.str();
 }
 

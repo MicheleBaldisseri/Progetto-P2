@@ -21,10 +21,10 @@ std::string Appuntamento::descrizioneMin() const{
 
 std::string Appuntamento::descrizioneFull() const{
     std::stringstream text;
-    text<<"<Appuntamento Titolo=\""<<getTitolo()<<"\" DataInizio=\""<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
-    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<"\" DataFine=\"";
+    text<<"<Appuntamento>\n <Titolo>"<<getTitolo()<<"</Titolo>\n <DataInizio>("<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
+    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<")</DataInizio>\n <DataFine>(";
     text<<getDataFine().getGiorno()<<","<<getDataFine().getMese()<<","<<getDataFine().getAnno()<<",";
-    text<<getDataFine().getOre()<<","<<getDataFine().getMinuti()<<","<<getDataFine().getSecondi()<<"\" Luogo=\""<<getLuogo()<<"\" Colore=\""<<getColore()<<"\"/>";
+    text<<getDataFine().getOre()<<","<<getDataFine().getMinuti()<<","<<getDataFine().getSecondi()<<")</DataFine>\n <Luogo>"<<getLuogo()<<"</Luogo>\n <Colore>"<<getColore()<<"</Colore>\n </Appuntamento>";
     return text.str();
 }
 

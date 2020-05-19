@@ -33,7 +33,7 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
     Lista<Evento*>::const_iterator find;
     if(p||a){//p è di tipo promemoria oppure a è di tipo Appuntamento
         for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
-            if(*cit==e){
+            if(**cit==*e){
                 find=cit;
             }
         }
@@ -84,9 +84,6 @@ void Model::showEvent(const Data & d)
             }
         }
     }
-    /*if(selezionati.size()==0){
-        throw new std::invalid_argument("Nessun evento presente nella data specificata");
-    }*/
 }
 
 bool Model::esporta()//inserire una lettera per identificare tipo
@@ -94,14 +91,14 @@ bool Model::esporta()//inserire una lettera per identificare tipo
     QFile lista("lista.xml");
         if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            qDebug() << "Open the file for writing failed";
+            qDebug()<<"Open the file for writing failed";
             return false;
         }
         else
         {
             QXmlStreamWriter stream(&lista);
             stream.setAutoFormatting(true);
-            stream.writeStartDocument();
+            //stream.writeStartDocument();
             for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
 
                 stringstream p;
@@ -111,58 +108,92 @@ bool Model::esporta()//inserire una lettera per identificare tipo
             }
             stream.writeEndDocument();
             lista.close();
-            qDebug() << "Writing is done";
+            qDebug()<<"Writing is done";
             return true;
         }
 
 }
-/*Evento* create(string& s){
-    string nuova;
-    if(s[0]=='A'){
-        //Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
-        nuova="new Appuntamento(\"";
-        unsigned int cont=0;
-        for(unsigned int i=0; s[i]!='\n'; ++i){
-            if(s[i]=='|') ++cont;
-            if(cont>1&&s[i]!='|')
-                nuova=nuova+s[i];
-            if(cont==2&&s[i]=='|')
-                nuova=nuova+"\",Dataora(";
-            if(cont>2&&cont<8&&s[i]=='|')
-                nuova=nuova+",";
-            if(cont==8&&s[i]=='|')
-                nuova=nuova+"),Dataora(";
-            if(cont>8&&cont<14&&s[i]=='|')
-                nuova=nuova+",";
-            if(cont==14&&s[i]=='|')
-                nuova=nuova+"),\"";
-            if(cont==15&&s[i]=='|')
-                nuova=nuova+"\",";
-        }
-        nuova=nuova+");";
-        cout<<"stringa "<<nuova<<endl;
-        Evento *e=nuova;
-        return e;
-    }
-}*/
+void stringtoData(string& dat, unsigned int& g,unsigned int& m,unsigned int& a,unsigned int& o,unsigned int& mp,unsigned int& s){
+    g=stoi(dat.substr(0, dat.find(",", 0)));
+    m=stoi(dat.substr(0, dat.find(",", 0)));
+    a=stoi(dat.substr(0, dat.find(",", 0)));
+    o=stoi(dat.substr(0, dat.find(",", 0)));
+    mp=stoi(dat.substr(0, dat.find(",", 0)));
+    s=stoi(dat.substr(0, dat.find("\n", 0)));
+}
 bool Model::importa()
 {
-    /*QFile lista("lista.txt");
-    int cont=0;
-    if (!lista.open(QIODevice::ReadOnly | QIODevice::Text))
-            return false;
-    QTextStream t(&lista);
-        while (!t.atEnd()) {
-            QString s = t.readLine();
-            cout << s.toStdString()<<endl;
-            Evento*e=create(s.toStdString());
-            if(!insert(e))
-                ++cont;
-        }
-        if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;*/
-    return true;
+    QFile lista("lista.xml");
+    if(!lista.open(QIODevice::ReadOnly | QIODevice::Text)){
+        qDebug()<<"Open the file for reading failed";
+        return false;
+    }
+    else{
+        QXmlStreamReader reader(&lista);
+        Evento*e;
+        while(reader.readNextStartElement()){
+            qDebug()<<reader.name();
+            if(reader.name()=="Promemoria"){//new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
+                string tit,desc,col;
+                unsigned int g,m,a,o,mp,s;
+                for(int i=0; i<4&&reader.readNextStartElement();++i){
+                    switch(i){
+                    case 0:{
+                        tit=reader.readElementText().toStdString();
+                    }
+                        break;
+                    case 1:{
+                        string dat=(reader.readElementText()).toStdString();
+                        //stringtoData(dat,g,m,a,o,mp,s);
+                        g=stoi(dat.substr(0, dat.find(",", 0)));
+                        m=stoi(dat.substr(0, dat.find(",", 0)));
+                        a=stoi(dat.substr(0, dat.find(",", 0)));
+                        o=stoi(dat.substr(0, dat.find(",", 0)));
+                        mp=stoi(dat.substr(0, dat.find(",", 0)));
+                        s=stoi(dat.substr(0, dat.find("\n", 0)));
+                    }
+                        break;
+                    case 2:{
+                        desc=reader.readElementText().toStdString();
+                    }
+                        break;
+                    case 3:{
+                        col=reader.readElementText().toStdString();
+                    }
+                    }
+                }
+                e=new Promemoria(tit,Dataora(g,m,a,o,mp,s),desc);
+                insert(e);
+            }
+            else{
+                if(reader.name()=="Appuntamento"){
+                    reader.readNextStartElement();
+                    reader.readNextStartElement();
+                    reader.readNextStartElement();
+                    reader.readNextStartElement();
+                    reader.readNextStartElement();
+                    //reader.readNextStartElement();
+                }
+                else{
+                    if(reader.name()=="Impegno"){
+                        reader.readNextStartElement();
+                    }
+                    else{//compleanno
+                        reader.readNextStartElement();
+                    }
+                }
+            }
+        insert(e);
+    }
+        lista.close();
+        return true;
+    }
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
     return selezionati;
+}
+
+Lista<Evento *> Model::Getl() const{
+    return l;
 }
