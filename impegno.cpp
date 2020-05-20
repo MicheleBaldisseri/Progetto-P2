@@ -47,10 +47,10 @@ std::string Impegno::descrizioneMin() const{
 
 std::string Impegno::descrizioneFull() const{
     std::stringstream text;
-    text<<"<Impegno>\n <Titolo>"<<getTitolo()<<"</Titolo>\n <DataInizio>("<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
-    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<")</DataInizio>\n <DataFine>(";
+    text<<"<Impegno>\n <Titolo>"<<getTitolo()<<"</Titolo>\n <DataInizio>"<<getDataInizio().getGiorno()<<","<<getDataInizio().getMese()<<","<<getDataInizio().getAnno()<<",";
+    text<<getDataInizio().getOre()<<","<<getDataInizio().getMinuti()<<","<<getDataInizio().getSecondi()<<"</DataInizio>\n <DataFine>";
     text<<getDataFine().getGiorno()<<","<<getDataFine().getMese()<<","<<getDataFine().getAnno()<<",";
-    text<<getDataFine().getOre()<<","<<getDataFine().getMinuti()<<","<<getDataFine().getSecondi()<<")</DataFine>\n <Colore>"<<getColore()<<"</Colore>\n <Ricorrenze>";
+    text<<getDataFine().getOre()<<","<<getDataFine().getMinuti()<<","<<getDataFine().getSecondi()<<"</DataFine>\n <Colore>"<<getColore()<<"</Colore>\n <Ricorrenze>";
     for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
         text<<"("<<d.getGiorno()<<","<<d.getMese()<<","<<d.getAnno()<<")";
     }

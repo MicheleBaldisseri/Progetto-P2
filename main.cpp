@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     Evento* eC = new Compleanno("Michele Baldisseri",Dataora(16,5,2020,00,00,00),Data(16,5,1999));
     Evento* eI = new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,2,3);
 
-   /* m.insert(eA);
+    /*m.insert(eA);
     m.insert(eP);
     m.insert(eC);
     m.insert(eI);*/
