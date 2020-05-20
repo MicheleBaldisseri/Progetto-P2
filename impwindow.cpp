@@ -1,23 +1,22 @@
 #include "impwindow.h"
 #include <iostream>
 
-ImpWindow::ImpWindow(QWidget *parent, QDate &selDate) : QDialog(parent), date(selDate)
+ImpWindow::ImpWindow(QWidget *parent, const QDate &selDate) : QDialog(parent), date(selDate)
 {
     mainLayout = new QVBoxLayout;
     formGroupBox = new QGroupBox(tr("Imposta impegno"));
-    //RicorrenzaGroupBox= new QGroupBox(tr("Ripeti"));
 
+    //allestimento finestra
     addImpItems();
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Close);
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-
+    //solo se l'inserimento è confermato l'evento viene creato
     connect(buttonBox,SIGNAL(accepted()),this,SLOT(creaEvento()));
 
     mainLayout->addWidget(formGroupBox);
-    //mainLayout->addWidget(RicorrenzaGroupBox);
     mainLayout->addWidget(buttonBox);
 
     setLayout(mainLayout);
@@ -28,27 +27,7 @@ ImpWindow::ImpWindow(QWidget *parent, QDate &selDate) : QDialog(parent), date(se
 }
 
 ImpWindow::~ImpWindow(){}
-/*
-void ImpWindow::inserisciManualmente(bool checked)
-{
-    if(checked){
-        n1->setEnabled(true);
-        n2->setEnabled(true);
-        n3->setEnabled(true);
-        ricChoise->setEnabled(false);
-        intGiorni->setEnabled(false);
-        intOcc->setEnabled(false);
-    }
-    else{
-        n1->setEnabled(false);
-        n2->setEnabled(false);
-        n3->setEnabled(false);
-        ricChoise->setEnabled(true);
-        intGiorni->setEnabled(true);
-        intOcc->setEnabled(true);
-    }
-}
-*/
+
 void ImpWindow::creaEvento()
 {
     DatiEvento* obj= new DatiEvento;
@@ -58,33 +37,14 @@ void ImpWindow::creaEvento()
     obj->inizio=setTimeBegin->time();
     obj->fine=setTimeEnd->time();
     obj->dataSelezionata=date;
-/*
-    //inserimento manuale
-    if(flag->isChecked()){
-        //se ne utilizzo solo 1??
-        obj->ricorrenze.push_back(n1->date());
-        obj->ricorrenze.push_back(n2->date());
-        obj->ricorrenze.push_back(n3->date());
-    }
-    //inserimento automatico
-    else{
-        obj->ogni=intOcc->value();
-        obj->tipo=ricChoise->currentIndex();
-        //tolgo l'evento base
-        obj->per=intGiorni->value()-1;
-    }
-*/
     obj->ogni=intOcc->value();
     obj->tipo=ricChoise->currentIndex();
     //tolgo l'evento base
     obj->per=intGiorni->value()-1;
 
+    //controllo sul range di orario inserito
     if(obj->fine < obj->inizio)
         QMessageBox::warning(this,"Input non valido","Errore: l'orario d'inizio non può essere inferiore a quello finale.");
-    /*
-    else if(flag->isChecked() && ((n1->date() < date) || (n2->date() < date) || (n3->date() < date)))
-        QMessageBox::warning(this,"Input non valido","Errore: la ricorrenza non si può verificare prima della data selezionata.");
-        */
     else
         emit eventoInserito(obj);
 }
@@ -94,19 +54,17 @@ void ImpWindow::addImpItems()
     //layout del box informazioni generali
     QFormLayout *layout = new QFormLayout;
     layout->setContentsMargins(10,18,10,10);
-    //layout del box per settare ricorrenze
-    //QFormLayout *layoutR = new QFormLayout;
-   // layoutR->setContentsMargins(10,18,10,10);
-    //tendina dei colori
-    colorChoise= new QComboBox(this);
-    //titolo impegno
-    title= new QLineEdit(this);
 
-    //aggiungo titolo, tendina colori
+    colorChoise= new QComboBox(this);
+    title= new QLineEdit(this);
+    setTimeBegin= new QTimeEdit(this);
+    setTimeEnd= new QTimeEdit(this);
+
+    //aggiungo degli elementi nel layout
     layout->addRow(new QLabel(tr("Titolo:")), title);
     layout->addRow(new QLabel(tr("Colore:")), colorChoise);
 
-    //riempio lista dei colori
+    //inserimento elementi nella comboBox e settaggio colori
     colorChoise->addItem("Viola - predefinito");
     colorChoise->addItem("Giallo");
     colorChoise->addItem("Rosso");
@@ -126,19 +84,16 @@ void ImpWindow::addImpItems()
     colorChoise->setItemData( 6, orangeColor, Qt::TextColorRole );
     colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
-    //orario di inizio e fine
-    setTimeBegin= new QTimeEdit(this);
-    setTimeEnd= new QTimeEdit(this);
     QHBoxLayout* time= new QHBoxLayout;
+
     QLabel* begin= new QLabel(tr("Orario inizio:"));
     QLabel* end= new QLabel(tr("Orario fine:"));
-
-    //inserisco nel Hlayout
+    //inserimento nel Hlayout
     time->addWidget(begin);
     time->addWidget(setTimeBegin);
     time->addWidget(end);
     time->addWidget(setTimeEnd);
-    //inserisco nel form
+    //inserimento nel form
     layout->addRow(time);
 
     //selettore ricorrenze
@@ -169,26 +124,4 @@ void ImpWindow::addImpItems()
     layout->addRow(rip);
     //imposto layout
     formGroupBox->setLayout(layout);
-/*
-    //check inserimento manuale
-    flag= new QCheckBox("Inserisci manualmente",this);
-    layoutR->addRow(flag);
-
-    n1= new QDateEdit(this);
-    n2= new QDateEdit(this);
-    n3= new QDateEdit(this);
-
-    n1->setEnabled(false);
-    n2->setEnabled(false);
-    n3->setEnabled(false);
-
-    layoutR->addRow(new QLabel(tr("Ricorrenza 1:")), n1);
-    layoutR->addRow(new QLabel(tr("Ricorrenza 2:")), n2);
-    layoutR->addRow(new QLabel(tr("Ricorrenza 3:")), n3);
-
-    //o inserisco le ricorrenze manualmente, o periodicamente in automatico
-    QObject::connect(flag, SIGNAL(clicked(bool)), this, SLOT(inserisciManualmente(bool)));
-
-    RicorrenzaGroupBox->setLayout(layoutR);
-    */
 }

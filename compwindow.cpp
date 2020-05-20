@@ -5,13 +5,14 @@ CompWindow::CompWindow(QWidget *parent, const QDate &selDate): QDialog(parent), 
     mainLayout = new QVBoxLayout;
     formGroupBox = new QGroupBox(tr("Imposta"));
 
+    //allestimento finestra
     addCompItems();
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Close);
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-
+    //solo se l'inserimento è confermato l'evento viene creato
     connect(buttonBox,SIGNAL(accepted()),this,SLOT(creaEvento()));
 
     mainLayout->addWidget(formGroupBox);
@@ -24,13 +25,11 @@ CompWindow::CompWindow(QWidget *parent, const QDate &selDate): QDialog(parent), 
     setMinimumSize(280,150);
 }
 
-CompWindow::~CompWindow()
-{
-
-}
+CompWindow::~CompWindow(){}
 
 void CompWindow::creaEvento()
 {
+    //inserimento dati passati dall'utente
     DatiEvento* obj= new DatiEvento;
     obj->type=2; //2=compleanno
     obj->titolo=title->text().toStdString();
@@ -45,11 +44,18 @@ void CompWindow::addCompItems()
 {
     QFormLayout *layout = new QFormLayout;
     layout->setContentsMargins(10,18,10,10);
+
     colorChoise= new QComboBox(this);
     title= new QLineEdit(this);
+    setYear= new QSpinBox(this);
+    setYear->setRange(0, 2100);
+
+    //aggiunta degli elementi nel layout
     layout->addRow(new QLabel(tr("Titolo:")), title);
     layout->addRow(new QLabel(tr("Colore:")), colorChoise);
+    layout->addRow(new QLabel(tr("Anno di nascita:")), setYear);
 
+    //inserimento elementi nella comboBox e settaggio colori
     colorChoise->addItem("Arancione - predefinito");
     colorChoise->addItem("Giallo");
     colorChoise->addItem("Rosso");
@@ -67,12 +73,7 @@ void CompWindow::addCompItems()
     colorChoise->setItemData( 4, QColor( Qt::cyan ), Qt::TextColorRole );
     colorChoise->setItemData( 5, QColor( Qt::white ), Qt::TextColorRole );
     colorChoise->setItemData( 0, orangeColor, Qt::TextColorRole );
-   // colorChoise->setItemData( 7, QColor( Qt::black ), Qt::TextColorRole );
     colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
-
-    setYear= new QSpinBox(this);
-    setYear->setRange(0, 2100);
-    layout->addRow(new QLabel(tr("Anno di nascita:")), setYear);
 
     formGroupBox->setLayout(layout);
 }

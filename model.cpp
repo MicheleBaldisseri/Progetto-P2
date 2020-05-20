@@ -92,18 +92,30 @@ void Model::showEvent(const Data & d)
 
 bool Model::esporta()//inserire una lettera per identificare tipo
 {
-    ofstream lista("lista.txt");
-    if(lista.is_open()){
-        for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){
-            lista<<**cit<<"\n";
+    QFile lista("lista.xml");
+        if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            qDebug() << "Open the file for writing failed";
+            return false;
         }
-        lista.close();
-        return lista.good();
-    }
-    else{
-        throw new std::runtime_error("Impossibile aprire il file");
-        return false;
-    }
+        else
+        {
+            QXmlStreamWriter stream(&lista);
+            stream.setAutoFormatting(true);
+            stream.writeStartDocument();
+            for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
+
+                stringstream p;
+                p<<**cit;
+                stream.writeEntityReference(QString::fromStdString(p.str()));
+                stream.writeCharacters("\n");
+            }
+            stream.writeEndDocument();
+            lista.close();
+            qDebug() << "Writing is done";
+            return true;
+        }
+
 }
 /*Evento* create(string& s){
     string nuova;
