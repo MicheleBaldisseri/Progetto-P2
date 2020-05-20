@@ -12,11 +12,6 @@
 #include <QXmlStreamWriter>
 #include <QFile>
 #include <QDebug>
-bool Model::modify(Lista<Evento*>::const_iterator it, Evento *nuovo)
-{
-
-}
-
 bool Model::insert(Evento *e)
 {
     if(search(e)==nullptr){
@@ -96,9 +91,11 @@ bool Model::esporta()//inserire una lettera per identificare tipo
         }
         else
         {
+
             QXmlStreamWriter stream(&lista);
             stream.setAutoFormatting(true);
-            stream.writeCharacters("<Agenda>\n");
+            string tag="<Agenda>\n";
+            stream.writeEntityReference(QString::fromStdString(tag));
             for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
 
                 stringstream p;
@@ -106,7 +103,8 @@ bool Model::esporta()//inserire una lettera per identificare tipo
                 stream.writeEntityReference(QString::fromStdString(p.str()));
                 stream.writeCharacters("\n");
             }
-            stream.writeCharacters("</Agenda>");
+            tag="</Agenda>";
+            stream.writeEntityReference(QString::fromStdString(tag));
             stream.writeEndDocument();
             lista.close();
             qDebug()<<"Writing is done";
@@ -129,7 +127,8 @@ bool Model::importa()
             if(reader.name()=="Agenda"){
                 while(reader.readNextStartElement()){
                     if(reader.name()=="Promemoria"){//new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
-                        string tit,desc,col;
+                        string tit,desc;
+                        unsigned int col;
                         unsigned int g,m,a,o,mp,s;
 
                         for(int i=0; i<4&&reader.readNextStartElement();++i){
@@ -140,7 +139,7 @@ bool Model::importa()
                                 break;
                             case 1:{
                                 string dat=(reader.readElementText()).toStdString();
-                                stringtoData(dat,g,m,a,o,mp,s);
+                                stringtoDataOra(dat,g,m,a,o,mp,s);
                             }
                                 break;
                             case 2:{
@@ -148,17 +147,18 @@ bool Model::importa()
                             }
                                 break;
                             case 3:{
-                                col=reader.readElementText().toStdString();
+                                col=stoi(reader.readElementText().toStdString());
                             }
                                 break;
                             }
                         }
-                        e=new Promemoria(tit,Dataora(g,m,a,o,mp,s),desc);
+                        e=new Promemoria(tit,Dataora(g,m,a,o,mp,s),desc,(Color)col);
                         reader.skipCurrentElement();
                     }
                     else{
                         if(reader.name()=="Appuntamento"){//new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");
-                            string tit,luogo,col;
+                            string tit,luogo;
+                            unsigned int col;
                             unsigned int g,m,a,o,mp,s;//dataora inizio
                             unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
                             for(int i=0; i<5&&reader.readNextStartElement();++i){
@@ -169,12 +169,12 @@ bool Model::importa()
                                     break;
                                 case 1:{
                                     string dat=(reader.readElementText()).toStdString();
-                                    stringtoData(dat,g,m,a,o,mp,s);
+                                    stringtoDataOra(dat,g,m,a,o,mp,s);
                                 }
                                     break;
                                 case 2:{
                                     string dat=(reader.readElementText()).toStdString();
-                                    stringtoData(dat,g2,m2,a2,o2,mp2,s2);
+                                    stringtoDataOra(dat,g2,m2,a2,o2,mp2,s2);
                                 }
                                     break;
                                 case 3:{
@@ -182,20 +182,22 @@ bool Model::importa()
                                 }
                                     break;
                                 case 4:{
-                                    col=reader.readElementText().toStdString();
+                                    col=stoi(reader.readElementText().toStdString());
                                 }
                                     break;
                                 }
                             }
-                            e=new Appuntamento(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo);
+                            e=new Appuntamento(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo,(Color)col);
                             reader.skipCurrentElement();
                         }
                         else{
                             if(reader.name()=="Impegno"){//new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,2,3);
-                                string tit,luogo,col;
+                                string tit;
+                                unsigned int col;
+                                vector<Data> v;
                                 unsigned int g,m,a,o,mp,s;//dataora inizio
                                 unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
-                                for(int i=0; i<4&&reader.readNextStartElement();++i){
+                                for(int i=0; i<5&&reader.readNextStartElement();++i){
                                     switch(i){
                                     case 0:{
                                         tit=reader.readElementText().toStdString();
@@ -203,28 +205,42 @@ bool Model::importa()
                                         break;
                                     case 1:{
                                         string dat=(reader.readElementText()).toStdString();
-                                        stringtoData(dat,g,m,a,o,mp,s);
+                                        stringtoDataOra(dat,g,m,a,o,mp,s);
                                     }
                                         break;
                                     case 2:{
                                         string dat=(reader.readElementText()).toStdString();
-                                        stringtoData(dat,g2,m2,a2,o2,mp2,s2);
+                                        stringtoDataOra(dat,g2,m2,a2,o2,mp2,s2);
                                     }
                                         break;
                                     case 3:{
-                                        col=reader.readElementText().toStdString();
+                                        col=stoi(reader.readElementText().toStdString());
+                                    }
+                                        break;
+                                    case 4:{
+                                        string ric=(reader.readElementText()).toStdString();
+                                        int lim=ric.find("|", 1), pos=1;
+                                        while(lim!=-1){
+                                            string dat=ric.substr(pos,lim-pos);
+                                            unsigned int giorno,mese,anno;
+                                            stringtoData(dat,giorno,mese,anno);
+                                            v.push_back(Data(giorno,mese,anno));
+                                            pos=lim+1;
+                                            lim=ric.find("|", pos);
+                                        }
                                     }
                                         break;
                                     }
                                 }
-                                //e=new Impegno(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo);
+                                e=new Impegno(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),v,(Color)col);
                                 reader.skipCurrentElement();
                             }
                             else{//compleanno new Compleanno("Michele Baldisseri",Dataora(16,5,2020,00,00,00),Data(16,5,1999));
                                 if(reader.name()=="Compleanno"){
-                                    string tit,col;
+                                    string tit;
+                                    unsigned int col;
                                     unsigned int g,m,a,o,mp,s;//dataora inizio
-                                    unsigned int g2,m2,a2,o2,mp2,s2;//data compleanno
+                                    unsigned int g2,m2,a2;//data compleanno
                                     for(int i=0; i<4&&reader.readNextStartElement();++i){
                                         switch(i){
                                         case 0:{
@@ -233,21 +249,21 @@ bool Model::importa()
                                             break;
                                         case 1:{
                                             string dat=(reader.readElementText()).toStdString();
-                                            stringtoData(dat,g,m,a,o,mp,s);
+                                            stringtoDataOra(dat,g,m,a,o,mp,s);
                                         }
                                             break;
                                         case 2:{
                                             string dat=(reader.readElementText()).toStdString();
-                                            stringtoData(dat,g2,m2,a2,o2,mp2,s2);
+                                            stringtoData(dat,g2,m2,a2);
                                         }
                                             break;
                                         case 3:{
-                                            col=reader.readElementText().toStdString();
+                                            col=stoi(reader.readElementText().toStdString());
                                         }
                                             break;
                                         }
                                     }
-                                    e=new Compleanno(tit,Dataora(g,m,a,o,mp,s),Data(g2,m2,a2));
+                                    e=new Compleanno(tit,Dataora(g,m,a,o,mp,s),Data(g2,m2,a2),(Color)col);
                                     reader.skipCurrentElement();
                                 }
                                 else
@@ -266,10 +282,25 @@ bool Model::importa()
                 return false;
             }
         }
+        else return false;
     }
 }
 
-void Model::stringtoData(string dat, unsigned int &g, unsigned int &m, unsigned int &a, unsigned int &o, unsigned int &mp, unsigned int &s)
+void Model::stringtoData(string dat, unsigned int &g, unsigned int &m, unsigned int &a)
+{
+    int prova=0;
+    int lim=dat.find(",", prova);
+    g=stoi(dat.substr(prova, lim));
+
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    m=stoi(dat.substr(prova, lim));
+    prova=lim+1;
+    lim=dat.find(",", prova);
+    a=stoi(dat.substr(prova, lim));
+}
+
+void Model::stringtoDataOra(string dat, unsigned int &g, unsigned int &m, unsigned int &a, unsigned int &o, unsigned int &mp, unsigned int &s)
 {
     int prova=0;
     int lim=dat.find(",", prova);

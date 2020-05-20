@@ -16,7 +16,8 @@ public:
     void showEvent(const Data&);//ritorna tutti gli eventi che si verificano nella data specificata
     bool esporta();//scrive lista su file, true se ha successo, false altrimenti
     bool importa();//legge da file, true se ha successo, false altrimenti
-    void stringtoData(string dat, unsigned int& g,unsigned int& m,unsigned int& a,unsigned int& o,unsigned int& mp,unsigned int& s);
+    void stringtoData(string dat, unsigned int& g,unsigned int& m,unsigned int& a);
+    void stringtoDataOra(string dat, unsigned int& g,unsigned int& m,unsigned int& a,unsigned int& o,unsigned int& mp,unsigned int& s);
     vector<Lista<Evento*>::const_iterator> getSelezionati() const;
     Lista<Evento*> Getl() const;
 };

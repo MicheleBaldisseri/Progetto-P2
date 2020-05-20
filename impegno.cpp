@@ -52,7 +52,7 @@ std::string Impegno::descrizioneFull() const{
     text<<getDataFine().getGiorno()<<","<<getDataFine().getMese()<<","<<getDataFine().getAnno()<<",";
     text<<getDataFine().getOre()<<","<<getDataFine().getMinuti()<<","<<getDataFine().getSecondi()<<"</DataFine>\n <Colore>"<<getColore()<<"</Colore>\n <Ricorrenze>";
     for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
-        text<<"("<<d.getGiorno()<<","<<d.getMese()<<","<<d.getAnno()<<")";
+        text<<"|"<<d.getGiorno()<<","<<d.getMese()<<","<<d.getAnno();
     }
     text<<"</Ricorrenze>\n </Impegno>";
     return text.str();
