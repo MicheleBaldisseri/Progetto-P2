@@ -48,4 +48,4 @@ Compleanno *Compleanno::clone() const{
     return new Compleanno(*this);
 }
 
-Color Compleanno::colorePred = red;
+Color Compleanno::colorePred = orange;

@@ -56,23 +56,27 @@ void CompWindow::addCompItems()
     layout->addRow(new QLabel(tr("Anno di nascita:")), setYear);
 
     //inserimento elementi nella comboBox e settaggio colori
-    colorChoise->addItem("Arancione - predefinito");
-    colorChoise->addItem("Giallo");
+    colorChoise->addItem("Bianco");
     colorChoise->addItem("Rosso");
     colorChoise->addItem("Verde");
-    colorChoise->addItem("Blu");
-    colorChoise->addItem("Bianco");
-    colorChoise->addItem("Viola");
+    colorChoise->addItem("Giallo");
+    colorChoise->addItem("Arancione - predefinito");
     colorChoise->addItem("Nero");
+    colorChoise->addItem("Blu");
+    colorChoise->addItem("Viola");
     colorChoise->addItem("Grigio");
+
+    //setta il selezionato di default
+    colorChoise->setCurrentIndex(4);
+
     QColor orangeColor(255,165,0);
-    colorChoise->setItemData( 6, QColor( Qt::magenta ), Qt::TextColorRole );
-    colorChoise->setItemData( 1, QColor( Qt::yellow), Qt::TextColorRole );
-    colorChoise->setItemData( 2, QColor( Qt::red ), Qt::TextColorRole );
-    colorChoise->setItemData( 3, QColor( Qt::green ), Qt::TextColorRole );
-    colorChoise->setItemData( 4, QColor( Qt::cyan ), Qt::TextColorRole );
-    colorChoise->setItemData( 5, QColor( Qt::white ), Qt::TextColorRole );
-    colorChoise->setItemData( 0, orangeColor, Qt::TextColorRole );
+    colorChoise->setItemData( 7, QColor( Qt::magenta ), Qt::TextColorRole );
+    colorChoise->setItemData( 3, QColor( Qt::yellow), Qt::TextColorRole );
+    colorChoise->setItemData( 1, QColor( Qt::red ), Qt::TextColorRole );
+    colorChoise->setItemData( 2, QColor( Qt::green ), Qt::TextColorRole );
+    colorChoise->setItemData( 6, QColor( Qt::cyan ), Qt::TextColorRole );
+    colorChoise->setItemData( 0, QColor( Qt::white ), Qt::TextColorRole );
+    colorChoise->setItemData( 4, orangeColor, Qt::TextColorRole );
     colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     formGroupBox->setLayout(layout);

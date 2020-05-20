@@ -75,4 +75,4 @@ Impegno *Impegno::clone() const{
     return new Impegno(*this);
 }
 
-Color Impegno::colorePred = blue;
+Color Impegno::colorePred = purple;
