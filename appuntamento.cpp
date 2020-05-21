@@ -8,7 +8,7 @@ Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l,
 
 std::string Appuntamento::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<" - "<<getDataFine().getOrario();
+    text<< getDataInizio().getOrario()<<" - "<<getDataFine().getOrario();
     text<<"\n"<<getTitolo()<<" - Luogo: "<<getLuogo();
     text<<"\nDurata: ";
     int ore = int(Dataora::secondsToHours(durata()));

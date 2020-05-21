@@ -83,23 +83,34 @@ void MainWindow::initializeModifica(DatiEvento* e){
     switch (e->type) {
     case 0:
         promW= new PromWindow(this, e->dataSelezionata,e);
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         promW->exec();
         break;
     case 1:
         appunW= new AppunWindow(this, e->dataSelezionata,e);
+        connect(appunW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         appunW->exec();
         break;
     case 2:
         compW= new CompWindow(this, e->dataSelezionata, e);
+        connect(compW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         compW->exec();
         break;
     case 3:
         impW= new ImpWindow(this, e->dataSelezionata, e);
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         impW->exec();
         break;
     default:
         break;
     }
+}
+
+int MainWindow::getPos()
+{
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    return list->row(selected[0]);
 }
 
 
@@ -118,22 +129,22 @@ void MainWindow::inserisciEvento(int type)
     switch (type) {
     case 0:
         promW= new PromWindow(this, selDate);
-        connect(promW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         promW->exec();
         break;
     case 1:
         appunW= new AppunWindow(this, selDate);
-        connect(appunW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
+        connect(appunW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         appunW->exec();
         break;
     case 2:
         impW= new ImpWindow(this, selDate);
-        connect(impW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         impW->exec();
         break;
     case 3:
-        compW= new CompWindow(this,selDate);
-        connect(compW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
+        compW= new CompWindow(this, selDate);
+        connect(compW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
         compW->exec();
         break;
     default:

@@ -29,8 +29,10 @@ public:
 public slots:
     void creaEvento();
 signals:
-    void eventoInserito(DatiEvento*);
+    void eventoInserito(DatiEvento*,bool);
 private:
+    bool modifica;
+
     QDialogButtonBox *buttonBox;
     QVBoxLayout *mainLayout;
     QGroupBox *formGroupBox;

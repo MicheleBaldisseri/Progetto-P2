@@ -24,8 +24,10 @@ public:
 public slots:
     void creaEvento();
 signals:
-    void eventoInserito(DatiEvento*);
+    void eventoInserito(DatiEvento*,bool);
 private:
+    bool modifica;
+
     QDate date;
     QComboBox* colorChoise;
     QLineEdit* title;

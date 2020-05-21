@@ -27,8 +27,10 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     setMinimumSize(280,250);
 
+    modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
         setForm(e);
+        modifica=true;
     }
 }
 
@@ -49,7 +51,7 @@ void PromWindow::creaEvento()
     if(date < QDate::currentDate())
         QMessageBox::warning(this,"Input non valido","Impossibile inserire un promemoria in una data precedente a quella corrente.");
     else
-        emit eventoInserito(obj);
+        emit eventoInserito(obj,modifica);
 }
 
 void PromWindow::addPromItems()

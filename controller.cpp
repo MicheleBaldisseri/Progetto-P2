@@ -29,7 +29,7 @@ void Controller::exportEvents()
     }
 }
 
-void Controller::dataFromWindow(DatiEvento *obj)
+void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 {
     Evento* newEvento;
 
@@ -115,10 +115,32 @@ void Controller::dataFromWindow(DatiEvento *obj)
     }
     //----------- end switch eventi -----------------
 
+
+    if(modifica){
+        int pos = view->getPos();
+        vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
+        bool er=model->erase((*(v[pos])));
+        if(!er){
+            view->showMessage(er,"Modifica","Errore nella modifica");
+            return;
+        }
+    }
+
     bool done=model->insert(newEvento);
-    if(done==false)
-        view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
+    if(done==false){
+        if(modifica){
+            view->showMessage(done,"Modifica","Errore nella modifica");
+        }else{
+            view->showMessage(done,"Evento già inserito","E' già presente questo evento.");
+        }
+    }else{
+        if(modifica){
+            view->showMessage(done,"Modifica","Evento modificato con successo!");
+        }
+    }
+
     view->updateList();
+
 }
 
 void Controller::eliminaEvento(const int &pos){

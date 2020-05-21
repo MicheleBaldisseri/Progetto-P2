@@ -24,8 +24,10 @@ CompWindow::CompWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     setMinimumSize(280,150);
 
+    modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
         setForm(e);
+        modifica=true;
     }
 }
 
@@ -41,7 +43,7 @@ void CompWindow::creaEvento()
     obj->dataSelezionata=date;
     obj->annoNascita=setYear->value();
 
-    emit eventoInserito(obj);
+    emit eventoInserito(obj,modifica);
 }
 
 void CompWindow::addCompItems()

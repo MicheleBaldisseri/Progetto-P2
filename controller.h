@@ -25,7 +25,7 @@ public:
 public slots:
     void updateList(const QDate& date);
     void exportEvents();
-    void dataFromWindow(DatiEvento* obj);
+    void dataFromWindow(DatiEvento* obj,bool modifica);
     void eliminaEvento(const int& pos);
     void modificaEvento(const int& pos);
 };

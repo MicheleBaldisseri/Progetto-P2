@@ -24,8 +24,10 @@ AppunWindow::AppunWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): 
 
     setMinimumSize(280,180);
 
+    modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
         setForm(e);
+        modifica=true;
     }
 }
 
@@ -47,7 +49,7 @@ void AppunWindow::creaEvento()
     if(obj->fine < obj->inizio)
         QMessageBox::warning(this,"Input non valido","Errore: l'orario d'inizio non può essere inferiore a quello finale.");
     else
-        emit eventoInserito(obj);
+        emit eventoInserito(obj,modifica);
 }
 
 void AppunWindow::createFormGroupBox()
