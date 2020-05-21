@@ -36,7 +36,7 @@ std::string Impegno::descrizioneMin() const{
     std::stringstream text;
     text<< std::setw(2) << std::setfill('0') << getDataInizio().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataInizio().getMinuti() <<" - ";
     text<< std::setw(2) << std::setfill('0') << getDataFine().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataFine().getMinuti();
-    text<<getTitolo()<<"\n";
+    text<<"\n"<<getTitolo()<<"\n";
     text<<"Durata: ";
     int ore = int(Dataora::secondsToHours(durata()));
     if(durata()%3600==0){ //ora intera
