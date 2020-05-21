@@ -7,17 +7,8 @@
 #include "impegno.h"
 #include "compleanno.h"
 #include <iostream>
-#include <fstream>
 #include <QFile>
-#include <QTextStream>
-
-
-
-bool Model::modify(Lista<Evento*>::const_iterator it, Evento *nuovo)
-{
-
-}
-
+#include <QDebug>
 bool Model::insert(Evento *e)
 {
     if(search(e)==nullptr){
@@ -85,85 +76,88 @@ void Model::showEvent(const Data & d)
             }
         }
     }
-    /*if(selezionati.size()==0){
-        throw new std::invalid_argument("Nessun evento presente nella data specificata");
-    }*/
 }
 
-bool Model::esporta()//inserire una lettera per identificare tipo
+bool Model::esporta()
 {
     QFile lista("lista.xml");
         if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            qDebug() << "Open the file for writing failed";
+            qDebug()<<"Open the file for writing failed";
             return false;
         }
         else
         {
-            QXmlStreamWriter stream(&lista);
+            QXmlStreamWriter stream;
+            stream.setDevice(&lista);
             stream.setAutoFormatting(true);
             stream.writeStartDocument();
+            stream.writeStartElement("Evento");
             for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-
-                stringstream p;
-                p<<**cit;
-                stream.writeEntityReference(QString::fromStdString(p.str()));
+                (*cit)->toExp(stream);
                 stream.writeCharacters("\n");
             }
+            stream.writeEndElement();
             stream.writeEndDocument();
             lista.close();
-            qDebug() << "Writing is done";
+            qDebug()<<"Writing is done";
             return true;
         }
 
 }
-/*Evento* create(string& s){
-    string nuova;
-    if(s[0]=='A'){
-        //Evento* eA = new Appuntamento("Ex",Dataora(20,10,2010,10,10,10),Dataora(20,10,2010,12,10,10),"Ufficio");
-        nuova="new Appuntamento(\"";
-        unsigned int cont=0;
-        for(unsigned int i=0; s[i]!='\n'; ++i){
-            if(s[i]=='|') ++cont;
-            if(cont>1&&s[i]!='|')
-                nuova=nuova+s[i];
-            if(cont==2&&s[i]=='|')
-                nuova=nuova+"\",Dataora(";
-            if(cont>2&&cont<8&&s[i]=='|')
-                nuova=nuova+",";
-            if(cont==8&&s[i]=='|')
-                nuova=nuova+"),Dataora(";
-            if(cont>8&&cont<14&&s[i]=='|')
-                nuova=nuova+",";
-            if(cont==14&&s[i]=='|')
-                nuova=nuova+"),\"";
-            if(cont==15&&s[i]=='|')
-                nuova=nuova+"\",";
-        }
-        nuova=nuova+");";
-        cout<<"stringa "<<nuova<<endl;
-        Evento *e=nuova;
-        return e;
-    }
-}*/
+
 bool Model::importa()
 {
-    /*QFile lista("lista.txt");
-    int cont=0;
-    if (!lista.open(QIODevice::ReadOnly | QIODevice::Text))
-            return false;
-    QTextStream t(&lista);
-        while (!t.atEnd()) {
-            QString s = t.readLine();
-            cout << s.toStdString()<<endl;
-            Evento*e=create(s.toStdString());
-            if(!insert(e))
-                ++cont;
+    QFile lista("lista.xml");
+    if(!lista.open(QIODevice::ReadOnly | QIODevice::Text)){
+        qDebug()<<"Open the file for reading failed";
+        return false;
+    }
+    else{
+        QXmlStreamReader reader(&lista);
+        Evento*e;
+        if (reader.readNextStartElement()){
+            if(reader.name()=="Evento"){
+                while(reader.readNextStartElement()){
+                    if(reader.name()=="Promemoria"){
+                        e=(new Promemoria)->fromImp(reader);
+                    }
+                    else{
+                        if(reader.name()=="Appuntamento"){
+                            e=(new Appuntamento)->fromImp(reader);
+                        }
+                        else{
+                            if(reader.name()=="Impegno"){
+                                e=(new Impegno)->fromImp(reader);
+                            }
+                            else{
+                                if(reader.name()=="Compleanno"){                                    
+                                    e=(new Compleanno)->fromImp(reader);
+                                }
+                                else
+                                    reader.skipCurrentElement();
+                            }
+                        }
+                    }
+                insert(e);
+            }
+
+            lista.close();
+            return true;
+            }
+            else{
+                reader.raiseError(QObject::tr("Incorrect file"));
+                return false;
+            }
         }
-        if(cont!=0)cout<<cont<<" eventi non inseriti perché già presenti"<<endl;*/
-    return true;
+        else return false;
+    }
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
     return selezionati;
+}
+
+Lista<Evento *> Model::Getl() const{
+    return l;
 }

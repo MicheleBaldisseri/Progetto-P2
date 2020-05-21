@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 #include "dataora.h"
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 using std::string;
 using std::stringstream;
 
@@ -24,8 +26,8 @@ public:
     virtual string descrizioneMin() const = 0;
     //Stampa di tutte le informazioni
     virtual string descrizioneFull() const = 0;
-
-
+    virtual void toExp(QXmlStreamWriter&)=0;
+    virtual Evento *fromImp(QXmlStreamReader&)=0;
     void setColore(const Color&);
     Color getColore() const;
     string getTitolo() const;
@@ -41,6 +43,9 @@ public:
 
     virtual ~Evento() = default;
     virtual Evento* clone() const = 0;
+
+    Dataora sToDataOra(QXmlStreamReader&);//metodo che converte stream in Dataora
+    Data sToData(QXmlStreamReader &stream);//metodo che converte stream in Data
 };
 
 //richiama il metodo polimorfo
