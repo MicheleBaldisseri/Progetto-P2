@@ -1,6 +1,6 @@
 #include "compwindow.h"
 
-CompWindow::CompWindow(QWidget *parent, const QDate &selDate): QDialog(parent), date(selDate)
+CompWindow::CompWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QDialog(parent), date(selDate)
 {
     mainLayout = new QVBoxLayout;
     formGroupBox = new QGroupBox(tr("Imposta"));
@@ -23,6 +23,10 @@ CompWindow::CompWindow(QWidget *parent, const QDate &selDate): QDialog(parent), 
     setWindowTitle(tr("Compleanno"));
 
     setMinimumSize(280,150);
+
+    if(e){ //se viene passato un evento, allora e' una modifica e setto il form
+        setForm(e);
+    }
 }
 
 CompWindow::~CompWindow(){}
@@ -51,7 +55,7 @@ void CompWindow::addCompItems()
     setYear->setRange(0, 2100);
 
     //aggiunta degli elementi nel layout
-    layout->addRow(new QLabel(tr("Titolo:")), title);
+    layout->addRow(new QLabel(tr("Nome:")), title);
     layout->addRow(new QLabel(tr("Colore:")), colorChoise);
     layout->addRow(new QLabel(tr("Anno di nascita:")), setYear);
 
@@ -80,4 +84,11 @@ void CompWindow::addCompItems()
     colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     formGroupBox->setLayout(layout);
+
+}
+
+void CompWindow::setForm(DatiEvento* obj){
+    title->setText(QString::fromStdString(obj->titolo));
+    colorChoise->setCurrentIndex(obj->colore);
+    setYear->setValue(obj->annoNascita);
 }

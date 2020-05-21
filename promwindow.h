@@ -23,7 +23,7 @@ class PromWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit PromWindow(QWidget *parent, const QDate& selDate);
+    explicit PromWindow(QWidget *parent, const QDate& selDate, DatiEvento* e = nullptr);
     ~PromWindow();
 public slots:
     void creaEvento();
@@ -41,6 +41,7 @@ private:
     QPlainTextEdit *bigEditor;
 
     void addPromItems();
+    void setForm(DatiEvento* obj);
 };
 
 #endif // PROMWINDOW_H

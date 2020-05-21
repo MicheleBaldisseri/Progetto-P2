@@ -1,7 +1,7 @@
 #include "appunwindow.h"
 
 
-AppunWindow::AppunWindow(QWidget *parent, const QDate &selDate): QDialog(parent), date(selDate)
+AppunWindow::AppunWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QDialog(parent), date(selDate)
 {
     //allestimento del form
     createFormGroupBox();
@@ -23,6 +23,10 @@ AppunWindow::AppunWindow(QWidget *parent, const QDate &selDate): QDialog(parent)
     setWindowTitle(tr("Appuntamento"));
 
     setMinimumSize(280,180);
+
+    if(e){ //se viene passato un evento, allora e' una modifica e setto il form
+        setForm(e);
+    }
 }
 
 AppunWindow::~AppunWindow(){}
@@ -103,4 +107,12 @@ void AppunWindow::createFormGroupBox()
     layout->addRow(time);
     //imposto layout
     formGroupBox->setLayout(layout);
+}
+
+void AppunWindow::setForm(DatiEvento* obj){
+    setTimeBegin->setTime(obj->inizio);
+    title->setText(QString::fromStdString(obj->titolo));
+    colorChoise->setCurrentIndex(obj->colore);
+    setTimeEnd->setTime(obj->fine);
+    location->setText(QString::fromStdString(obj->luogo));
 }

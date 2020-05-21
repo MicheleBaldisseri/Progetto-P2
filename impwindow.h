@@ -24,7 +24,7 @@ class ImpWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ImpWindow(QWidget *parent, const QDate& selDate);
+    explicit ImpWindow(QWidget *parent, const QDate& selDate, DatiEvento* e = nullptr);
     ~ImpWindow();
 public slots:
     void creaEvento();
@@ -42,6 +42,7 @@ private:
     QTimeEdit* setTimeBegin, *setTimeEnd;
 
     void addImpItems();
+    void setForm(DatiEvento* obj);
 };
 
 #endif // IMPWINDOW_H

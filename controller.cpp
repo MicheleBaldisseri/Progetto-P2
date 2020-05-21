@@ -135,7 +135,60 @@ void Controller::eliminaEvento(const int &pos){
 void Controller::modificaEvento(const int &pos){
     vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
     Evento* e = (*(v[pos]))->clone();
-    std::cout<<e->descrizioneFull();
+    DatiEvento* obj = new DatiEvento();
+
+    obj->dataSelezionata=QDate(e->getDataInizio().getAnno(),e->getDataInizio().getMese(),e->getDataInizio().getGiorno());
+    obj->titolo=e->getTitolo();
+    obj->inizio=QTime(e->getDataInizio().getOre(),e->getDataInizio().getMinuti(),e->getDataInizio().getSecondi());
+    obj->colore=(int)e->getColore();
+
+    Promemoria* p = dynamic_cast<Promemoria*>(e);
+    if(p){
+        obj->type=0;
+        obj->contenuto=p->getDesc();
+    }
+
+    Appuntamento* a = dynamic_cast<Appuntamento*>(e);
+    if(a){
+        obj->type=1;
+        obj->fine=QTime(a->getDataFine().getOre(),a->getDataFine().getMinuti(),a->getDataFine().getSecondi());
+        obj->luogo=a->getLuogo();
+    }
+
+    Compleanno* c = dynamic_cast<Compleanno*>(e);
+    if(c){
+        obj->type=2;
+        obj->annoNascita=c->getDataNascita().getAnno();
+    }
+
+    Impegno* i = dynamic_cast<Impegno*>(e);
+    if(i){
+        obj->type=3;
+        obj->fine=QTime(i->getDataFine().getOre(),i->getDataFine().getMinuti(),i->getDataFine().getSecondi());
+    }
+
+    view->initializeModifica(obj);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -37,6 +37,7 @@ public:
     void updateList();
     void clearList();
     void showMessage(bool done, QString title, QString messagge);
+    void initializeModifica(DatiEvento* e);
 public slots:
     void showTime();
     void inserisciEvento(int type);

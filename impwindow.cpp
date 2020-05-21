@@ -1,7 +1,7 @@
 #include "impwindow.h"
 #include <iostream>
 
-ImpWindow::ImpWindow(QWidget *parent, const QDate &selDate) : QDialog(parent), date(selDate)
+ImpWindow::ImpWindow(QWidget *parent, const QDate &selDate, DatiEvento* e) : QDialog(parent), date(selDate)
 {
     mainLayout = new QVBoxLayout;
     formGroupBox = new QGroupBox(tr("Imposta impegno"));
@@ -24,6 +24,10 @@ ImpWindow::ImpWindow(QWidget *parent, const QDate &selDate) : QDialog(parent), d
     setWindowTitle(tr("Impegno"));
 
     setMinimumSize(300,150);
+
+    if(e){
+        setForm(e);
+    }
 }
 
 ImpWindow::~ImpWindow(){}
@@ -128,4 +132,11 @@ void ImpWindow::addImpItems()
     layout->addRow(rip);
     //imposto layout
     formGroupBox->setLayout(layout);
+}
+
+void ImpWindow::setForm(DatiEvento *obj){
+    setTimeBegin->setTime(obj->inizio);
+    title->setText(QString::fromStdString(obj->titolo));
+    colorChoise->setCurrentIndex(obj->colore);
+    setTimeEnd->setTime(obj->fine);
 }

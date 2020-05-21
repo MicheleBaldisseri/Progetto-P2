@@ -1,6 +1,6 @@
 #include "promwindow.h"
 
-PromWindow::PromWindow(QWidget *parent, const QDate &selDate): QDialog(parent), date(selDate)
+PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QDialog(parent), date(selDate)
 {
     mainLayout = new QVBoxLayout;
     formGroupBox = new QGroupBox(tr("Imposta promemoria"));
@@ -9,7 +9,7 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate): QDialog(parent), 
     addPromItems();
     bigEditor = new QPlainTextEdit(this);
     bigEditor->setFixedHeight(100);
-    bigEditor->setPlainText(tr("Inserisci qui la descrizione... "));
+    bigEditor->setPlaceholderText(tr("Inserisci qui la descrizione... "));
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Close);
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
@@ -26,6 +26,10 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate): QDialog(parent), 
     setWindowTitle(tr("Promemoria"));
 
     setMinimumSize(280,250);
+
+    if(e){ //se viene passato un evento, allora e' una modifica e setto il form
+        setForm(e);
+    }
 }
 
 PromWindow::~PromWindow(){}
@@ -90,4 +94,11 @@ void PromWindow::addPromItems()
     colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     formGroupBox->setLayout(layout);
+}
+
+void PromWindow::setForm(DatiEvento* obj){
+    bigEditor->setPlainText(QString::fromStdString(obj->contenuto));
+    setTime->setTime(obj->inizio);
+    title->setText(QString::fromStdString(obj->titolo));
+    colorChoise->setCurrentIndex(obj->colore);
 }

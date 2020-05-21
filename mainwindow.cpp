@@ -79,6 +79,29 @@ void MainWindow::showMessage(bool done, QString title, QString messagge)
         QMessageBox::warning(this, title, messagge);
 }
 
+void MainWindow::initializeModifica(DatiEvento* e){
+    switch (e->type) {
+    case 0:
+        promW= new PromWindow(this, e->dataSelezionata,e);
+        promW->exec();
+        break;
+    case 1:
+        appunW= new AppunWindow(this, e->dataSelezionata,e);
+        appunW->exec();
+        break;
+    case 2:
+        compW= new CompWindow(this, e->dataSelezionata, e);
+        compW->exec();
+        break;
+    case 3:
+        impW= new ImpWindow(this, e->dataSelezionata, e);
+        impW->exec();
+        break;
+    default:
+        break;
+    }
+}
+
 
 
 void MainWindow::showTime(){
@@ -96,22 +119,22 @@ void MainWindow::inserisciEvento(int type)
     case 0:
         promW= new PromWindow(this, selDate);
         connect(promW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
-        promW->show();
+        promW->exec();
         break;
     case 1:
         appunW= new AppunWindow(this, selDate);
         connect(appunW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
-        appunW->show();
+        appunW->exec();
         break;
     case 2:
         impW= new ImpWindow(this, selDate);
         connect(impW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
-        impW->show();
+        impW->exec();
         break;
     case 3:
         compW= new CompWindow(this,selDate);
         connect(compW,SIGNAL(eventoInserito(DatiEvento*)),controller,SLOT(dataFromWindow(DatiEvento*)));
-        compW->show();
+        compW->exec();
         break;
     default:
         break;

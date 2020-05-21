@@ -19,7 +19,7 @@ class CompWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit CompWindow(QWidget *parent, const QDate& selDate);
+    explicit CompWindow(QWidget *parent, const QDate& selDate, DatiEvento* e = nullptr);
     ~CompWindow();
 public slots:
     void creaEvento();
@@ -35,5 +35,6 @@ private:
     QGroupBox *formGroupBox;
 
     void addCompItems();
+    void setForm(DatiEvento* obj);
 };
 #endif // COMPWINDOW_H

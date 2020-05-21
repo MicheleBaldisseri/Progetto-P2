@@ -22,7 +22,7 @@ class AppunWindow : public QDialog
 {
     Q_OBJECT
 public:
-    explicit AppunWindow(QWidget *parent, const QDate& selDate);
+    explicit AppunWindow(QWidget *parent, const QDate& selDate, DatiEvento* e = nullptr);
     ~AppunWindow();
 public slots:
     void creaEvento();
@@ -38,6 +38,7 @@ private:
     QDialogButtonBox *buttonBox;
 
     void createFormGroupBox();
+    void setForm(DatiEvento* obj);
 };
 
 #endif // APPUNWINDOWS_H
