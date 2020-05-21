@@ -34,7 +34,8 @@ Impegno::Impegno(std::string s, Dataora di, Dataora df, ModeRicorrenza mode, int
 
 std::string Impegno::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<"-"<<getDataFine().getOrario()<<"\n";
+    text<< std::setw(2) << std::setfill('0') << getDataInizio().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataInizio().getMinuti() <<" - ";
+    text<< std::setw(2) << std::setfill('0') << getDataFine().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataFine().getMinuti();
     text<<getTitolo()<<"\n";
     text<<"Durata: ";
     int ore = int(Dataora::secondsToHours(durata()));
