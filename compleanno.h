@@ -13,8 +13,6 @@ public:
 
     string descrizioneMin() const;
     string descrizioneFull() const;
-    void toExp(QXmlStreamWriter&);
-    Evento * fromImp(QXmlStreamReader &);
     Data getDataNascita() const;
 
     bool operator==(const Evento&) const;

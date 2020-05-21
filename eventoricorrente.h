@@ -14,8 +14,6 @@ public:
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
-    virtual void toExp(QXmlStreamWriter&)=0;
-    virtual Evento* fromImp(QXmlStreamReader&)=0;
 
     void addRicorrenza(const Data&);
     //ritorna il vettore delle ricorrenze

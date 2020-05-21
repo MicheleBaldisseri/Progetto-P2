@@ -83,8 +83,7 @@ void Esporta::promToXML(QXmlStreamWriter &stream, Promemoria *p){
     stream.writeEndElement();
 }
 
-void Esporta::impToXML(QXmlStreamWriter &stream, Impegno *i)
-{
+void Esporta::impToXML(QXmlStreamWriter &stream, Impegno *i){
     stream.writeStartElement("Impegno");
     stream.writeTextElement("Titolo",QString::fromStdString(i->getTitolo()));
     stream.writeStartElement("DataInizio");
@@ -116,8 +115,7 @@ void Esporta::impToXML(QXmlStreamWriter &stream, Impegno *i)
     stream.writeEndElement();
 }
 
-void Esporta::compToXML(QXmlStreamWriter &stream, Compleanno *c)
-{
+void Esporta::compToXML(QXmlStreamWriter &stream, Compleanno *c){
     stream.writeStartElement("Compleanno");
     stream.writeTextElement("Titolo",QString::fromStdString(c->getTitolo()));
     stream.writeStartElement("DataInizio");

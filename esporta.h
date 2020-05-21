@@ -16,10 +16,10 @@ private:
 public:
     Esporta(Lista<Evento*>&);
     bool Export();
-    void appToXML(QXmlStreamWriter&,Appuntamento*);
-    void promToXML(QXmlStreamWriter&,Promemoria*);
-    void impToXML(QXmlStreamWriter&,Impegno*);
-    void compToXML(QXmlStreamWriter&,Compleanno*);
+    void appToXML(QXmlStreamWriter&,Appuntamento*);//esporta appuntamento
+    void promToXML(QXmlStreamWriter&,Promemoria*);//esporta promemoria
+    void impToXML(QXmlStreamWriter&,Impegno*);//esporta impegno
+    void compToXML(QXmlStreamWriter&,Compleanno*);//esporta compleanno
 };
 
 #endif // ESPORTA_H

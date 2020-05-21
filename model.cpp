@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QDebug>
 #include "esporta.h"
+#include "importa.h"
 bool Model::insert(Evento *e)
 {
     if(search(e)==nullptr){
@@ -86,36 +87,16 @@ bool Model::esporta()
             return true;
         else
             return false;
-    /*QFile lista("lista.xml");
-        if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            qDebug()<<"Open the file for writing failed";
-            return false;
-        }
-        else
-        {
-
-            QXmlStreamWriter stream;
-            stream.setDevice(&lista);
-            stream.setAutoFormatting(true);
-            stream.writeStartDocument();
-            stream.writeStartElement("Evento");
-            for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-                (*cit)->toExp(stream);
-                stream.writeCharacters("\n");
-            }
-            stream.writeEndElement();
-            stream.writeEndDocument();
-            lista.close();
-            qDebug()<<"Writing is done";
-            return true;
-        }*/
-
 }
 
 bool Model::importa()
 {
-    QFile lista("lista.xml");
+    Importa lista(l);
+    if(lista.Import(*this))
+        return true;
+    else
+        return false;
+    /*QFile lista("lista.xml");
     if(!lista.open(QIODevice::ReadOnly | QIODevice::Text)){
         qDebug()<<"Open the file for reading failed";
         return false;
@@ -158,7 +139,7 @@ bool Model::importa()
             }
         }
         else return false;
-    }
+    }*/
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
