@@ -13,6 +13,8 @@ public:
     string descrizioneMin() const;
     string descrizioneFull() const;
     string getDesc() const;
+    void toExp(QXmlStreamWriter&);
+    Evento* fromImp(QXmlStreamReader&);
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;

@@ -7,9 +7,6 @@
 #include "impegno.h"
 #include "compleanno.h"
 #include <iostream>
-#include <fstream>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 #include <QFile>
 #include <QDebug>
 bool Model::insert(Evento *e)
@@ -81,7 +78,7 @@ void Model::showEvent(const Data & d)
     }
 }
 
-bool Model::esporta()//inserire una lettera per identificare tipo
+bool Model::esporta()
 {
     QFile lista("lista.xml");
         if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -92,19 +89,16 @@ bool Model::esporta()//inserire una lettera per identificare tipo
         else
         {
 
-            QXmlStreamWriter stream(&lista);
+            QXmlStreamWriter stream;
+            stream.setDevice(&lista);
             stream.setAutoFormatting(true);
-            string tag="<Agenda>\n";
-            stream.writeEntityReference(QString::fromStdString(tag));
+            stream.writeStartDocument();
+            stream.writeStartElement("Evento");
             for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-
-                stringstream p;
-                p<<**cit;
-                stream.writeEntityReference(QString::fromStdString(p.str()));
+                (*cit)->toExp(stream);
                 stream.writeCharacters("\n");
             }
-            tag="</Agenda>";
-            stream.writeEntityReference(QString::fromStdString(tag));
+            stream.writeEndElement();
             stream.writeEndDocument();
             lista.close();
             qDebug()<<"Writing is done";
@@ -124,147 +118,22 @@ bool Model::importa()
         QXmlStreamReader reader(&lista);
         Evento*e;
         if (reader.readNextStartElement()){
-            if(reader.name()=="Agenda"){
+            if(reader.name()=="Evento"){
                 while(reader.readNextStartElement()){
-                    if(reader.name()=="Promemoria"){//new Promemoria("Denti",Dataora(14,5,2020,5,11,47),"Lavati i denti");
-                        string tit,desc;
-                        unsigned int col;
-                        unsigned int g,m,a,o,mp,s;
-
-                        for(int i=0; i<4&&reader.readNextStartElement();++i){
-                            switch(i){
-                            case 0:{
-                                tit=reader.readElementText().toStdString();
-                            }
-                                break;
-                            case 1:{
-                                string dat=(reader.readElementText()).toStdString();
-                                stringtoDataOra(dat,g,m,a,o,mp,s);
-                            }
-                                break;
-                            case 2:{
-                                desc=reader.readElementText().toStdString();
-                            }
-                                break;
-                            case 3:{
-                                col=stoi(reader.readElementText().toStdString());
-                            }
-                                break;
-                            }
-                        }
-                        e=new Promemoria(tit,Dataora(g,m,a,o,mp,s),desc,(Color)col);
-                        reader.skipCurrentElement();
+                    if(reader.name()=="Promemoria"){
+                        e=(new Promemoria)->fromImp(reader);
                     }
                     else{
-                        if(reader.name()=="Appuntamento"){//new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");
-                            string tit,luogo;
-                            unsigned int col;
-                            unsigned int g,m,a,o,mp,s;//dataora inizio
-                            unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
-                            for(int i=0; i<5&&reader.readNextStartElement();++i){
-                                switch(i){
-                                case 0:{
-                                    tit=reader.readElementText().toStdString();
-                                }
-                                    break;
-                                case 1:{
-                                    string dat=(reader.readElementText()).toStdString();
-                                    stringtoDataOra(dat,g,m,a,o,mp,s);
-                                }
-                                    break;
-                                case 2:{
-                                    string dat=(reader.readElementText()).toStdString();
-                                    stringtoDataOra(dat,g2,m2,a2,o2,mp2,s2);
-                                }
-                                    break;
-                                case 3:{
-                                    luogo=reader.readElementText().toStdString();
-                                }
-                                    break;
-                                case 4:{
-                                    col=stoi(reader.readElementText().toStdString());
-                                }
-                                    break;
-                                }
-                            }
-                            e=new Appuntamento(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),luogo,(Color)col);
-                            reader.skipCurrentElement();
+                        if(reader.name()=="Appuntamento"){
+                            e=(new Appuntamento)->fromImp(reader);
                         }
                         else{
-                            if(reader.name()=="Impegno"){//new Impegno("conferenza",Dataora(11,5,2020,11,11,11),Dataora(11,5,2020,12,12,12),giorno,2,3);
-                                string tit;
-                                unsigned int col;
-                                vector<Data> v;
-                                unsigned int g,m,a,o,mp,s;//dataora inizio
-                                unsigned int g2,m2,a2,o2,mp2,s2;//dataora fine
-                                for(int i=0; i<5&&reader.readNextStartElement();++i){
-                                    switch(i){
-                                    case 0:{
-                                        tit=reader.readElementText().toStdString();
-                                    }
-                                        break;
-                                    case 1:{
-                                        string dat=(reader.readElementText()).toStdString();
-                                        stringtoDataOra(dat,g,m,a,o,mp,s);
-                                    }
-                                        break;
-                                    case 2:{
-                                        string dat=(reader.readElementText()).toStdString();
-                                        stringtoDataOra(dat,g2,m2,a2,o2,mp2,s2);
-                                    }
-                                        break;
-                                    case 3:{
-                                        col=stoi(reader.readElementText().toStdString());
-                                    }
-                                        break;
-                                    case 4:{
-                                        string ric=(reader.readElementText()).toStdString();
-                                        int lim=ric.find("|", 1), pos=1;
-                                        while(lim!=-1){
-                                            string dat=ric.substr(pos,lim-pos);
-                                            unsigned int giorno,mese,anno;
-                                            stringtoData(dat,giorno,mese,anno);
-                                            v.push_back(Data(giorno,mese,anno));
-                                            pos=lim+1;
-                                            lim=ric.find("|", pos);
-                                        }
-                                    }
-                                        break;
-                                    }
-                                }
-                                e=new Impegno(tit,Dataora(g,m,a,o,mp,s),Dataora(g2,m2,a2,o2,mp2,s2),v,(Color)col);
-                                reader.skipCurrentElement();
+                            if(reader.name()=="Impegno"){
+                                e=(new Impegno)->fromImp(reader);
                             }
-                            else{//compleanno new Compleanno("Michele Baldisseri",Dataora(16,5,2020,00,00,00),Data(16,5,1999));
-                                if(reader.name()=="Compleanno"){
-                                    string tit;
-                                    unsigned int col;
-                                    unsigned int g,m,a,o,mp,s;//dataora inizio
-                                    unsigned int g2,m2,a2;//data compleanno
-                                    for(int i=0; i<4&&reader.readNextStartElement();++i){
-                                        switch(i){
-                                        case 0:{
-                                            tit=reader.readElementText().toStdString();
-                                        }
-                                            break;
-                                        case 1:{
-                                            string dat=(reader.readElementText()).toStdString();
-                                            stringtoDataOra(dat,g,m,a,o,mp,s);
-                                        }
-                                            break;
-                                        case 2:{
-                                            string dat=(reader.readElementText()).toStdString();
-                                            stringtoData(dat,g2,m2,a2);
-                                        }
-                                            break;
-                                        case 3:{
-                                            col=stoi(reader.readElementText().toStdString());
-                                        }
-                                            break;
-                                        }
-                                    }
-                                    e=new Compleanno(tit,Dataora(g,m,a,o,mp,s),Data(g2,m2,a2),(Color)col);
-                                    reader.skipCurrentElement();
+                            else{
+                                if(reader.name()=="Compleanno"){                                    
+                                    e=(new Compleanno)->fromImp(reader);
                                 }
                                 else
                                     reader.skipCurrentElement();
@@ -284,43 +153,6 @@ bool Model::importa()
         }
         else return false;
     }
-}
-
-void Model::stringtoData(string dat, unsigned int &g, unsigned int &m, unsigned int &a)
-{
-    int prova=0;
-    int lim=dat.find(",", prova);
-    g=stoi(dat.substr(prova, lim));
-
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    m=stoi(dat.substr(prova, lim));
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    a=stoi(dat.substr(prova, lim));
-}
-
-void Model::stringtoDataOra(string dat, unsigned int &g, unsigned int &m, unsigned int &a, unsigned int &o, unsigned int &mp, unsigned int &s)
-{
-    int prova=0;
-    int lim=dat.find(",", prova);
-    g=stoi(dat.substr(prova, lim));
-
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    m=stoi(dat.substr(prova, lim));
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    a=stoi(dat.substr(prova, lim));
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    o=stoi(dat.substr(prova, lim));
-    prova=lim+1;
-    lim=dat.find(",", prova);
-    mp=stoi(dat.substr(prova, lim));
-    prova=lim+1;
-    lim=dat.find("\n", prova);
-    s=stoi(dat.substr(prova, lim));
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
