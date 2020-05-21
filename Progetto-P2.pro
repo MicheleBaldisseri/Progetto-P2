@@ -26,10 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     appuntamento.cpp \
     compleanno.cpp \
+    esporta.cpp \
     evento.cpp \
     eventodurata.cpp \
     eventoricorrente.cpp \
     impegno.cpp \
+    importa.cpp \
     main.cpp \
     mainwindow.cpp \
     data.cpp \
@@ -48,10 +50,12 @@ SOURCES += \
 HEADERS += \
     appuntamento.h \
     compleanno.h \
+    esporta.h \
     evento.h \
     eventodurata.h \
     eventoricorrente.h \
     impegno.h \
+    importa.h \
     mainwindow.h \
     data.h \
     orario.h \

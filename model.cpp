@@ -9,6 +9,7 @@
 #include <iostream>
 #include <QFile>
 #include <QDebug>
+#include "esporta.h"
 bool Model::insert(Evento *e)
 {
     if(search(e)==nullptr){
@@ -80,7 +81,12 @@ void Model::showEvent(const Data & d)
 
 bool Model::esporta()
 {
-    QFile lista("lista.xml");
+    Esporta lista(l);
+        if(lista.Export())
+            return true;
+        else
+            return false;
+    /*QFile lista("lista.xml");
         if(!lista.open(QIODevice::WriteOnly | QIODevice::Text))
         {
             qDebug()<<"Open the file for writing failed";
@@ -103,7 +109,7 @@ bool Model::esporta()
             lista.close();
             qDebug()<<"Writing is done";
             return true;
-        }
+        }*/
 
 }
 
