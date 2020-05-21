@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Model m;
-   /* Controller c(&m);
+    Controller c(&m);
     MainWindow w(&c);
     c.setView(&w);
 
@@ -40,9 +40,8 @@ int main(int argc, char *argv[])
     m.insert(eC);
     m.insert(eI);*/
 
-
-    //return a.exec();
-
+    w.updateList();
+    return a.exec();
 
 
     /*Evento* eA1 = new Appuntamento("Ex",Dataora(13,5,2020,10,10,10),Dataora(13,5,2020,12,10,10),"Ufficio");

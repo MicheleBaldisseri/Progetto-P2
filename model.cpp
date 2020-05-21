@@ -88,7 +88,6 @@ bool Model::esporta()
         }
         else
         {
-
             QXmlStreamWriter stream;
             stream.setDevice(&lista);
             stream.setAutoFormatting(true);

@@ -81,4 +81,4 @@ Promemoria *Promemoria::clone() const{
     return new Promemoria(*this);
 }
 
-Color Promemoria::colorePred = yellow;
+Color Promemoria::colorePred = red;
