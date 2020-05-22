@@ -1,5 +1,6 @@
 #ifndef IMPORTA_H
 #define IMPORTA_H
+#include <QXmlStreamReader>
 #include "appuntamento.h"
 #include "impegno.h"
 #include "compleanno.h"

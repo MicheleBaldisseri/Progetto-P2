@@ -3,7 +3,6 @@
 #include "evento.h"
 #include "lista.h"
 #include <vector>
-#include <QXmlStreamWriter>
 #include <QDebug>
 class Model
 {

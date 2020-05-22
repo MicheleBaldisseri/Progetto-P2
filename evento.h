@@ -4,8 +4,6 @@
 #include <sstream>
 #include <iomanip>
 #include "dataora.h"
-#include <QXmlStreamWriter>
-#include <QXmlStreamReader>
 using std::string;
 using std::stringstream;
 

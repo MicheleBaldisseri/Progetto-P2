@@ -164,7 +164,7 @@ void Controller::modificaEvento(const int &pos){
     obj->inizio=QTime(e->getDataInizio().getOre(),e->getDataInizio().getMinuti(),e->getDataInizio().getSecondi());
     obj->colore=(int)e->getColore();
 
-    Promemoria* p = dynamic_cast<Promemoria*>(e);
+    Promemoria* p = dynamic_cast<Promemoria*>(e); //necessari per passare i dati all'oggetto
     if(p){
         obj->type=0;
         obj->contenuto=p->getDesc();

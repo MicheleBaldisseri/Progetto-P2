@@ -2,6 +2,7 @@
 #define ESPORTA_H
 #include <iostream>
 #include <QFile>
+#include <QXmlStreamWriter>
 #include "appuntamento.h"
 #include "impegno.h"
 #include "compleanno.h"
