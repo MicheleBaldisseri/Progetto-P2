@@ -34,58 +34,6 @@ std::string Appuntamento::getLuogo() const{
     return luogo;
 }
 
-void Appuntamento::toExp(QXmlStreamWriter& stream)
-{
-    stream.writeStartElement("Appuntamento");
-    stream.writeTextElement("Titolo",QString::fromStdString(getTitolo()));
-    stream.writeStartElement("DataInizio");
-    stream.writeTextElement("Giorno",QString::fromStdString(std::to_string(getDataInizio().getGiorno())));
-    stream.writeTextElement("Mese",QString::fromStdString(std::to_string(getDataInizio().getMese())));
-    stream.writeTextElement("Anno",QString::fromStdString(std::to_string(getDataInizio().getAnno())));
-    stream.writeTextElement("Ora",QString::fromStdString(std::to_string(getDataInizio().getOre())));
-    stream.writeTextElement("Minuti",QString::fromStdString(std::to_string(getDataInizio().getMinuti())));
-    stream.writeTextElement("Secondi",QString::fromStdString(std::to_string(getDataInizio().getSecondi())));
-    stream.writeEndElement();
-    stream.writeStartElement("DataFine");
-    stream.writeTextElement("Giorno",QString::fromStdString(std::to_string(getDataFine().getGiorno())));
-    stream.writeTextElement("Mese",QString::fromStdString(std::to_string(getDataFine().getMese())));
-    stream.writeTextElement("Anno",QString::fromStdString(std::to_string(getDataFine().getAnno())));
-    stream.writeTextElement("Ora",QString::fromStdString(std::to_string(getDataFine().getOre())));
-    stream.writeTextElement("Minuti",QString::fromStdString(std::to_string(getDataFine().getMinuti())));
-    stream.writeTextElement("Secondi",QString::fromStdString(std::to_string(getDataFine().getSecondi())));
-    stream.writeEndElement();
-    stream.writeTextElement("Luogo",QString::fromStdString(getLuogo()));
-    stream.writeTextElement("Colore",QString::fromStdString(std::to_string(getColore())));
-    stream.writeEndElement();
-}
-
-Evento *Appuntamento::fromImp(QXmlStreamReader &stream)
-{
-    string tit,luogo;
-    Dataora in,fi;
-    int col;
-    while(stream.readNextStartElement()){
-        if(stream.name()=="Titolo")
-            tit=stream.readElementText().toStdString();
-        else{
-            if(stream.name()=="DataInizio")
-                in=sToDataOra(stream);
-            else{
-                if(stream.name()=="DataFine")
-                    fi=sToDataOra(stream);
-                else{
-                    if(stream.name()=="Luogo")
-                        luogo=stream.readElementText().toStdString();
-                    else
-                        if(stream.name()=="Colore")
-                            col=stoi(stream.readElementText().toStdString());
-                }
-            }
-        }
-    }
-    return new Appuntamento(tit,in,fi,luogo,(Color)col);
-}
-
 bool Appuntamento::operator==(const Evento & e) const{
     const Appuntamento* a = dynamic_cast<const Appuntamento*>(&e);
     if(a){

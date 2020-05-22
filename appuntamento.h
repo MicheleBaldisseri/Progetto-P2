@@ -1,3 +1,4 @@
+
 #ifndef APPUNTAMENTO_H
 #define APPUNTAMENTO_H
 #include "eventodurata.h"
@@ -13,8 +14,6 @@ public:
     string descrizioneMin() const;
     string descrizioneFull() const;
     string getLuogo() const;
-    void toExp(QXmlStreamWriter&);
-    Evento * fromImp(QXmlStreamReader &);
 
     bool operator==(const Evento&) const;
     bool operator!=(const Evento&) const;
