@@ -11,11 +11,11 @@
 class Esporta
 {
 private:
-    QFile lista;
+    QFile lista;//QFile dove salvare
     Lista<Evento*> l;
 public:
     Esporta(Lista<Evento*>&);
-    bool Export();
+    bool esport();//true se l'export va a buon fine, false altrimenti
     void appToXML(QXmlStreamWriter&,Appuntamento*);//esporta appuntamento
     void promToXML(QXmlStreamWriter&,Promemoria*);//esporta promemoria
     void impToXML(QXmlStreamWriter&,Impegno*);//esporta impegno

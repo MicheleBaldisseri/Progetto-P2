@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
     cout<<"export"<<endl;
    // cout<<m.esporta()<<endl;
     cout<<m.importa()<<endl;
-    Lista<Evento*> sel=m.Getl();
+    Lista<Evento*> sel=m.getl();
     for(Lista<Evento*>::const_iterator cit2=sel.begin();cit2!=sel.end();cit2++){
         cout<<**cit2<<endl;
     }

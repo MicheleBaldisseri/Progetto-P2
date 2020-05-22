@@ -1,20 +1,16 @@
+#include <iostream>
 #include "model.h"
 #include "appuntamento.h"
-#include "eventodurata.h"
 #include "promemoria.h"
-#include "eventoricorrente.h"
 #include "lista.cpp"
 #include "impegno.h"
 #include "compleanno.h"
-#include <iostream>
-#include <QFile>
-#include <QDebug>
 #include "esporta.h"
 #include "importa.h"
 bool Model::insert(Evento *e)
 {
-    if(search(e)==nullptr){
-        l.push_back(e);
+    if(search(e)==nullptr){//se search restituisce nullptr significa che l'evento non esiste dunque
+        l.push_back(e);    // inserisce e
         return true;
     }
     else return false;
@@ -24,7 +20,7 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
 {
     Appuntamento*a=dynamic_cast<Appuntamento*>(e);
     Promemoria*p=dynamic_cast<Promemoria*>(e);
-    Lista<Evento*>::const_iterator find;
+    Lista<Evento*>::const_iterator find=nullptr;//iteratore utilizzato per la restituzione dell'occorrenza
     if(p||a){//p è di tipo promemoria oppure a è di tipo Appuntamento
         for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
             if(**cit==*e){
@@ -32,7 +28,7 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
             }
         }
     }
-    else{
+    else{//e è di tipo Impegno o Compleanno
         for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
 
             if((*cit)->getTitolo()==e->getTitolo()){
@@ -45,9 +41,8 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
 
 bool Model::erase(Evento *e)
 {
-    Lista<Evento*>::const_iterator find=search(e);
+    Lista<Evento*>::const_iterator find=search(e);//se search ritorna un'occorrenza allora viene cancellato l'evento
     if(find!=nullptr){
-
         find=l.erase(find);
         return true;
     }
@@ -59,11 +54,11 @@ bool Model::erase(Evento *e)
 
 void Model::showEvent(const Data & d)
 {
-    selezionati.clear();
-    for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){
+    selezionati.clear();//selezionati viene prima liberata in caso ci fossero già degli eventi
+    for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){//ciclo che verifica tutta la Lista
         EventoRicorrente*r=dynamic_cast<EventoRicorrente*>(*cit);
         if(!r){//se evento è di tipo EventoDurata o Promemoria
-            if(d==(*cit)->getDataInizio()){
+            if(d==(*cit)->getDataInizio()){//
                 selezionati.push_back(cit);
             }
         }
@@ -72,8 +67,8 @@ void Model::showEvent(const Data & d)
                 selezionati.push_back(cit);
             }
             vector<Data>* v=r->getRicorrenze();
-            for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){
-                if(*c==d)
+            for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){//viene passato tutto il vettore per verificare
+                if(*c==d)                                                  //se ci sono match tra le ricorrenze
                     selezionati.push_back(cit);
             }
         }
@@ -82,8 +77,8 @@ void Model::showEvent(const Data & d)
 
 bool Model::esporta()
 {
-    Esporta lista(l);
-        if(lista.Export())
+    Esporta lista(l);//crea una lista di classe Esporta passandogli la lista da cui stampare i dati
+        if(lista.esport())//se esport va a buon fine restituisce vero
             return true;
         else
             return false;
@@ -91,61 +86,17 @@ bool Model::esporta()
 
 bool Model::importa()
 {
-    Importa lista(l);
-    if(lista.Import(*this))
+    Importa lista;//crea una lista di classe Importa
+    if(lista.import(*this))//se import va a buon fine restituisce vero
         return true;
     else
         return false;
-    /*QFile lista("lista.xml");
-    if(!lista.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug()<<"Open the file for reading failed";
-        return false;
-    }
-    else{
-        QXmlStreamReader reader(&lista);
-        Evento*e;
-        if (reader.readNextStartElement()){
-            if(reader.name()=="Evento"){
-                while(reader.readNextStartElement()){
-                    if(reader.name()=="Promemoria"){
-                        e=(new Promemoria)->fromImp(reader);
-                    }
-                    else{
-                        if(reader.name()=="Appuntamento"){
-                            e=(new Appuntamento)->fromImp(reader);
-                        }
-                        else{
-                            if(reader.name()=="Impegno"){
-                                e=(new Impegno)->fromImp(reader);
-                            }
-                            else{
-                                if(reader.name()=="Compleanno"){                                    
-                                    e=(new Compleanno)->fromImp(reader);
-                                }
-                                else
-                                    reader.skipCurrentElement();
-                            }
-                        }
-                    }
-                insert(e);
-            }
-
-            lista.close();
-            return true;
-            }
-            else{
-                reader.raiseError(QObject::tr("Incorrect file"));
-                return false;
-            }
-        }
-        else return false;
-    }*/
 }
 
 vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
     return selezionati;
 }
 
-Lista<Evento *> Model::Getl() const{
+Lista<Evento *> Model::getl() const{
     return l;
 }

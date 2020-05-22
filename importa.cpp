@@ -1,11 +1,11 @@
 #include "importa.h"
 
 #include <QFile>
-bool Importa::Import(Model& m)
+bool Importa::import(Model& m)
 {
     QFile lista("lista.xml");
         if(!lista.open(QIODevice::ReadOnly | QIODevice::Text)){
-            lista.open(QIODevice::ReadWrite | QIODevice::Text);//crea un file se non è presente
+            lista.open(QIODevice::ReadWrite | QIODevice::Text);//crea un file vuoto se non è presente
             lista.close();
             return false;
         }
@@ -13,10 +13,10 @@ bool Importa::Import(Model& m)
             QXmlStreamReader reader(&lista);
             Evento*e;
             if (reader.readNextStartElement()){
-                if(reader.name()=="Evento"){
-                    while(reader.readNextStartElement()){
-                        if(reader.name()=="Promemoria"){
-                            e=this->xmlToProm(reader);
+                if(reader.name()=="Evento"){//reader accede al tag Evento
+                    while(reader.readNextStartElement()){//ciclo che scorre i tag all'interno di Evento
+                        if(reader.name()=="Promemoria"){//verifica il tag e direziona la chiamata alla funzione più oppurtuna
+                            e=this->xmlToProm(reader);//in base al tipo di evento
                         }
                         else{
                             if(reader.name()=="Appuntamento"){
@@ -31,33 +31,34 @@ bool Importa::Import(Model& m)
                                         e=this->xmlToComp(reader);
                                     }
                                     else
-                                        reader.skipCurrentElement();
+                                        reader.skipCurrentElement();//se il tag è sconosciuto passa all'elemento successivo
                                 }
                             }
                         }
-                    m.insert(e);
+                        if(e!=nullptr)
+                            m.insert(e);//inserisce e nel modello utilizzando insert
                 }
 
-                lista.close();
+                lista.close();//chiusura del QFile per evitare conflitti
                 return true;
                 }
                 else{
-                    reader.raiseError(QObject::tr("Incorrect file"));
-                    return false;
+                    reader.raiseError(QObject::tr("Incorrect file"));//Se il file non è scritto in modo corretto viene
+                    return false;//sollevata un eccezione
                 }
             }
-            else return false;
+            else return false;//se file è vuoto restituisce false
         }
 }
 
 Promemoria *Importa::xmlToProm(QXmlStreamReader &stream)
 {
-    string tit,desc;
+    string tit,desc;//variabili dove salvare il testo letto
     Dataora dat;
     int col;
-    while(stream.readNextStartElement()){
-        if(stream.name()=="Titolo")
-            tit=stream.readElementText().toStdString();
+    while(stream.readNextStartElement()){//scorre tutti i tag all'interno di Promemoria
+        if(stream.name()=="Titolo") //Per ogni tag viene assegnato il testo trovato alla variabile corrispondente
+            tit=stream.readElementText().toStdString();//QString convertita in std::string
         else{
             if(stream.name()=="DataInizio")
                 dat=xmlToDataOra(stream);
@@ -66,12 +67,13 @@ Promemoria *Importa::xmlToProm(QXmlStreamReader &stream)
                     desc=stream.readElementText().toStdString();
                 else{
                     if(stream.name()=="Colore")
-                        col=stoi(stream.readElementText().toStdString());
+                        col=stream.readElementText().toInt();//QString convertita in int
+                    else return nullptr;//se file scritto in modo non corretto ritorna un nullptr
                 }
             }
         }
     }
-    return new Promemoria(tit,dat,desc,(Color)col);
+    return new Promemoria(tit,dat,desc,(Color)col);//creazione del puntatore con le variabili
 }
 
 Impegno *Importa::xmlToImp(QXmlStreamReader &stream)
@@ -91,13 +93,14 @@ Impegno *Importa::xmlToImp(QXmlStreamReader &stream)
                     fi=xmlToDataOra(stream);
                 else{
                     if(stream.name()=="Colore")
-                        col=stoi(stream.readElementText().toStdString());
+                        col=stream.readElementText().toInt();
                     else{
                         if(stream.name()=="Ricorrenze"){
                             while(stream.readNextStartElement()){
                                 if(stream.name()=="Ricor"){
                                     v.push_back(Data(xmlToData(stream)));
                                 }
+                                else return nullptr;//se file scritto in modo non corretto ritorna un nullptr
                             }
                         }
                     }
@@ -125,7 +128,8 @@ Compleanno *Importa::xmlToComp(QXmlStreamReader &stream)
                     nas=xmlToData(stream);
                 else{
                     if(stream.name()=="Colore")
-                        col=stoi(stream.readElementText().toStdString());
+                        col=stream.readElementText().toInt();
+                    else return nullptr;//se file scritto in modo non corretto ritorna un nullptr
                 }
             }
         }
@@ -152,7 +156,8 @@ Appuntamento *Importa::xmlToApp(QXmlStreamReader &stream)
                         luogo=stream.readElementText().toStdString();
                     else
                         if(stream.name()=="Colore")
-                            col=stoi(stream.readElementText().toStdString());
+                            col=stream.readElementText().toInt();
+                        else return nullptr;//se file scritto in modo non corretto ritorna un nullptr
                 }
             }
         }
@@ -162,24 +167,25 @@ Appuntamento *Importa::xmlToApp(QXmlStreamReader &stream)
 
 Dataora Importa::xmlToDataOra(QXmlStreamReader &stream)
 {
-    int g,m,a,o,mp,s;
+    int g,m,a,o,mp,s;//variabili dove salvare i numeri letti
     while(stream.readNextStartElement()){
         if(stream.name()=="Giorno")
-            g=stoi(stream.readElementText().toStdString());
+            g=stream.readElementText().toInt();//conversione di QString in int
         else{
             if(stream.name()=="Mese")
-                m=stoi(stream.readElementText().toStdString());
+                m=stream.readElementText().toInt();
             else{
                 if(stream.name()=="Anno")
-                    a=stoi(stream.readElementText().toStdString());
+                    a=stream.readElementText().toInt();
                 else{
                     if(stream.name()=="Ora")
-                        o=stoi(stream.readElementText().toStdString());
+                        o=stream.readElementText().toInt();
                     else{
                         if(stream.name()=="Minuti")
-                            mp=stoi(stream.readElementText().toStdString());
+                            mp=stream.readElementText().toInt();
                         else
-                            s=stoi(stream.readElementText().toStdString());
+                            if(stream.name()=="Secondi")
+                                s=stream.readElementText().toInt();
                     }
                 }
             }
@@ -194,13 +200,13 @@ Data Importa::xmlToData(QXmlStreamReader &stream)
     int g,m,a;
     while(stream.readNextStartElement()){
         if(stream.name()=="Giorno")
-            g=stoi(stream.readElementText().toStdString());
+            g=stream.readElementText().toInt();
         else{
             if(stream.name()=="Mese")
-                m=stoi(stream.readElementText().toStdString());
+                m=stream.readElementText().toInt();
             else{
                 if(stream.name()=="Anno")
-                    a=stoi(stream.readElementText().toStdString());
+                    a=stream.readElementText().toInt();
             }
         }
     }
