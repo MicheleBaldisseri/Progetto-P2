@@ -34,14 +34,16 @@ Impegno::Impegno(std::string s, Dataora di, Dataora df, ModeRicorrenza mode, int
 
 std::string Impegno::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<"-"<<getDataFine().getOrario()<<" Durata: ";
+    text<< std::setw(2) << std::setfill('0') << getDataInizio().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataInizio().getMinuti() <<" - ";
+    text<< std::setw(2) << std::setfill('0') << getDataFine().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataFine().getMinuti();
+    text<<"\n"<<getTitolo()<<"\n";
+    text<<"Durata: ";
     int ore = int(Dataora::secondsToHours(durata()));
     if(durata()%3600==0){ //ora intera
-        text<<ore<<" ora/e\n";
+        text<<ore<<" ora/e";
     }else{  //ora non intera
-        text<<ore<<" ora/e e "<<int(Dataora::secondsToMinutes(durata()-ore*3600))<<" minuti\n";
+        text<<ore<<" ora/e e "<<int(Dataora::secondsToMinutes(durata()-ore*3600))<<" minuti";
     }
-    text<<getTitolo();
     return text.str();
 }
 
@@ -75,4 +77,4 @@ Impegno *Impegno::clone() const{
     return new Impegno(*this);
 }
 
-Color Impegno::colorePred = blue;
+Color Impegno::colorePred = purple;

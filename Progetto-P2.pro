@@ -44,7 +44,8 @@ SOURCES += \
     appunwindow.cpp \
     impwindow.cpp \
     compwindow.cpp \
-    lista.cpp
+    lista.cpp \
+    datievento.cpp
 
 
 HEADERS += \
@@ -67,7 +68,8 @@ HEADERS += \
     appunwindow.h \
     impwindow.h \
     compwindow.h \
-    lista.h
+    lista.h \
+    datievento.h
 
 
 FORMS +=

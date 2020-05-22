@@ -63,12 +63,54 @@ void MainWindow::addEventList(string text, int color){
 void MainWindow::updateList(){
     QDate selDate = static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
     clearList();
-    controller->updateList(selDate);
+    controller->updateList(selDate); //da trasformare in segnale se necessario
 }
 
 void MainWindow::clearList(){
     QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
     list->clear();
+}
+
+void MainWindow::showMessage(bool done, QString title, QString messagge)
+{
+    if(done)
+        QMessageBox::information(this, title, messagge);
+    else
+        QMessageBox::warning(this, title, messagge);
+}
+
+void MainWindow::initializeModifica(DatiEvento* e){
+    switch (e->type) {
+    case 0:
+        promW= new PromWindow(this, e->dataSelezionata,e);
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        promW->exec();
+        break;
+    case 1:
+        appunW= new AppunWindow(this, e->dataSelezionata,e);
+        connect(appunW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        appunW->exec();
+        break;
+    case 2:
+        compW= new CompWindow(this, e->dataSelezionata, e);
+        connect(compW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        compW->exec();
+        break;
+    case 3:
+        impW= new ImpWindow(this, e->dataSelezionata, e);
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        impW->exec();
+        break;
+    default:
+        break;
+    }
+}
+
+int MainWindow::getPos()
+{
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    return list->row(selected[0]);
 }
 
 
@@ -83,27 +125,57 @@ void MainWindow::showTime(){
 void MainWindow::inserisciEvento(int type)
 {
     QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+
     switch (type) {
     case 0:
-        promW= new PromWindow;
-        promW->show();
+        promW= new PromWindow(this, selDate);
+        connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        promW->exec();
         break;
     case 1:
-        appunW= new AppunWindow;
-        appunW->show();
+        appunW= new AppunWindow(this, selDate);
+        connect(appunW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        appunW->exec();
         break;
     case 2:
-        impW= new ImpWindow;
-        impW->show();
+        impW= new ImpWindow(this, selDate);
+        connect(impW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        impW->exec();
         break;
     case 3:
-        compW= new CompWindow;
-        compW->show();
+        compW= new CompWindow(this, selDate);
+        connect(compW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
+        compW->exec();
         break;
     default:
         break;
     }
 }
+
+void MainWindow::eliminaEvento(){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    if(!(selected.isEmpty())){
+        int pos = list->row(selected[0]);
+
+        QMessageBox::StandardButton conferma;
+        conferma = QMessageBox::question(this,"Conferma eliminazione", "Vuoi eliminare l'evento selezionato?", QMessageBox::Yes|QMessageBox::No);
+        if (conferma == QMessageBox::Yes) {
+            controller->eliminaEvento(pos); //da trasformare in segnale se necessario
+        }
+    }
+}
+
+void MainWindow::modificaEvento(){
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QList<QListWidgetItem*> selected = list->selectedItems();
+    if(!(selected.isEmpty())){
+        int pos = list->row(selected[0]);
+        controller->modificaEvento(pos); //da trasformare in segnale se necessario
+
+    }
+}
+
 
 void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
 
@@ -145,6 +217,9 @@ void MainWindow::addList(){
 
     QListWidget *list = new QListWidget(this);
     listLayout->addWidget(list);
+
+    connect(elimina,SIGNAL(clicked()),this,SLOT(eliminaEvento()));
+    connect(modifica,SIGNAL(clicked()),this,SLOT(modificaEvento()));
 }
 
 void MainWindow::addButtons(){
@@ -181,6 +256,7 @@ void MainWindow::addButtons(){
     QPushButton* esci = new QPushButton("Esci",this);
 
     connect(esci,SIGNAL(clicked()),this,SLOT(close()));
+    connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents()));
 
     menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
     menuLayout->addWidget(inserisci);

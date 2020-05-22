@@ -7,7 +7,7 @@ Promemoria::Promemoria(std::string s, Dataora di, std::string d, Color c)
 
 std::string Promemoria::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<"\n"<<getTitolo()<<" - "<<desc;
+    text<< std::setw(2) << std::setfill('0') << getDataInizio().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataInizio().getMinuti()<<"\n"<<getTitolo()<<" - "<<desc;
     return text.str();
 }
 
@@ -40,4 +40,4 @@ Promemoria *Promemoria::clone() const{
     return new Promemoria(*this);
 }
 
-Color Promemoria::colorePred = yellow;
+Color Promemoria::colorePred = red;

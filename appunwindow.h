@@ -12,22 +12,34 @@
 #include <QSpinBox>
 #include <QDialog>
 #include <QDialogButtonBox>
-#include <QTextEdit>
-#include <QMenuBar>
 #include <QPushButton>
 #include <QTimeEdit>
+#include <QColor>
+#include "datievento.h"
+#include <QMessageBox>
 
 class AppunWindow : public QDialog
 {
     Q_OBJECT
-
 public:
-    AppunWindow();
-
+    explicit AppunWindow(QWidget *parent, const QDate& selDate, DatiEvento* e = nullptr);
+    ~AppunWindow();
+public slots:
+    void creaEvento();
+signals:
+    void eventoInserito(DatiEvento*,bool);
 private:
-    void createFormGroupBox();
+    bool modifica;
+
+    QDate date;
+    QComboBox* colorChoise;
+    QLineEdit* title, * location;
+    QTimeEdit* setTimeBegin,* setTimeEnd;
     QGroupBox *formGroupBox;
     QDialogButtonBox *buttonBox;
+
+    void createFormGroupBox();
+    void setForm(DatiEvento* obj);
 };
 
 #endif // APPUNWINDOWS_H

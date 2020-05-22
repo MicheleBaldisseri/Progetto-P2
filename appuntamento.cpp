@@ -8,14 +8,16 @@ Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l,
 
 std::string Appuntamento::descrizioneMin() const{
     std::stringstream text;
-    text<<getDataInizio().getOrario()<<"-"<<getDataFine().getOrario()<<" Durata: ";
+    text<< std::setw(2) << std::setfill('0') << getDataInizio().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataInizio().getMinuti() <<" - ";
+    text<< std::setw(2) << std::setfill('0') << getDataFine().getOre() <<":"<< std::setw(2) << std::setfill('0') << getDataFine().getMinuti();
+    text<<"\n"<<getTitolo()<<" - Luogo: "<<getLuogo();
+    text<<"\nDurata: ";
     int ore = int(Dataora::secondsToHours(durata()));
     if(durata()%3600==0){ //ora intera
-        text<<ore<<" ora/e\n";
+        text<<ore<<" ora/e";
     }else{  //ora non intera
-        text<<ore<<" ora/e e "<<int(Dataora::secondsToMinutes(durata()-ore*3600))<<" minuti\n";
+        text<<ore<<" ora/e e "<<int(Dataora::secondsToMinutes(durata()-ore*3600))<<" minuti";
     }
-    text<<getTitolo()<<"\nLuogo: "<<getLuogo();
     return text.str();
 }
 

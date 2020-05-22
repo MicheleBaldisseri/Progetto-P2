@@ -20,6 +20,8 @@
 #include <QToolButton>
 #include <QMenu>
 #include <QListWidget>
+#include <QMessageBox>
+#include "datievento.h"
 using std::string;
 
 class Controller;
@@ -34,11 +36,14 @@ public:
     void addEventList(string text,int color);
     void updateList();
     void clearList();
-
+    void showMessage(bool done, QString title, QString messagge);
+    void initializeModifica(DatiEvento* e);
+    int getPos();
 public slots:
     void showTime();
     void inserisciEvento(int type);
-
+    void eliminaEvento();
+    void modificaEvento();
 private:
     Controller* controller;
 

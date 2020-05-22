@@ -2,6 +2,7 @@
 #define EVENTO_H
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include "dataora.h"
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
