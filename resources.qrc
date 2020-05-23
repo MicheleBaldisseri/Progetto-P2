@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>style.css</file>
+        <file>icone/delete.svg</file>
+        <file>icone/edit.svg</file>
+        <file>icone/back-right.svg</file>
+        <file>icone/exit.svg</file>
+        <file>icone/file.svg</file>
+        <file>icone/save.svg</file>
     </qresource>
 </RCC>

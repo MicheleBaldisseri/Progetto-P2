@@ -209,8 +209,9 @@ void MainWindow::addMainItems(){
 void MainWindow::addList(){
     listLayout->addLayout(buttonListLayout);
 
-    QPushButton* elimina = new QPushButton("Elimina",this); //tasto elimina
-    QPushButton* modifica = new QPushButton("Modifica",this); //tasto modifica
+
+    QPushButton* elimina = new QPushButton(QIcon(":icone/delete.svg"),"Elimina",this); //tasto elimina
+    QPushButton* modifica = new QPushButton(QIcon(":icone/edit.svg"),"Modifica",this); //tasto modifica
 
     buttonListLayout->addWidget(elimina);
     buttonListLayout->addWidget(modifica);
@@ -250,9 +251,8 @@ void MainWindow::addButtons(){
     connect(impegno, &QAction::triggered, this, [this]{ inserisciEvento(2);});
     connect(compleanno, &QAction::triggered, this, [this]{ inserisciEvento(3);});
 
-
-    QPushButton* salva = new QPushButton("Salva eventi",this); //tasto salva eventi
-    QPushButton* esci = new QPushButton("Esci",this); //tasto per uscire
+    QPushButton* salva = new QPushButton(QIcon(":icone/save.svg"),"Salva eventi",this); //tasto salva eventi
+    QPushButton* esci = new QPushButton(QIcon(":icone/exit.svg"),"Esci",this); //tasto per uscire
 
     connect(esci,SIGNAL(clicked()),this,SLOT(close())); //connect alla chiusura
     connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents())); //connect all'export
