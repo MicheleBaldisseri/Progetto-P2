@@ -56,13 +56,12 @@ void Model::showEvent(const Data & d)
 
 bool Model::esporta()
 {
-    /*Esporta lista(l);//crea una lista di classe Esporta passandogli la lista da cui stampare i dati
+    Esporta lista(l);//crea una lista di classe Esporta passandogli la lista da cui stampare i dati
         if(lista.esport())//se esport va a buon fine restituisce vero
             return true;
         else
-            return false;*/
-    Lista<SmartEvento> d = l;
-    return true;
+            return false;
+
 }
 
 bool Model::importa()
@@ -72,7 +71,6 @@ bool Model::importa()
         return true;
     else
         return false;
-    return true;
 }
 
 vector<Lista<SmartEvento>::const_iterator> Model::getSelezionati() const{

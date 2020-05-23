@@ -5,15 +5,10 @@ typename Lista<T>::nodo* Lista<T>::copy(Lista<T>::nodo *a, Lista<T>::nodo *&b){
     if(!a) return 0;
     if(!a->next){
         b= new nodo(a->info, nullptr);
-        std::cout<<"Indirizzo Originale   "<<(a->info).operator->()<<"   Valore Originale   " <<(a->info).operator->()->getTitolo()<<"\n";
-        std::cout<<"Indirizzo Nuovo   "<<(b->info).operator->()<<"   Valore Nuovo   " <<(b->info).operator->()->getTitolo()<<"\n";
         return b;
     }
     else{
-        nodo* c = new nodo(a->info, copy(a->next,b));
-        std::cout<<"Indirizzo Originale   "<<(a->info).operator->()<<"   Valore Originale   " <<(a->info).operator->()->getTitolo()<<"\n";
-        std::cout<<"Indirizzo Nuovo   "<<(c->info).operator->()<<"   Valore Nuovo   " <<(c->info).operator->()->getTitolo()<<"\n";
-        return c;
+        return new nodo(a->info, copy(a->next,b));
     }
 }
 
