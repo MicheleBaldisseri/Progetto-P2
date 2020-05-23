@@ -1,12 +1,10 @@
 #ifndef IMPORTA_H
 #define IMPORTA_H
 #include <QXmlStreamReader>
-#include "appuntamento.h"
-#include "impegno.h"
-#include "compleanno.h"
-#include "promemoria.h"
-#include "lista.h"
+#include <QFile>
 #include "model.h"
+
+class Model;
 
 class Importa
 {

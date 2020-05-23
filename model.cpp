@@ -1,12 +1,4 @@
-#include <iostream>
 #include "model.h"
-#include "appuntamento.h"
-#include "promemoria.h"
-#include "lista.cpp"
-#include "impegno.h"
-#include "compleanno.h"
-#include "esporta.h"
-#include "importa.h"
 
 bool Model::insert(Evento *e)
 {

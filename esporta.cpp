@@ -1,5 +1,4 @@
 #include "esporta.h"
-#include "evento.h"
 
 Esporta::Esporta(Lista<Evento *> &eventi):lista("lista.xml"),l(eventi){}
 

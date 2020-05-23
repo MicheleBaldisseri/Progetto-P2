@@ -3,11 +3,7 @@
 #include <iostream>
 #include <QFile>
 #include <QXmlStreamWriter>
-#include "appuntamento.h"
-#include "impegno.h"
-#include "compleanno.h"
-#include "promemoria.h"
-#include "lista.h"
+#include "model.h"
 
 class Esporta
 {

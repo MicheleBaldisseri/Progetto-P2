@@ -1,6 +1,5 @@
 #include "importa.h"
 
-#include <QFile>
 bool Importa::import(Model& m)
 {
     QFile lista("lista.xml");

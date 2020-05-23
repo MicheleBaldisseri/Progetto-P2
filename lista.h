@@ -2,7 +2,6 @@
 #define LISTA_H
 #include <iostream>
 
-
 using namespace std;
 template <class T>
 class Lista{
@@ -48,6 +47,6 @@ public:
         const_iterator end() const;
     };
 
-
+#include "lista.cpp"
 
 #endif // LISTA_H

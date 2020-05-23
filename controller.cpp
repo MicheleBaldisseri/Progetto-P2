@@ -6,6 +6,7 @@ Controller::Controller(Model* m, QObject* parent)
 void Controller::setView(MainWindow* v) { view = v; }
 
 void Controller::updateList(const QDate& date){
+
     //pulisco la lista della vista
     view->clearList();
 

@@ -2,8 +2,16 @@
 #define MODEL_H
 #include "evento.h"
 #include "lista.h"
+#include "appuntamento.h"
+#include "promemoria.h"
+#include "impegno.h"
+#include "compleanno.h"
+#include "esporta.h"
+#include "importa.h"
 #include <vector>
 #include <QDebug>
+#include <iostream>
+
 class Model
 {
 private:
