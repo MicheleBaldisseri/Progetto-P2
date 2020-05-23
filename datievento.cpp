@@ -27,13 +27,14 @@ DatiEvento *DatiEvento::fromStdString(std::string s){
         obj->contenuto=tokens[9];
     }else if(tokens[0]=="Appuntamento"){
         obj->type=1;
-        //TODO
+        obj->fine=QTime(std::stoi(tokens[12]),std::stoi(tokens[13]),std::stoi(tokens[14]));
+        obj->luogo=tokens[15];
     }else if(tokens[0]=="Compleanno"){
         obj->type=2;
-        //TODO
+        obj->annoNascita=std::stoi(tokens[11]);
     }else if(tokens[0]=="Impegno"){
         obj->type=3;
-        //TODO
+        obj->fine=QTime(std::stoi(tokens[12]),std::stoi(tokens[13]),std::stoi(tokens[14]));
     }
 
     return obj;
