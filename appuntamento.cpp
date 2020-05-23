@@ -3,8 +3,12 @@
 
 Appuntamento::Appuntamento() : EventoDurata(), luogo(""){}
 
-Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c)
-    : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){}
+Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c) : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){
+    std::size_t pos = 0;
+    while ((pos = luogo.find('|',pos)) != std::string::npos) {
+         luogo.replace(pos, 1, " ");
+    }
+}
 
 std::string Appuntamento::descrizioneMin() const{
     std::stringstream text;
@@ -24,9 +28,9 @@ std::string Appuntamento::descrizioneMin() const{
 std::string Appuntamento::descrizioneFull() const{
     std::stringstream text;
     text<<"Appuntamento"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
-    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|"<<getColore()<<"|";
     text<<getDataFine().getGiorno()<<"|"<<getDataFine().getMese()<<"|"<<getDataFine().getAnno()<<"|";
-    text<<getDataFine().getOre()<<"|"<<getDataFine().getMinuti()<<"|"<<getDataFine().getSecondi()<<"|"<<getLuogo()<<"|"<<getColore();
+    text<<getDataFine().getOre()<<"|"<<getDataFine().getMinuti()<<"|"<<getDataFine().getSecondi()<<"|"<<getLuogo();
     return text.str();
 }
 

@@ -4,7 +4,7 @@ EventoDurata::EventoDurata() : Evento(), dataFine(){}
 
 EventoDurata::EventoDurata(std::string s, Dataora di, Dataora df, Color c) : Evento(s,di,c), dataFine(df){
     if(dataFine<di){
-        throw new std::logic_error("DataFine < DataInizio");
+        dataFine=di;
     }
 }
 

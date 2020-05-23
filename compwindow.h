@@ -14,6 +14,7 @@
 #include <QColor>
 #include "datievento.h"
 #include <QSpinBox>
+#include <QMessageBox>
 
 class CompWindow : public QDialog
 {

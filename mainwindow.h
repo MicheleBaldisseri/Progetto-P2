@@ -34,16 +34,25 @@ public:
     MainWindow(Controller* controller, QWidget *parent = nullptr);
     ~MainWindow()=default;
 
+    //aggiunge un evento alla lista della vista
     void addEventList(string text,int color);
+    //aggiorna la lista della vista
     void updateList();
+    //pulisce la lista della vista
     void clearList();
+    //mostra un messaggio
     void showMessage(bool done, QString title, QString messagge);
+    //richiama le finestre di inserimento, ma con i dati dell'evento per modificare
     void initializeModifica(DatiEvento* e);
     int getPos();
 public slots:
+    //mostra la data e ora (richiamato da un timer)
     void showTime();
+    //richiama le finestre di inserimento in base al tasto usato
     void inserisciEvento(int type);
+    //prende la posizione dell'evento selezionato e lo passa al controller per eliminarlo
     void eliminaEvento();
+    //prende la posizione dell'evento selezionato e lo passa al controller per modificarlo
     void modificaEvento();
 private:
     Controller* controller;

@@ -2,8 +2,13 @@
 
 Promemoria::Promemoria():Evento(), desc() {}
 
-Promemoria::Promemoria(std::string s, Dataora di, std::string d, Color c)
-    : Evento(s,di,c), desc(d) {}
+Promemoria::Promemoria(std::string s, Dataora di, std::string d, Color c) : Evento(s,di,c), desc(d) {
+
+    std::size_t pos = 0;
+    while ((pos = desc.find('|',pos)) != std::string::npos) {
+         desc.replace(pos, 1, " ");
+    }
+}
 
 std::string Promemoria::descrizioneMin() const{
     std::stringstream text;
@@ -14,8 +19,8 @@ std::string Promemoria::descrizioneMin() const{
 std::string Promemoria::descrizioneFull() const{
     std::stringstream text;
     text<<"Promemoria"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
-    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
-    text<<getDesc()<<"|"<<getColore();
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|"<<getColore()<<"|";
+    text<<getDesc();
     return text.str();
 }
 
