@@ -11,11 +11,12 @@
 #include <vector>
 #include <QDebug>
 #include <iostream>
+#include "smartevento.h"
 
 class Model
 {
 private:
-    Lista<Evento*> l;
+    Lista<SmartEvento> l;
     vector<Lista<Evento*>::const_iterator> selezionati;
 public:
     bool modify(Lista<Evento*>::const_iterator,Evento*);//cerca evento, controlla se ci sono campi diversi e lo modifico

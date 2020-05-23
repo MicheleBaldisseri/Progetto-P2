@@ -45,7 +45,8 @@ SOURCES += \
     impwindow.cpp \
     compwindow.cpp \
     lista.cpp \
-    datievento.cpp
+    datievento.cpp \
+    smartevento.cpp
 
 
 HEADERS += \
@@ -69,7 +70,8 @@ HEADERS += \
     impwindow.h \
     compwindow.h \
     lista.h \
-    datievento.h
+    datievento.h \
+    smartevento.h
 
 
 FORMS +=

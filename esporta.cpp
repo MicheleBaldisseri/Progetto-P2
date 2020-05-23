@@ -1,6 +1,6 @@
 #include "esporta.h"
 
-Esporta::Esporta(Lista<Evento *> &eventi):lista("lista.xml"),l(eventi){}
+Esporta::Esporta(Lista<SmartEvento> &eventi):lista("lista.xml"),l(eventi){}
 
 bool Esporta::esport()
 {
@@ -14,20 +14,20 @@ bool Esporta::esport()
         stream.setAutoFormatting(true);
         stream.writeStartDocument();
         stream.writeStartElement("Evento");
-        for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-             Appuntamento*a=dynamic_cast<Appuntamento*>(*cit);
+        for(Lista<SmartEvento>::const_iterator cit=l.begin(); cit!=l.end();++cit){
+             Appuntamento*a=dynamic_cast<Appuntamento*>(**cit);
              if(a)
                  appToXML(stream,a);
              else{
-                 Impegno*i=dynamic_cast<Impegno*>(*cit);
+                 Impegno*i=dynamic_cast<Impegno*>(**cit);
                  if(i)
                      impToXML(stream,i);
                  else{
-                     Promemoria*p=dynamic_cast<Promemoria*>(*cit);
+                     Promemoria*p=dynamic_cast<Promemoria*>(**cit);
                      if(p)
                          promToXML(stream,p);
                      else{
-                        Compleanno*c=dynamic_cast<Compleanno*>(*cit);
+                        Compleanno*c=dynamic_cast<Compleanno*>(**cit);
                         compToXML(stream,c);
                      }
                  }
