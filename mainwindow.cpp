@@ -209,8 +209,8 @@ void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo
 void MainWindow::addList(){
     listLayout->addLayout(buttonListLayout);
 
-    QPushButton* elimina = new QPushButton("Elimina",this);
-    QPushButton* modifica = new QPushButton("Modifica",this);
+    QPushButton* elimina = new QPushButton(QIcon(":icone/delete.svg"),"Elimina",this);
+    QPushButton* modifica = new QPushButton(QIcon(":icone/edit.svg"),"Modifica",this);
 
     buttonListLayout->addWidget(elimina);
     buttonListLayout->addWidget(modifica);
@@ -252,8 +252,8 @@ void MainWindow::addButtons(){
     connect(compleanno, &QAction::triggered, this, [this]{ inserisciEvento(3);});
 
 
-    QPushButton* salva = new QPushButton("Salva eventi",this);
-    QPushButton* esci = new QPushButton("Esci",this);
+    QPushButton* salva = new QPushButton(QIcon(":icone/save.svg"),"Salva eventi",this);
+    QPushButton* esci = new QPushButton(QIcon(":icone/exit.svg"),"Esci",this);
 
     connect(esci,SIGNAL(clicked()),this,SLOT(close()));
     connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents()));

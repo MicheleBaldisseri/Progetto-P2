@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QDateTime>
 #include <QFile>
+#include <QIcon>
 #include <QTimer>
 #include <promwindow.h>
 #include <appunwindow.h>
