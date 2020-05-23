@@ -17,16 +17,16 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) : QWidget(parent), contro
 
     setLayout(mainLayout);
 
-    QTimer *timer = new QTimer(this);
+    QTimer *timer = new QTimer(this); //timer per mostrare data e ora in tempo reale
     connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
     timer->start(1000);
 }
 
 void MainWindow::addEventList(string text, int color){
-    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
-    QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(text),list);
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget()); //ricava la lista della vista
+    QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(text),list); //crea l'item
     QColor c = QColor();
-    switch(color){
+    switch(color){ //trasforma int in QColor
     case 0://white
         c=QColor(255,255,255,20);
         break;
@@ -56,18 +56,18 @@ void MainWindow::addEventList(string text, int color){
         break;
     }
 
-    item->setBackgroundColor(c);
-    list->addItem(item);
+    item->setBackgroundColor(c); //setta il colore
+    list->addItem(item); //aggiunge l'item
 }
 
 void MainWindow::updateList(){
-    QDate selDate = static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
-    clearList();
-    controller->updateList(selDate); //da trasformare in segnale se necessario
+    QDate selDate = static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate(); //ricava la data selezionata
+    clearList(); //pulisce la lista
+    controller->updateList(selDate); //passa la data al controller
 }
 
 void MainWindow::clearList(){
-    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget()); //ricava la lsita
     list->clear();
 }
 
@@ -80,7 +80,7 @@ void MainWindow::showMessage(bool done, QString title, QString messagge)
 }
 
 void MainWindow::initializeModifica(DatiEvento* e){
-    switch (e->type) {
+    switch (e->type) {//chiama la rispettiva finestra in base al tipo
     case 0:
         promW= new PromWindow(this, e->dataSelezionata,e);
         connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
@@ -108,25 +108,25 @@ void MainWindow::initializeModifica(DatiEvento* e){
 
 int MainWindow::getPos()
 {
-    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
-    QList<QListWidgetItem*> selected = list->selectedItems();
-    return list->row(selected[0]);
+    QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget()); //ricava la lista
+    QList<QListWidgetItem*> selected = list->selectedItems(); //prende l'item selezionato
+    return list->row(selected[0]); //ritorna la posizione
 }
 
 
 
 void MainWindow::showTime(){
-    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
-    s[3] = s.at(3).toTitleCase();
-    static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(s);
+    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss"); //trasforma QDateTime in QString per la label
+    s[3] = s.at(3).toTitleCase(); //nome del mese con la lettera iniziale in maiuscolo, Qt lo traduce tutto in minuscolo
+    static_cast<QLabel*>(mainLayout->itemAt(0)->widget())->setText(s); //setta la stringa
 
 }
 
 void MainWindow::inserisciEvento(int type)
 {
-    QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate();
+    QDate selDate =  static_cast<QCalendarWidget*>(itemLayout->itemAt(1)->widget())->selectedDate(); //ricava la data selezionata
 
-    switch (type) {
+    switch (type) { //chiama la rispettiva finestra in base al tasto cliccato
     case 0:
         promW= new PromWindow(this, selDate);
         connect(promW,SIGNAL(eventoInserito(DatiEvento*,bool)),controller,SLOT(dataFromWindow(DatiEvento*,bool)));
@@ -155,13 +155,13 @@ void MainWindow::inserisciEvento(int type)
 void MainWindow::eliminaEvento(){
     QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
     QList<QListWidgetItem*> selected = list->selectedItems();
-    if(!(selected.isEmpty())){
+    if(!(selected.isEmpty())){ //controlla che esiste un elemento selezionato
         int pos = list->row(selected[0]);
 
         QMessageBox::StandardButton conferma;
-        conferma = QMessageBox::question(this,"Conferma eliminazione", "Vuoi eliminare l'evento selezionato?", QMessageBox::Yes|QMessageBox::No);
+        conferma = QMessageBox::question(this,"Conferma eliminazione", "Vuoi eliminare l'evento selezionato?", QMessageBox::Yes|QMessageBox::No); //finestra di conferma
         if (conferma == QMessageBox::Yes) {
-            controller->eliminaEvento(pos); //da trasformare in segnale se necessario
+            controller->eliminaEvento(pos); //richiama il controller per eliminare l'evento
         }
     }
 }
@@ -169,74 +169,73 @@ void MainWindow::eliminaEvento(){
 void MainWindow::modificaEvento(){
     QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget());
     QList<QListWidgetItem*> selected = list->selectedItems();
-    if(!(selected.isEmpty())){
+    if(!(selected.isEmpty())){ //controlla che esiste un elemento selezionato
         int pos = list->row(selected[0]);
-        controller->modificaEvento(pos); //da trasformare in segnale se necessario
+        controller->modificaEvento(pos); //richiama il controller per inizializzare la modifica dell'evento
 
     }
 }
 
 
-void MainWindow::addMainItems(){    //ogni widget puo essere spostato come campo privato, se deve essere usato da altri metodi
+void MainWindow::addMainItems(){
 
-    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss");
+    QString s = QDateTime::currentDateTime().toString("dd MMMM yyyy hh:mm:ss"); //data e ora
     s[3] = s.at(3).toTitleCase();
     QLabel* date = new QLabel(s,this);
     date->setObjectName("date");
     date->setAlignment(Qt::AlignCenter);
     mainLayout->addWidget(date);
 
-    QFrame *line = new QFrame();
+    QFrame *line = new QFrame(); //linea spaziatrice
     line->setFrameShape(QFrame::HLine);
     line->setObjectName("line");
     mainLayout->addWidget(line);
 
     mainLayout->addLayout(itemLayout);
 
-    itemLayout->addLayout(menuLayout);
+    itemLayout->addLayout(menuLayout); //layout tasti a sinistra
 
-    QCalendarWidget* calendar = new QCalendarWidget(this);
+    QCalendarWidget* calendar = new QCalendarWidget(this); //calendario
     itemLayout->addWidget(calendar);
     calendar->setGridVisible(true);
     calendar->setMinimumWidth(380);
     calendar->setMaximumHeight(320);
 
 
-    connect(calendar,SIGNAL(clicked(QDate)),controller,SLOT(updateList(QDate)));
-    itemLayout->addLayout(listLayout);
+    connect(calendar,SIGNAL(clicked(QDate)),controller,SLOT(updateList(QDate))); //connetto la selezione di una data all'aggiornamento della lista
+    itemLayout->addLayout(listLayout); //layout lista
 }
 
 void MainWindow::addList(){
     listLayout->addLayout(buttonListLayout);
 
-    QPushButton* elimina = new QPushButton("Elimina",this);
-    QPushButton* modifica = new QPushButton("Modifica",this);
+    QPushButton* elimina = new QPushButton("Elimina",this); //tasto elimina
+    QPushButton* modifica = new QPushButton("Modifica",this); //tasto modifica
 
     buttonListLayout->addWidget(elimina);
     buttonListLayout->addWidget(modifica);
 
-    QListWidget *list = new QListWidget(this);
+    QListWidget *list = new QListWidget(this); //lista
     listLayout->addWidget(list);
 
-    connect(elimina,SIGNAL(clicked()),this,SLOT(eliminaEvento()));
-    connect(modifica,SIGNAL(clicked()),this,SLOT(modificaEvento()));
+    connect(elimina,SIGNAL(clicked()),this,SLOT(eliminaEvento())); //connetto elimina
+    connect(modifica,SIGNAL(clicked()),this,SLOT(modificaEvento())); //connetto modifica
 }
 
 void MainWindow::addButtons(){
 
-    //QPushButton* inserisci = new QPushButton("Inserisci nuovo evento");
-    QToolButton* inserisci = new QToolButton(this);
+    QToolButton* inserisci = new QToolButton(this); //toolbutton inserisci nuovo evento
     inserisci->setPopupMode(QToolButton::InstantPopup);
     inserisci->setObjectName("inserisci");
     inserisci->setText("Inserisci nuovo evento   ");
     inserisci->setFixedWidth(180);
 
 
-    QMenu* menu = new QMenu(inserisci);
+    QMenu* menu = new QMenu(inserisci); //menu a tendina di inserisci evento
     inserisci->setMenu(menu);
     menu->setFixedWidth(180);
 
-    QAction* promemoria = new QAction("Promemoria",menu);
+    QAction* promemoria = new QAction("Promemoria",menu); //tasti del menu a tendina
     QAction* appuntamento = new QAction("Appuntamento",menu);
     QAction* impegno = new QAction("Impegno",menu);
     QAction* compleanno = new QAction("Compleanno",menu);
@@ -246,25 +245,23 @@ void MainWindow::addButtons(){
     menu->addAction(impegno);
     menu->addAction(compleanno);
 
-    connect(promemoria, &QAction::triggered, this, [this]{ inserisciEvento(0);});
+    connect(promemoria, &QAction::triggered, this, [this]{ inserisciEvento(0);}); //connect (con formato diverso, per passare il tipo di tasto cliccato) all'inserimento
     connect(appuntamento, &QAction::triggered, this, [this]{ inserisciEvento(1);});
     connect(impegno, &QAction::triggered, this, [this]{ inserisciEvento(2);});
     connect(compleanno, &QAction::triggered, this, [this]{ inserisciEvento(3);});
 
 
-    QPushButton* salva = new QPushButton("Salva eventi",this);
-    QPushButton* esci = new QPushButton("Esci",this);
+    QPushButton* salva = new QPushButton("Salva eventi",this); //tasto salva eventi
+    QPushButton* esci = new QPushButton("Esci",this); //tasto per uscire
 
-    connect(esci,SIGNAL(clicked()),this,SLOT(close()));
-    connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents()));
+    connect(esci,SIGNAL(clicked()),this,SLOT(close())); //connect alla chiusura
+    connect(salva,SIGNAL(clicked()),controller,SLOT(exportEvents())); //connect all'export
 
-    menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
+    menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding)); //spacerItem per migliore spaziatura
     menuLayout->addWidget(inserisci);
     menuLayout->addWidget(salva);
     menuLayout->addWidget(esci);
-    menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding));
-
-    //menu->setFont(QFont("AdobeHeitiStd-Regular",30,QFont::Bold));
+    menuLayout->addSpacerItem(new QSpacerItem(180,20,QSizePolicy::Minimum,QSizePolicy::Expanding)); //spacerItem per migliore spaziatura
 
     menuLayout->setAlignment(inserisci,Qt::AlignTop);
     menuLayout->setAlignment(salva,Qt::AlignTop);
@@ -273,16 +270,16 @@ void MainWindow::addButtons(){
 }
 
 void MainWindow::setWindowStyle(){
-    setWindowTitle(tr("Agenda"));
+    setWindowTitle(tr("Agenda")); //titolo finestra
 
-    mainLayout->setContentsMargins(20,15,20,20);
+    mainLayout->setContentsMargins(20,15,20,20); //vari spacing e dimensioni
     mainLayout->setSpacing(10);
     setGeometry(200,200,900,350);
     itemLayout->setSpacing(35);
     itemLayout->setContentsMargins(5,0,0,0);
     listLayout->setSpacing(10);
 
-    QFile file(":/style.css");
+    QFile file(":/style.css"); //file css
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
 

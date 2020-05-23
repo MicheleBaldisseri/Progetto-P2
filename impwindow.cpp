@@ -51,7 +51,7 @@ void ImpWindow::creaEvento()
     //controllo sul range di orario inserito
     if(obj->fine < obj->inizio)
         QMessageBox::warning(this,"Input non valido","Errore: l'orario d'inizio non può essere inferiore a quello finale.");
-    else if(obj->titolo.find('|')){
+    else if(obj->titolo.find('|')!= std::string::npos){
         QMessageBox::warning(this,"Input non valido","Impossibile usare il carattere speciale '|'");
     }else
         emit eventoInserito(obj,modifica);

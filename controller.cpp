@@ -6,12 +6,17 @@ Controller::Controller(Model* m, QObject* parent)
 void Controller::setView(MainWindow* v) { view = v; }
 
 void Controller::updateList(const QDate& date){
+    //pulisco la lista della vista
     view->clearList();
 
+    //ricavo la data selezionata
     Data d = Data(date.day(),date.month(),date.year());
-    model->showEvent(d);
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
 
+    //riempio la lista secondaria del modello con eventi che hanno la stessa data
+    model->showEvent(d);
+
+    //passo gli eventi alla vista ad uno ad uno, in modo da mostrarli
+    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
     for(unsigned int i=0;i<v.size();i++){
         view->addEventList((*(v[i]))->descrizioneMin(),(*(v[i]))->getColore());
     }
@@ -144,8 +149,8 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 }
 
 void Controller::eliminaEvento(const int &pos){
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
-    bool done=model->erase((*(v[pos])));
+    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
+    bool done=model->erase((*(v[pos]))); //prende l'evento selezionato e lo elimina
     if(done){
         view->showMessage(done,"Eliminazione", "Evento eliminato con successo!");
     }else{
@@ -155,10 +160,10 @@ void Controller::eliminaEvento(const int &pos){
 }
 
 void Controller::modificaEvento(const int &pos){
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
+    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
     Evento* e = (*(v[pos]))->clone();
 
-    DatiEvento* obj = DatiEvento::fromStdString(e->descrizioneFull());
+    DatiEvento* obj = DatiEvento::fromStdString(e->descrizioneFull()); //trasforma l'evento in un DatiEvento per passare i dati alle finestre
 
     view->initializeModifica(obj);
 }

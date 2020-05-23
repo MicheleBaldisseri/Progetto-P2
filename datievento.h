@@ -13,13 +13,13 @@ class DatiEvento
 {
 public:
     std::string titolo, luogo, contenuto;
-    //std::vector<QDate> ricorrenze;
     int type;//0=promemoria,1=appuntamento,2=compleanno,3=impegno
     QDate dataSelezionata;
     QTime inizio, fine;
     DatiEvento();
     int ogni, tipo, per, colore, annoNascita;
 
+    //trasforma una stringa in un oggetto di DatiEvento, evita il dynamic_cast in modificaEvento nel controller
     static DatiEvento *fromStdString(std::string s);
 };
 

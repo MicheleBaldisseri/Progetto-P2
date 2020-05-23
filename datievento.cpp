@@ -10,12 +10,9 @@ DatiEvento *DatiEvento::fromStdString(std::string s){
     std::stringstream check(s);
     std::string tok;
 
-    while(std::getline(check,tok,'|')){
+    while(std::getline(check,tok,'|')){ //divide la stringa nei vari campi dati
         tokens.push_back(tok);
     }
-
-    /*for(int i = 0; i < tokens.size(); i++)
-        std::cout << tokens[i] << '\n';*/
 
     obj->titolo=tokens[1];
     obj->dataSelezionata=QDate(std::stoi(tokens[4]),std::stoi(tokens[3]),std::stoi(tokens[2]));
