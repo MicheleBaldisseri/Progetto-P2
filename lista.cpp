@@ -4,7 +4,7 @@ template<class T>
 typename Lista<T>::nodo* Lista<T>::copy(Lista<T>::nodo *a, Lista<T>::nodo *&b){
     if(!a) return 0;
     if(!a->next){
-        b=a;
+        b= new nodo(a->info, nullptr);
         return a;
     }
     else return new nodo(a->info, copy(a->next,b));

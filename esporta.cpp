@@ -15,19 +15,19 @@ bool Esporta::esport()
         stream.writeStartDocument();
         stream.writeStartElement("Evento");
         for(Lista<SmartEvento>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-             Appuntamento*a=dynamic_cast<Appuntamento*>(**cit);
+             Appuntamento*a=dynamic_cast<Appuntamento*>((*cit).operator->());
              if(a)
                  appToXML(stream,a);
              else{
-                 Impegno*i=dynamic_cast<Impegno*>(**cit);
+                 Impegno*i=dynamic_cast<Impegno*>((*cit).operator->());
                  if(i)
                      impToXML(stream,i);
                  else{
-                     Promemoria*p=dynamic_cast<Promemoria*>(**cit);
+                     Promemoria*p=dynamic_cast<Promemoria*>((*cit).operator->());
                      if(p)
                          promToXML(stream,p);
                      else{
-                        Compleanno*c=dynamic_cast<Compleanno*>(**cit);
+                        Compleanno*c=dynamic_cast<Compleanno*>((*cit).operator->());
                         compToXML(stream,c);
                      }
                  }
@@ -38,7 +38,6 @@ bool Esporta::esport()
         lista.close();
         return true;
     }
-
 }
 void Esporta::appToXML(QXmlStreamWriter &stream,Appuntamento *a){
     stream.writeStartElement("Appuntamento");//apertura tag appuntamento

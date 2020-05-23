@@ -13,6 +13,12 @@ SmartEvento &SmartEvento::operator=(const SmartEvento &s)
     return *this;
 }
 
-Evento* SmartEvento::operator*() const{return ptr;}
+Evento& SmartEvento::operator*() const{return *ptr;}
+
+Evento* SmartEvento::operator->() const{return ptr;}
+
+bool SmartEvento::operator==(const SmartEvento& x) const {
+    return ptr == x.ptr;
+}
 
 SmartEvento::~SmartEvento(){delete ptr;}
