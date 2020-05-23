@@ -43,7 +43,10 @@ void CompWindow::creaEvento()
     obj->dataSelezionata=date;
     obj->annoNascita=setYear->value();
 
-    emit eventoInserito(obj,modifica);
+    if(obj->titolo.find('|')){
+            QMessageBox::warning(this,"Input non valido","Impossibile usare il carattere speciale '|'");
+    }else
+        emit eventoInserito(obj,modifica);
 }
 
 void CompWindow::addCompItems()

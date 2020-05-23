@@ -3,8 +3,12 @@
 
 Appuntamento::Appuntamento() : EventoDurata(), luogo(""){}
 
-Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c)
-    : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){}
+Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c) : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){
+    std::size_t pos = 0;
+    while ((pos = luogo.find('|',pos)) != std::string::npos) {
+         luogo.replace(pos, 1, " ");
+    }
+}
 
 std::string Appuntamento::descrizioneMin() const{
     std::stringstream text;

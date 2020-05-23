@@ -48,9 +48,11 @@ void PromWindow::creaEvento()
     obj->type=0;//0=promemoria
 
     //controllo per evitare di inserire promemoria in date passate
-    if(date < QDate::currentDate())
+    if(date < QDate::currentDate() )
         QMessageBox::warning(this,"Input non valido","Impossibile inserire un promemoria in una data precedente a quella corrente.");
-    else
+    else if(obj->titolo.find('|') || obj->contenuto.find('|')){
+        QMessageBox::warning(this,"Input non valido","Impossibile usare il carattere speciale '|'");
+    }else
         emit eventoInserito(obj,modifica);
 }
 
