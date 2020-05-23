@@ -5,6 +5,9 @@
 #include <QTime>
 #include <QDateTime>
 #include <vector>
+#include <sstream>
+#include <iostream>
+
 
 class DatiEvento
 {
@@ -16,6 +19,8 @@ public:
     QTime inizio, fine;
     DatiEvento();
     int ogni, tipo, per, colore, annoNascita;
+
+    static DatiEvento *fromStdString(std::string s);
 };
 
 #endif // DATIEVENTO_H

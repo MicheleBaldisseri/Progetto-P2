@@ -19,8 +19,8 @@ std::string Compleanno::descrizioneMin() const{
 std::string Compleanno::descrizioneFull() const{
     std::stringstream text;
     text<<"Compleanno"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
-    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|";
-    text<<getDataNascita().getGiorno()<<"|"<<getDataNascita().getMese()<<"|"<<getDataNascita().getAnno()<<"|"<<getColore();
+    text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|"<<getColore()<<"|";
+    text<<getDataNascita().getGiorno()<<"|"<<getDataNascita().getMese()<<"|"<<getDataNascita().getAnno();
     for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
         text<<"|"<<d.getGiorno()<<"|"<<d.getMese()<<"|"<<d.getAnno();
     }
