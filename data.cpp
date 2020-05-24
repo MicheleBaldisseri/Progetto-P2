@@ -19,7 +19,7 @@ std::string Data::getData() const{
 }
 
 unsigned int Data::getGiorniMese() const{
-    int gg;
+    int gg=0;
     switch(mese){
         case(1): case(3): case(5): case(7): case(8): case(10): case(12):
             gg=31;

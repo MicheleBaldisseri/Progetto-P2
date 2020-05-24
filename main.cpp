@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-
+    a.setWindowIcon(QIcon(":icone/calendar.svg"));
     Model m;
     Controller c(&m);
     MainWindow w(&c);
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     m.importa();
 
     w.updateList();
+
     return a.exec();
 
 return 0;

@@ -10,7 +10,7 @@ bool Importa::import(Model& m)
         }
         else{
             QXmlStreamReader reader(&lista);
-            Evento*e;
+            Evento*e=nullptr;
             if (reader.readNextStartElement()){
                 if(reader.name()=="Evento"){//reader accede al tag Evento
                     while(reader.readNextStartElement()){//ciclo che scorre i tag all'interno di Evento
@@ -54,7 +54,7 @@ Promemoria *Importa::xmlToProm(QXmlStreamReader &stream)
 {
     string tit,desc;//variabili dove salvare il testo letto
     Dataora dat;
-    int col;
+    int col=0;
     while(stream.readNextStartElement()){//scorre tutti i tag all'interno di Promemoria
         if(stream.name()=="Titolo") //Per ogni tag viene assegnato il testo trovato alla variabile corrispondente
             tit=stream.readElementText().toStdString();//QString convertita in std::string
@@ -79,7 +79,7 @@ Impegno *Importa::xmlToImp(QXmlStreamReader &stream)
 {
     string tit;
     Dataora in,fi;
-    int col;
+    int col=0;
     vector<Data> v;
     while(stream.readNextStartElement()){
         if(stream.name()=="Titolo")
@@ -115,7 +115,7 @@ Compleanno *Importa::xmlToComp(QXmlStreamReader &stream)
     string tit;
     Dataora in;
     Data nas;
-    int col;
+    int col=0;
     while(stream.readNextStartElement()){
         if(stream.name()=="Titolo")
             tit=stream.readElementText().toStdString();
@@ -140,7 +140,7 @@ Appuntamento *Importa::xmlToApp(QXmlStreamReader &stream)
 {
     string tit,luogo;
     Dataora in,fi;
-    int col;
+    int col=0;
     while(stream.readNextStartElement()){
         if(stream.name()=="Titolo")
             tit=stream.readElementText().toStdString();
@@ -166,7 +166,7 @@ Appuntamento *Importa::xmlToApp(QXmlStreamReader &stream)
 
 Dataora Importa::xmlToDataOra(QXmlStreamReader &stream)
 {
-    int g,m,a,o,mp,s;//variabili dove salvare i numeri letti
+    int g=0,m=0,a=0,o=0,mp=0,s=0;//variabili dove salvare i numeri letti
     while(stream.readNextStartElement()){
         if(stream.name()=="Giorno")
             g=stream.readElementText().toInt();//conversione di QString in int
@@ -196,7 +196,7 @@ Dataora Importa::xmlToDataOra(QXmlStreamReader &stream)
 
 Data Importa::xmlToData(QXmlStreamReader &stream)
 {
-    int g,m,a;
+    int g=0,m=0,a=0;
     while(stream.readNextStartElement()){
         if(stream.name()=="Giorno")
             g=stream.readElementText().toInt();

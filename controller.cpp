@@ -37,7 +37,7 @@ void Controller::exportEvents()
 
 void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 {
-    Evento* newEvento;
+    Evento* newEvento=nullptr;
 
     switch (obj->type) {
     case 0:

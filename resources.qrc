@@ -7,5 +7,7 @@
         <file>icone/exit.svg</file>
         <file>icone/file.svg</file>
         <file>icone/save.svg</file>
+        <file>icone/book.svg</file>
+        <file>icone/calendar.svg</file>
     </qresource>
 </RCC>
