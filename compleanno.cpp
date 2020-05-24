@@ -21,7 +21,7 @@ std::string Compleanno::descrizioneFull() const{
     text<<"Compleanno"<<"|"<<getTitolo()<<"|"<<getDataInizio().getGiorno()<<"|"<<getDataInizio().getMese()<<"|"<<getDataInizio().getAnno()<<"|";
     text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|"<<getColore()<<"|";
     text<<getDataNascita().getGiorno()<<"|"<<getDataNascita().getMese()<<"|"<<getDataNascita().getAnno();
-    for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
+    for(Data d : getRicorrenze()) { //scorro il vettore delle date ricorrenti
         text<<"|"<<d.getGiorno()<<"|"<<d.getMese()<<"|"<<d.getAnno();
     }
     return text.str();

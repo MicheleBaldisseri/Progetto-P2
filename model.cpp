@@ -45,8 +45,8 @@ void Model::showEvent(const Data & d)
         }
 
         if(r){
-            vector<Data>* v=r->getRicorrenze();
-            for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){//viene passato tutto il vettore per verificare
+            vector<Data> v=r->getRicorrenze();
+            for(vector<Data>::const_iterator c=v.begin();c!=v.end();++c){//viene passato tutto il vettore per verificare
                 if(*c==d)                                                  //se ci sono match tra le ricorrenze
                     selezionati.push_back(cit);
             }

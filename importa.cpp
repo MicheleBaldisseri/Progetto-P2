@@ -34,8 +34,11 @@ bool Importa::import(Model& m)
                                 }
                             }
                         }
-                        if(e!=nullptr)
+                        if(e!=nullptr){
                             m.insert(e);//inserisce e nel modello utilizzando insert
+                            delete e;
+                        }
+
                 }
 
                 lista.close();//chiusura del QFile per evitare conflitti

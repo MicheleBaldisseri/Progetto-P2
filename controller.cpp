@@ -147,6 +147,9 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 
     view->updateList();
 
+    delete obj;
+    delete newEvento;
+
 }
 
 void Controller::eliminaEvento(const int &pos){
@@ -167,6 +170,9 @@ void Controller::modificaEvento(const int &pos){
     DatiEvento* obj = DatiEvento::fromStdString(e->descrizioneFull()); //trasforma l'evento in un DatiEvento per passare i dati alle finestre
 
     view->initializeModifica(obj);
+
+    delete obj;
+    delete e;
 }
 
 

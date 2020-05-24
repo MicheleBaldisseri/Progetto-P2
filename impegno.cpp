@@ -53,7 +53,7 @@ std::string Impegno::descrizioneFull() const{
     text<<getDataInizio().getOre()<<"|"<<getDataInizio().getMinuti()<<"|"<<getDataInizio().getSecondi()<<"|"<<getColore()<<"|";
     text<<getDataFine().getGiorno()<<"|"<<getDataFine().getMese()<<"|"<<getDataFine().getAnno()<<"|";
     text<<getDataFine().getOre()<<"|"<<getDataFine().getMinuti()<<"|"<<getDataFine().getSecondi();
-    for(Data d : *getRicorrenze()) { //scorro il vettore delle date ricorrenti
+    for(Data d : getRicorrenze()) { //scorro il vettore delle date ricorrenti
         text<<"|"<<d.getGiorno()<<"|"<<d.getMese()<<"|"<<d.getAnno();
     }
     return text.str();

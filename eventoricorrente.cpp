@@ -9,14 +9,14 @@ void EventoRicorrente::addRicorrenza(const Data& d){
     ricorrenze.push_back(d);     //controllare condivisione di memoria!
 }
 
-vector<Data>* EventoRicorrente::getRicorrenze() const{
-    return new vector<Data>(ricorrenze);
+vector<Data> EventoRicorrente::getRicorrenze() const{
+    return ricorrenze;
 }
 
 bool EventoRicorrente::operator==(const Evento & e) const{
     const EventoRicorrente* er = dynamic_cast<const EventoRicorrente*>(&e);
     if(er){
-        return Evento::operator==(e) && ricorrenze==*(er->getRicorrenze());
+        return Evento::operator==(e) && ricorrenze==(er->getRicorrenze());
     }else{
         return false;
     }

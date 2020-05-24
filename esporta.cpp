@@ -100,7 +100,7 @@ void Esporta::impToXML(QXmlStreamWriter &stream, Impegno *i){
     stream.writeEndElement();
     stream.writeTextElement("Colore",QString::number(i->getColore()));
     stream.writeStartElement("Ricorrenze");
-    for(Data d : *(i->getRicorrenze())) { //scorro il vettore delle date ricorrenti
+    for(Data d : (i->getRicorrenze())) { //scorro il vettore delle date ricorrenti
         stream.writeStartElement("Ricor");
         stream.writeTextElement("Giorno",QString::number(d.getGiorno()));
         stream.writeTextElement("Mese",QString::number(d.getMese()));
