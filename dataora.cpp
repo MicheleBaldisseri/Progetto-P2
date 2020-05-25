@@ -11,22 +11,22 @@ Dataora::Dataora(const Data &d, const Orario &o):Data(d.getGiorno(),d.getMese(),
 
 bool Dataora::operator==(const Dataora &d) const
 {
-    return this->Data::operator ==(d) && this->Orario::operator ==(d);
+    return Data::operator ==(d) && Orario::operator ==(d);
 }
 
 bool Dataora::operator!=(const Dataora &d) const
 {
-    return this->Data::operator !=(d) || this->Orario::operator !=(d);
+    return Data::operator !=(d) || Orario::operator !=(d);
 }
 
 bool Dataora::operator<(const Dataora &d) const
 {
-    return this->Data::operator<(d)? true : (this->Data::operator ==(d)? (this->Orario::operator <(d)? true : false) : false);
+    return Data::operator<(d)? true : (Data::operator ==(d)? (Orario::operator <(d)? true : false) : false);
 }
 
 bool Dataora::operator>(const Dataora &d) const
 {
-    return this->Data::operator >(d)? true : (this->Data::operator ==(d)? (this->Orario::operator >(d)? true : false) : false);
+    return Data::operator >(d)? true : (Data::operator ==(d)? (Orario::operator >(d)? true : false) : false);
 }
 
 unsigned int Dataora::operator-(const Dataora &d) const

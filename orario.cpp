@@ -2,7 +2,7 @@
 
 Orario::Orario(int o, int m, int s){
     if(o<0 || o>23 || m<0 || m>59 || s<0 || s>59)
-        throw std::invalid_argument("Input orario non valido");
+        sec=0;
     else sec= o*3600+ m*60+ s;
 }
 
@@ -59,7 +59,6 @@ std::string Orario::getOrario() const{
 
 Orario Orario::operator-(const Orario &o) const
 {
-
     Orario aux;
     int secondi=sec-o.sec;
 
@@ -93,10 +92,7 @@ bool Orario::operator>(const Orario &o) const
     else return false;
 }
 
-unsigned int Orario::getCampoDati() const
-{
-    return sec;
-}
+unsigned int Orario::getCampoDati() const {return sec;}
 
 
 ostream& operator<<(ostream& os, const Orario& o) {

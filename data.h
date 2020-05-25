@@ -11,9 +11,14 @@ std::ostream& operator<<(std::ostream&, const Data&);
 class Data{
     friend std::ostream& operator<<(std::ostream&, const Data&);
 public:
-    //costruttore di default
+    //costruttore default
     Data();
-    //costruttore a 3 parametri
+    /**
+     * @brief costruttore completo
+     * @param giorno
+     * @param mese
+     * @param anno
+     */
     Data(unsigned int gg, unsigned int mm, unsigned int aa);
     //distruttore
     ~Data();
@@ -23,34 +28,56 @@ public:
     Data& operator=(const Data& d);
 
 
-    //restituisce true se l'anno d'invocazione è bisestile
+    /**
+     * @brief determina se l'anno è bisestile
+     * @return restituisce true se l'anno d'invocazione è bisestile
+     */
     bool bisestile() const;
-    //restituisce la data completa sottoforma di stringa
+    /**
+     * @return restituisce la data completa sottoforma di stringa
+     */
     std::string getData() const;
-    //modifica l'oggetto d'invocazione aumentandolo di g giorni
+    /**
+     * @brief modifica l'oggetto d'invocazione aumentandone i giorni
+     * @param giorni da aumentare
+     */
     void avanzaGiorni(unsigned int g);
-    //modifica l'oggetto d'invocazione aumentandolo di m mesi
+    /**
+     * @brief modifica l'oggetto d'invocazione aumentandone i mesi
+     * @param mesi da aumentare
+     */
     void avanzaMesi(unsigned int m);
-    //modifica l'oggetto d'invocazione aumentandolo di a anni
+    /**
+     * @brief modifica l'oggetto d'invocazione aumentandone gli anni
+     * @param anni da aumentare
+     */
     void avanzaAnni(unsigned int a);
-    //ritorna il numero di giorno per arrivare a fine mese dal giorno corrente
+    /**
+     * @brief comunica quanti giorni mancano per arrivare a fine mese dal giorno corrente
+     * @return ritorna il numero di giorno per arrivare a fine mese
+     */
     unsigned int giorniFineMese() const;
-    //conta gli anni bisestili prima della data d
 
-
-    //ritorna il mese dell'oggetto d'invocazione
+    //getters
     unsigned int getMese() const;
-    //ritorna il giorno dell'oggetto d'invocazione
     unsigned int getGiorno() const;
-    //ritorna l'anno dell'oggetto d'invocazione
     unsigned int getAnno() const;
-    //restituisce i giorni del mese dell'oggetto d'invocazione
+    /**
+     * @return restituisce i giorni del mese dell'oggetto d'invocazione
+     */
     unsigned int getGiorniMese() const;
-    //ritorna il giorno della settimana
+    /**
+     * @return ritorna il giorno della settimana
+     */
     unsigned int getGiornoSettimana() const;
-    //ritorna la data annuale del giorno considerato, ovvero il numero di giorni trascorsi dall'inizio dell'anno fino al giorno stesso (compreso)
+    /**
+     * @return ritorna la data annuale del giorno considerato, ovvero il numero di giorni
+     *          trascorsi dall'inizio dell'anno fino al giorno stesso (compreso)
+     */
     unsigned int getGiornoDellAnno() const;
-    //ritorna il giorno della settimana sottoforma di stringa
+    /**
+     * @return ritorna il giorno della settimana sottoforma di stringa
+     */
     std::string getStringGs(int g) const;
 
     //setters
@@ -64,14 +91,22 @@ public:
     bool operator!=(const Data& d) const;
     bool operator<(const Data& d) const;
     bool operator>(const Data& d) const;
+    /**
+     * @return ritorna i giorni di differenza
+     */
     unsigned int operator-(const Data& d) const;
 
 private:
     unsigned int giorno, mese, anno;
     settimana giorno_settimana;
-    //ritorna il numero di anni bisestili tra l'anno 0 e quello dell'obj
+    /**
+     * @brief metodo usato dall'operator-
+     * @return ritorna il numero di anni bisestili tra l'anno 0 e quello dell'obj
+     */
     static unsigned int countLeapYears(const Data &d);
 };
+
 //overload operatore di output
 std::ostream& operator<<(std::ostream& os, const Data& d);
+
 #endif // DATA_H

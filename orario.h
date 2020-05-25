@@ -5,9 +5,17 @@ using std::ostream;
 
 class Orario{
 public:
-    //costruttore ore-min-sec
+    /**
+     * @brief costruttore completo
+     * @param ore
+     * @param minuti
+     * @param secondi
+     */
     Orario(int o=0,int m=0,int s=0);
-    //costruttore sec
+    /**
+     * @brief costruttore 1 param.
+     * @param secondi
+     */
     Orario(unsigned int s);
     //costruttore di copia
     Orario(const Orario& o);
@@ -21,27 +29,30 @@ public:
     int getMinuti() const;
     int getSecondi() const;
     std::string getOrario() const;
-
-    unsigned int getCampoDati() const;//meglio mettere in protected?
+    unsigned int getCampoDati() const;
 
     //setters
     void setOre(int o);
     void setMinuti(int m);
     void setSecondi(int s);
 
-    //avanza di "o" ore l'oggetto d'invocazione
+    /**
+     * @brief avanza le ore dell'obj d'invocazione
+     * @param ore da avanzare
+     */
     void avanzaOre(int o);
 
     //overload operatori
-    Orario operator-(const Orario& o) const;
+    Orario operator-(const Orario& o) const; //ritorna la differenza in "durata"
     bool operator==(const Orario& o) const;
     bool operator!=(const Orario& o) const;
     bool operator<(const Orario& o) const;
     bool operator>(const Orario& o) const;
-
 private:
     unsigned int sec;
 };
+
 //overload operatore di output
 std::ostream& operator<<(std::ostream&, const Orario&);
+
 #endif // ORA_H
