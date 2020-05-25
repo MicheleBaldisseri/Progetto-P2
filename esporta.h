@@ -4,14 +4,15 @@
 #include <QFile>
 #include <QXmlStreamWriter>
 #include "model.h"
+#include "smartevento.h"
 
 class Esporta
 {
 private:
     QFile lista;//QFile dove salvare
-    Lista<Evento*> l;
+    Lista<SmartEvento> l;
 public:
-    Esporta(Lista<Evento*>&);
+    Esporta(Lista<SmartEvento>&);
     bool esport();//true se l'export va a buon fine, false altrimenti
     void appToXML(QXmlStreamWriter&,Appuntamento*);//esporta appuntamento
     void promToXML(QXmlStreamWriter&,Promemoria*);//esporta promemoria

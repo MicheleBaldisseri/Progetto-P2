@@ -9,10 +9,10 @@ bool Model::insert(Evento *e)
     else return false;
 }
 
-Lista<Evento*>::const_iterator Model::search(Evento *e)const
+Lista<SmartEvento>::const_iterator Model::search(Evento *e)const
 {
-    Lista<Evento*>::const_iterator find=nullptr;//iteratore utilizzato per la restituzione dell'occorrenza
-    for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
+    Lista<SmartEvento>::const_iterator find=nullptr;//iteratore utilizzato per la restituzione dell'occorrenza
+    for(Lista<SmartEvento>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
         if(**cit==*e){
             find=cit;
         }
@@ -23,7 +23,7 @@ Lista<Evento*>::const_iterator Model::search(Evento *e)const
 
 bool Model::erase(Evento *e)
 {
-    Lista<Evento*>::const_iterator find=search(e);//se search ritorna un'occorrenza allora viene cancellato l'evento
+    Lista<SmartEvento>::const_iterator find=search(e);//se search ritorna un'occorrenza allora viene cancellato l'evento
     if(find!=nullptr){
         find=l.erase(find);
         return true;
@@ -37,16 +37,16 @@ bool Model::erase(Evento *e)
 void Model::showEvent(const Data & d)
 {
     selezionati.clear();//selezionati viene prima liberata in caso ci fossero già degli eventi
-    for(Lista<Evento*>::const_iterator cit=l.begin();cit!=l.end();++cit){//ciclo che verifica tutta la Lista
-        EventoRicorrente*r=dynamic_cast<EventoRicorrente*>(*cit);
+    for(Lista<SmartEvento>::const_iterator cit=l.begin();cit!=l.end();++cit){//ciclo che verifica tutta la Lista
+        EventoRicorrente*r=dynamic_cast<EventoRicorrente*>((*cit).operator->());
 
         if(d==(*cit)->getDataInizio()){//
             selezionati.push_back(cit);
         }
 
         if(r){
-            vector<Data>* v=r->getRicorrenze();
-            for(vector<Data>::const_iterator c=v->begin();c!=v->end();++c){//viene passato tutto il vettore per verificare
+            vector<Data> v=r->getRicorrenze();
+            for(vector<Data>::const_iterator c=v.begin();c!=v.end();++c){//viene passato tutto il vettore per verificare
                 if(*c==d)                                                  //se ci sono match tra le ricorrenze
                     selezionati.push_back(cit);
             }
@@ -61,6 +61,7 @@ bool Model::esporta()
             return true;
         else
             return false;
+
 }
 
 bool Model::importa()
@@ -72,10 +73,10 @@ bool Model::importa()
         return false;
 }
 
-vector<Lista<Evento*>::const_iterator> Model::getSelezionati() const{
+vector<Lista<SmartEvento>::const_iterator> Model::getSelezionati() const{
     return selezionati;
 }
 
-Lista<Evento *> Model::getl() const{
+Lista<SmartEvento> Model::getl() const{
     return l;
 }

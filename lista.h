@@ -11,9 +11,9 @@ private:
         T info;
         nodo* next;
         nodo(const T& t=T(),nodo* n=nullptr): info(t), next(n){}
-        ~nodo(){}
+        ~nodo(){if(next!=0)delete next;}
     };
-    nodo* first, *last;
+    nodo* last, *first;
 public:
     static Lista<T>::nodo* copy(nodo* a, nodo*& b);
     Lista();

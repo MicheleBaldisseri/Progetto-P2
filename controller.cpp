@@ -17,7 +17,7 @@ void Controller::updateList(const QDate& date){
     model->showEvent(d);
 
     //passo gli eventi alla vista ad uno ad uno, in modo da mostrarli
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
+    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati();
     for(unsigned int i=0;i<v.size();i++){
         view->addEventList((*(v[i]))->descrizioneMin(),(*(v[i]))->getColore());
     }
@@ -37,7 +37,7 @@ void Controller::exportEvents()
 
 void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 {
-    Evento* newEvento;
+    Evento* newEvento=nullptr;
 
     switch (obj->type) {
     case 0:
@@ -124,8 +124,8 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 
     if(modifica){
         int pos = view->getPos();
-        vector<Lista<Evento*>::const_iterator> v = model->getSelezionati();
-        bool er=model->erase((*(v[pos])));
+        vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati();
+        bool er=model->erase((*(v[pos])).operator->());
         if(!er){
             view->showMessage(er,"Modifica","Errore nella modifica");
             return;
@@ -147,11 +147,14 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 
     view->updateList();
 
+    delete obj;
+    delete newEvento;
+
 }
 
 void Controller::eliminaEvento(const int &pos){
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
-    bool done=model->erase((*(v[pos]))); //prende l'evento selezionato e lo elimina
+    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
+    bool done=model->erase((*(v[pos])).operator->()); //prende l'evento selezionato e lo elimina
     if(done){
         view->showMessage(done,"Eliminazione", "Evento eliminato con successo!");
     }else{
@@ -161,12 +164,15 @@ void Controller::eliminaEvento(const int &pos){
 }
 
 void Controller::modificaEvento(const int &pos){
-    vector<Lista<Evento*>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
+    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
     Evento* e = (*(v[pos]))->clone();
 
     DatiEvento* obj = DatiEvento::fromStdString(e->descrizioneFull()); //trasforma l'evento in un DatiEvento per passare i dati alle finestre
 
     view->initializeModifica(obj);
+
+    delete obj;
+    delete e;
 }
 
 

@@ -1,6 +1,6 @@
 #include "esporta.h"
 
-Esporta::Esporta(Lista<Evento *> &eventi):lista("lista.xml"),l(eventi){}
+Esporta::Esporta(Lista<SmartEvento> &eventi):lista("lista.xml"),l(eventi){}
 
 bool Esporta::esport()
 {
@@ -14,20 +14,20 @@ bool Esporta::esport()
         stream.setAutoFormatting(true);
         stream.writeStartDocument();
         stream.writeStartElement("Evento");
-        for(Lista<Evento*>::const_iterator cit=l.begin(); cit!=l.end();++cit){
-             Appuntamento*a=dynamic_cast<Appuntamento*>(*cit);
+        for(Lista<SmartEvento>::const_iterator cit=l.begin(); cit!=l.end();++cit){
+             Appuntamento*a=dynamic_cast<Appuntamento*>((*cit).operator->());
              if(a)
                  appToXML(stream,a);
              else{
-                 Impegno*i=dynamic_cast<Impegno*>(*cit);
+                 Impegno*i=dynamic_cast<Impegno*>((*cit).operator->());
                  if(i)
                      impToXML(stream,i);
                  else{
-                     Promemoria*p=dynamic_cast<Promemoria*>(*cit);
+                     Promemoria*p=dynamic_cast<Promemoria*>((*cit).operator->());
                      if(p)
                          promToXML(stream,p);
                      else{
-                        Compleanno*c=dynamic_cast<Compleanno*>(*cit);
+                        Compleanno*c=dynamic_cast<Compleanno*>((*cit).operator->());
                         compToXML(stream,c);
                      }
                  }
@@ -38,7 +38,6 @@ bool Esporta::esport()
         lista.close();
         return true;
     }
-
 }
 void Esporta::appToXML(QXmlStreamWriter &stream,Appuntamento *a){
     stream.writeStartElement("Appuntamento");//apertura tag appuntamento
@@ -101,7 +100,7 @@ void Esporta::impToXML(QXmlStreamWriter &stream, Impegno *i){
     stream.writeEndElement();
     stream.writeTextElement("Colore",QString::number(i->getColore()));
     stream.writeStartElement("Ricorrenze");
-    for(Data d : *(i->getRicorrenze())) { //scorro il vettore delle date ricorrenti
+    for(Data d : (i->getRicorrenze())) { //scorro il vettore delle date ricorrenti
         stream.writeStartElement("Ricor");
         stream.writeTextElement("Giorno",QString::number(d.getGiorno()));
         stream.writeTextElement("Mese",QString::number(d.getMese()));
