@@ -41,17 +41,19 @@ void Model::showEvent(const Data & d)
         EventoRicorrente*r=dynamic_cast<EventoRicorrente*>((*cit).operator->());
 
         if(d==(*cit)->getDataInizio()){//
-            selezionati.push_back(cit);
+            selezionati.push_back(*cit);
         }
 
         if(r){
             vector<Data> v=r->getRicorrenze();
             for(vector<Data>::const_iterator c=v.begin();c!=v.end();++c){//viene passato tutto il vettore per verificare
                 if(*c==d)                                                  //se ci sono match tra le ricorrenze
-                    selezionati.push_back(cit);
+                    selezionati.push_back(*cit);
             }
         }
     }
+
+    std::sort(selezionati.begin(),selezionati.end());
 }
 
 bool Model::esporta()
@@ -73,10 +75,6 @@ bool Model::importa()
         return false;
 }
 
-vector<Lista<SmartEvento>::const_iterator> Model::getSelezionati() const{
+vector<SmartEvento> Model::getSelezionati() const{
     return selezionati;
-}
-
-Lista<SmartEvento> Model::getl() const{
-    return l;
 }

@@ -14,6 +14,8 @@ public:
     Evento& operator*() const;
     Evento* operator->() const;
     bool operator==(const SmartEvento& x) const;
+    bool operator>(const SmartEvento& x) const;
+    bool operator<(const SmartEvento& x) const;
     ~SmartEvento();
 };
 

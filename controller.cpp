@@ -17,9 +17,9 @@ void Controller::updateList(const QDate& date){
     model->showEvent(d);
 
     //passo gli eventi alla vista ad uno ad uno, in modo da mostrarli
-    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati();
+    vector<SmartEvento> v = model->getSelezionati();
     for(unsigned int i=0;i<v.size();i++){
-        view->addEventList((*(v[i]))->descrizioneMin(),(*(v[i]))->getColore());
+        view->addEventList(v[i]->descrizioneMin(),v[i]->getColore());
     }
 }
 
@@ -124,8 +124,8 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 
     if(modifica){
         int pos = view->getPos();
-        vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati();
-        bool er=model->erase((*(v[pos])).operator->());
+        vector<SmartEvento> v = model->getSelezionati();
+        bool er=model->erase(v[pos].operator->());
         if(!er){
             view->showMessage(er,"Modifica","Errore nella modifica");
             return;
@@ -153,8 +153,8 @@ void Controller::dataFromWindow(DatiEvento *obj,bool modifica)
 }
 
 void Controller::eliminaEvento(const int &pos){
-    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
-    bool done=model->erase((*(v[pos])).operator->()); //prende l'evento selezionato e lo elimina
+    vector<SmartEvento> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
+    bool done=model->erase(v[pos].operator->()); //prende l'evento selezionato e lo elimina
     if(done){
         view->showMessage(done,"Eliminazione", "Evento eliminato con successo!");
     }else{
@@ -164,8 +164,8 @@ void Controller::eliminaEvento(const int &pos){
 }
 
 void Controller::modificaEvento(const int &pos){
-    vector<Lista<SmartEvento>::const_iterator> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
-    Evento* e = (*(v[pos]))->clone();
+    vector<SmartEvento> v = model->getSelezionati(); //ricavo la lista di eventi mostrati
+    Evento* e = v[pos]->clone();
 
     DatiEvento* obj = DatiEvento::fromStdString(e->descrizioneFull()); //trasforma l'evento in un DatiEvento per passare i dati alle finestre
 
