@@ -2,7 +2,6 @@
 
 Data::Data():giorno(1),mese(1),anno(1980),giorno_settimana(martedi){}
 
-//se l'input non è valido viene richiamato il costruttore di default
 Data::Data(unsigned int gg, unsigned int mm, unsigned int aa):Data(){
     if(mm<=12){
         mese=mm;
@@ -11,7 +10,6 @@ Data::Data(unsigned int gg, unsigned int mm, unsigned int aa):Data(){
         anno=aa;
         giorno_settimana=(settimana)getGiornoSettimana();
     }
-    else throw std::invalid_argument("Input data non valido");
 }
 
 std::string Data::getData() const{
@@ -220,7 +218,7 @@ unsigned int Data::countLeapYears(const Data &d)
 {
     int years = d.getAnno();
 
-    //Se non sono oltre a febbraio non mi serve considerare se l'anno è bisestile
+    //Se non sono oltre febbraio non mi serve considerare se l'anno è bisestile
     if (d.getMese() <= 2)
         years--;
 
