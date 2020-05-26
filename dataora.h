@@ -16,7 +16,7 @@ public:
      * @param minuti
      * @param secondi
      */
-    Dataora(int gg, int mm, int aa, int o, int m, int s);
+    Dataora(const int& gg,const int& mm,const int& aa,const int& o,const int& m,const int& s);
     //costruttore di copia
     Dataora(const Dataora& d);
     //costruttore data+orario
@@ -39,13 +39,13 @@ public:
      * @param secondi da convertire
      * @return ore
      */
-    static double secondsToHours(unsigned int s);
+    static double secondsToHours(const unsigned int& s);
     /**
      * @brief converte secondi->minuti
      * @param secondi da convertire
      * @return minuti
      */
-    static double secondsToMinutes(unsigned int s);
+    static double secondsToMinutes(const unsigned int& s);
 };
 
 //overload operatore di output

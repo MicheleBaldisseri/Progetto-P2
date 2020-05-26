@@ -14,6 +14,7 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
     //solo se l'inserimento è confermato l'evento viene creato
     connect(buttonBox,SIGNAL(accepted()),this,SLOT(creaEvento()));
 
@@ -58,7 +59,6 @@ void PromWindow::creaEvento()
 
 void PromWindow::addPromItems()
 {
-
     QFormLayout *layout = new QFormLayout;
     layout->setContentsMargins(10,18,10,10);
 

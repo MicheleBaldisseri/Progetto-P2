@@ -11,12 +11,12 @@ public:
      * @param minuti
      * @param secondi
      */
-    Orario(int o=0,int m=0,int s=0);
+    Orario(const int& o=0,const int& m=0,const int& s=0);
     /**
      * @brief costruttore 1 param.
      * @param secondi
      */
-    Orario(unsigned int s);
+    Orario(const unsigned int& s);
     //costruttore di copia
     Orario(const Orario& o);
     //overload operatore assegnazione
@@ -32,9 +32,9 @@ public:
     unsigned int getCampoDati() const;
 
     //setters
-    void setOre(int o);
-    void setMinuti(int m);
-    void setSecondi(int s);
+    void setOre(const int& o);
+    void setMinuti(const int& m);
+    void setSecondi(const int& s);
 
     /**
      * @brief avanza le ore dell'obj d'invocazione
