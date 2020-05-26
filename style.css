@@ -1,5 +1,5 @@
 
-* {
+*{
     margin: 0;
     padding: 0;
     background: #191919;
@@ -50,6 +50,26 @@ QToolButton#inserisci::menu-indicator{
 
 QAbstractButton:hover, QMenu::item:selected{
     background: #353535;
+}
+
+QSpinBox::up-button{
+    background-color: #353535;
+}
+
+QSpinBox::down-button{
+    background-color: #353535;
+}
+
+QSpinBox::up-arrow{
+    image: url(:/icone/up.png);
+    width: 7px;
+    height: 7px;
+}
+
+QSpinBox::down-arrow{
+    image: url(:/icone/down.png);
+    width: 7px;
+    height: 7px;
 }
 
 QAbstractButton:pressed {

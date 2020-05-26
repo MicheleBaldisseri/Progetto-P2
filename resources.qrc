@@ -9,5 +9,7 @@
         <file>icone/save.svg</file>
         <file>icone/book.svg</file>
         <file>icone/calendar.svg</file>
+        <file>icone/down.png</file>
+        <file>icone/up.png</file>
     </qresource>
 </RCC>
