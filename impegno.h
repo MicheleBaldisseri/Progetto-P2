@@ -12,14 +12,14 @@ private:
 public:
     Impegno();
     //costruttore con date ricorrenti già create
-    Impegno(string, Dataora, Dataora, vector<Data>, Color=colorePred);
+    Impegno(const string& tit, const Dataora& di, const Dataora& df, const vector<Data>& v, const Color& c =colorePred);
     /*
      * costruttore con date ricorrenti create automaticamente
-     * ModeRicorrenza definisce il tipo di intervallo
-     * interval indica ogni quanti intervalli
-     * nRic indica quante ricorrenze scrivere
+     * ModeRicorrenza: definisce il tipo di intervallo
+     * interval: indica ogni quanti intervalli
+     * nRic: indica quante ricorrenze scrivere
     */
-    Impegno(string, Dataora, Dataora, ModeRicorrenza, int interval, int nRic, Color=colorePred);
+    Impegno(const string& tit, const Dataora& di, const Dataora& df, const ModeRicorrenza& mode, const int& interval, const int& nRic, const Color& c =colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

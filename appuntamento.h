@@ -9,7 +9,7 @@ private:
     static Color colorePred; //Colore predefinito, per creare tutti i tipi eventi con lo stesso colore
 public:
     Appuntamento();
-    Appuntamento(string, Dataora, Dataora, string, Color=colorePred);
+    Appuntamento(const string& tit, const Dataora& di, const Dataora& df, const string& l, const Color& c =colorePred);
 
     string descrizioneMin() const;
     string descrizioneFull() const;

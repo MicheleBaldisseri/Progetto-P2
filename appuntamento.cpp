@@ -3,7 +3,7 @@
 
 Appuntamento::Appuntamento() : EventoDurata(), luogo(""){}
 
-Appuntamento::Appuntamento(std::string s, Dataora di, Dataora df, std::string l, Color c) : Evento (s,di,c), EventoDurata(s,di,df,c), luogo(l){
+Appuntamento::Appuntamento(const string& tit, const Dataora& di, const Dataora& df, const string& l, const Color& c) : Evento (tit,di,c), EventoDurata(tit,di,df,c), luogo(l){
     std::size_t pos = 0;
     while ((pos = luogo.find('|',pos)) != std::string::npos) {
          luogo.replace(pos, 1, " ");

@@ -2,7 +2,7 @@
 
 Compleanno::Compleanno() : EventoRicorrente(), dataNascita(){}
 
-Compleanno::Compleanno(std::string s, Dataora di, Data dn, int limit, Color c) : Evento(s,di,c), dataNascita(dn){
+Compleanno::Compleanno(const string& nome, const Dataora& di, const Data& dn, const int& limit, const Color& c) : Evento(nome,di,c), dataNascita(dn){
     Data d=getDataInizio();
     for(int i=0;i<limit;i++){//creazione delle ricorrenze
         d.avanzaAnni(1);
@@ -12,7 +12,7 @@ Compleanno::Compleanno(std::string s, Dataora di, Data dn, int limit, Color c) :
 
 std::string Compleanno::descrizioneMin() const{
     std::stringstream text;
-    text<<"Compleanno di "<<getTitolo()<<"\nEta': "<<((getDataInizio().getAnno())-(getDataNascita().getAnno()));
+    text<<"Compleanno di "<<getTitolo()<<"\nEta': "<<((getDataInizio().getAnno())-(getDataNascita().getAnno()))<< " anni";
     return text.str();
 }
 

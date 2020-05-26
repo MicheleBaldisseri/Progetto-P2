@@ -2,7 +2,7 @@
 
 EventoDurata::EventoDurata() : Evento(), dataFine(){}
 
-EventoDurata::EventoDurata(std::string s, Dataora di, Dataora df, Color c) : Evento(s,di,c), dataFine(df){
+EventoDurata::EventoDurata(const string& tit, const Dataora& di, const Dataora& df, const Color& c) : Evento(tit,di,c), dataFine(df){
     if(dataFine<di){
         dataFine=di;
     }

@@ -10,7 +10,7 @@ private:
     vector<Data> ricorrenze;
 public:
     EventoRicorrente();
-    EventoRicorrente(string, Dataora, vector<Data>, Color);
+    EventoRicorrente(const string& tit, const Dataora& di, const vector<Data>& ric, const Color& c);
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;

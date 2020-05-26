@@ -2,7 +2,7 @@
 
 Promemoria::Promemoria():Evento(), desc() {}
 
-Promemoria::Promemoria(std::string s, Dataora di, std::string d, Color c) : Evento(s,di,c), desc(d) {
+Promemoria::Promemoria(const string& tit, const Dataora& di, const string& d, const Color& c) : Evento(tit,di,c), desc(d) {
 
     std::size_t pos = 0;
     while ((pos = desc.find('|',pos)) != std::string::npos) {

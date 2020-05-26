@@ -2,10 +2,10 @@
 
 Impegno::Impegno() : Evento() {}
 
-Impegno::Impegno(std::string s, Dataora di, Dataora df, vector<Data> v, Color c)
-    : Evento(s,di,c), EventoDurata(s,di,df,c), EventoRicorrente(s,di,v,c) {}
+Impegno::Impegno(const string& tit, const Dataora& di, const Dataora& df, const vector<Data>& v, const Color& c)
+    : Evento(tit,di,c), EventoDurata(tit,di,df,c), EventoRicorrente(tit,di,v,c) {}
 
-Impegno::Impegno(std::string s, Dataora di, Dataora df, ModeRicorrenza mode, int interval, int nRic, Color c) : Evento(s,di,c), EventoDurata(s,di,df,c){
+Impegno::Impegno(const string& tit, const Dataora& di, const Dataora& df, const ModeRicorrenza& mode, const int& interval, const int& nRic, const Color& c) : Evento(tit,di,c), EventoDurata(tit,di,df,c){
     Data d=getDataInizio();
     switch (mode) { //creazione automatica delle ricorrenze, in base al tipo di intervallo
     case 0: //giorni

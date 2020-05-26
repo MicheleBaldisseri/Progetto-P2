@@ -7,7 +7,7 @@ private:
     Dataora dataFine;
 public:
     EventoDurata();
-    EventoDurata(string, Dataora, Dataora, Color);
+    EventoDurata(const string& tit, const Dataora& di, const Dataora& df, const Color& c);
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;

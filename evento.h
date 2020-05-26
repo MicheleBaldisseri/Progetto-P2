@@ -19,7 +19,7 @@ public:
     //costruttore standard
     Evento();
     //costruttore con campi classico per classi derivate
-    Evento(string, Dataora, Color);
+    Evento(const string& tit, const Dataora& di, const Color& c);
 
     //Descrizione delle informazioni basi, con formattazione e descrizione per migliore lettura
     virtual string descrizioneMin() const = 0;

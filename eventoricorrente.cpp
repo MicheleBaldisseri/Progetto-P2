@@ -2,8 +2,8 @@
 
 EventoRicorrente::EventoRicorrente() : Evento(){}
 
-EventoRicorrente::EventoRicorrente(std::string s, Dataora di, vector<Data> v, Color c)
-    : Evento(s,di,c), ricorrenze(v){}
+EventoRicorrente::EventoRicorrente(const string& tit, const Dataora& di, const vector<Data>& ric, const Color& c)
+    : Evento(tit,di,c), ricorrenze(ric){}
 
 void EventoRicorrente::addRicorrenza(const Data& d){
     ricorrenze.push_back(d);     //controllare condivisione di memoria!

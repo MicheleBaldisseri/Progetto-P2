@@ -4,7 +4,7 @@ using std::string;
 
 Evento::Evento() : titolo(""), dataInizio(), colore(white){}
 
-Evento::Evento(string s, Dataora di, Color c) : titolo(s), dataInizio(di), colore(c){
+Evento::Evento(const string& tit, const Dataora& di, const Color& c) : titolo(tit), dataInizio(di), colore(c){
     std::size_t pos = 0;
     while ((pos = titolo.find('|',pos)) != std::string::npos) {
          titolo.replace(pos, 1, " ");
