@@ -22,7 +22,7 @@ CompWindow::CompWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     setWindowTitle(tr("Compleanno"));
 
-    setMinimumSize(280,150);
+    setFixedSize(280,150);
 
     modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
@@ -69,7 +69,7 @@ void CompWindow::addCompItems()
     colorChoise->addItem("Rosso");
     colorChoise->addItem("Verde");
     colorChoise->addItem("Giallo");
-    colorChoise->addItem("Arancione - predefinito");
+    colorChoise->addItem("Arancione - pred.");
     colorChoise->addItem("Nero");
     colorChoise->addItem("Blu");
     colorChoise->addItem("Viola");
@@ -77,16 +77,6 @@ void CompWindow::addCompItems()
 
     //setta il selezionato di default
     colorChoise->setCurrentIndex(4);
-
-    QColor orangeColor(255,165,0);
-    colorChoise->setItemData( 7, QColor( Qt::magenta ), Qt::TextColorRole );
-    colorChoise->setItemData( 3, QColor( Qt::yellow), Qt::TextColorRole );
-    colorChoise->setItemData( 1, QColor( Qt::red ), Qt::TextColorRole );
-    colorChoise->setItemData( 2, QColor( Qt::green ), Qt::TextColorRole );
-    colorChoise->setItemData( 6, QColor( Qt::cyan ), Qt::TextColorRole );
-    colorChoise->setItemData( 0, QColor( Qt::white ), Qt::TextColorRole );
-    colorChoise->setItemData( 4, orangeColor, Qt::TextColorRole );
-    colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     formGroupBox->setLayout(layout);
 

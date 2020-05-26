@@ -23,7 +23,7 @@ ImpWindow::ImpWindow(QWidget *parent, const QDate &selDate, DatiEvento* e) : QDi
 
     setWindowTitle(tr("Impegno"));
 
-    setMinimumSize(300,150);
+    setFixedSize(340,170);
 
     modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
@@ -85,16 +85,6 @@ void ImpWindow::addImpItems()
 
     //setta il selezionato di default
     colorChoise->setCurrentIndex(7);
-
-    QColor orangeColor(255,165,0);
-    colorChoise->setItemData( 7, QColor( Qt::magenta ), Qt::TextColorRole );
-    colorChoise->setItemData( 3, QColor( Qt::yellow), Qt::TextColorRole );
-    colorChoise->setItemData( 1, QColor( Qt::red ), Qt::TextColorRole );
-    colorChoise->setItemData( 2, QColor( Qt::green ), Qt::TextColorRole );
-    colorChoise->setItemData( 6, QColor( Qt::cyan ), Qt::TextColorRole );
-    colorChoise->setItemData( 0, QColor( Qt::white ), Qt::TextColorRole );
-    colorChoise->setItemData( 4, orangeColor, Qt::TextColorRole );
-    colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     QHBoxLayout* time= new QHBoxLayout;
 

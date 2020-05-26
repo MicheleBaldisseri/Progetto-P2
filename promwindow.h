@@ -14,6 +14,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QTimeEdit>
+#include <QSizePolicy>
 #include <QColor>
 #include <QMessageBox>
 #include "datievento.h"

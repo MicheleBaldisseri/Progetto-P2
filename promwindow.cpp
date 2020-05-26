@@ -8,7 +8,7 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
     //allestimento della finestra
     addPromItems();
     bigEditor = new QPlainTextEdit(this);
-    bigEditor->setFixedHeight(100);
+    bigEditor->setFixedHeight(50);
     bigEditor->setPlaceholderText(tr("Inserisci qui la descrizione... "));
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Close);
 
@@ -25,7 +25,7 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     setWindowTitle(tr("Promemoria"));
 
-    setMinimumSize(280,250);
+    setFixedSize(280,210);
 
     modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
@@ -86,16 +86,6 @@ void PromWindow::addPromItems()
 
     //setta il selezionato di default
     colorChoise->setCurrentIndex(1);
-
-    QColor orangeColor(255,165,0);
-    colorChoise->setItemData( 7, QColor( Qt::magenta ), Qt::TextColorRole );
-    colorChoise->setItemData( 3, QColor( Qt::yellow), Qt::TextColorRole );
-    colorChoise->setItemData( 1, QColor( Qt::red ), Qt::TextColorRole );
-    colorChoise->setItemData( 2, QColor( Qt::green ), Qt::TextColorRole );
-    colorChoise->setItemData( 6, QColor( Qt::cyan ), Qt::TextColorRole );
-    colorChoise->setItemData( 0, QColor( Qt::white ), Qt::TextColorRole );
-    colorChoise->setItemData( 4, orangeColor, Qt::TextColorRole );
-    colorChoise->setItemData( 8, QColor( Qt::gray ), Qt::TextColorRole );
 
     formGroupBox->setLayout(layout);
 }

@@ -72,6 +72,26 @@ QSpinBox::down-arrow{
     height: 7px;
 }
 
+QTimeEdit::up-button{
+    background-color: #353535;
+}
+
+QTimeEdit::down-button{
+    background-color: #353535;
+}
+
+QTimeEdit::up-arrow{
+    image: url(:/icone/up.png);
+    width: 7px;
+    height: 7px;
+}
+
+QTimeEdit::down-arrow{
+    image: url(:/icone/down.png);
+    width: 7px;
+    height: 7px;
+}
+
 QAbstractButton:pressed {
     background: #5A5A5A;
 }

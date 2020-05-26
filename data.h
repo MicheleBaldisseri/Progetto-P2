@@ -27,7 +27,6 @@ public:
     //overload dell'operatore d'assegnazione
     Data& operator=(const Data& d);
 
-
     /**
      * @brief determina se l'anno è bisestile
      * @return restituisce true se l'anno d'invocazione è bisestile
