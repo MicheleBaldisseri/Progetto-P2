@@ -22,7 +22,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) : QWidget(parent), contro
     timer->start(1000);
 }
 
-void MainWindow::addEventList(string text, int color){
+void MainWindow::addEventList(const string& text, const int& color){
     QListWidget* list = static_cast<QListWidget*>(listLayout->itemAt(1)->widget()); //ricava la lista della vista
     QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(text),list); //crea l'item
     QColor c = QColor();
@@ -71,7 +71,7 @@ void MainWindow::clearList(){
     list->clear();
 }
 
-void MainWindow::showMessage(bool done, QString title, QString messagge)
+void MainWindow::showMessage(const bool& done, QString title, QString messagge)
 {
     if(done)
         QMessageBox::information(this, title, messagge);

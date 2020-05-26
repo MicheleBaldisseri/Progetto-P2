@@ -35,13 +35,13 @@ public:
     ~MainWindow()=default;
 
     //aggiunge un evento alla lista della vista
-    void addEventList(string text,int color);
+    void addEventList(const string& text, const int& color);
     //aggiorna la lista della vista
     void updateList();
     //pulisce la lista della vista
     void clearList();
     //mostra un messaggio
-    void showMessage(bool done, QString title, QString messagge);
+    void showMessage(const bool& done, QString title, QString messagge);
     //richiama le finestre di inserimento, ma con i dati dell'evento per modificare
     void initializeModifica(DatiEvento* e);
     int getPos();
