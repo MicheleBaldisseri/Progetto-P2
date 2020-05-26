@@ -21,4 +21,12 @@ bool SmartEvento::operator==(const SmartEvento& x) const {
     return ptr == x.ptr;
 }
 
+bool SmartEvento::operator>(const SmartEvento& x) const {
+    return ptr > x.ptr;
+}
+
+bool SmartEvento::operator<(const SmartEvento& x) const {
+    return ptr < x.ptr;
+}
+
 SmartEvento::~SmartEvento(){delete ptr;}
