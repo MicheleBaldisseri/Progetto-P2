@@ -8,18 +8,18 @@ typename Lista<T>::nodo* Lista<T>::copy(Lista<T>::nodo *a, Lista<T>::nodo *&b){
         return b;
     }
     else{
-        return new nodo(a->info, copy(a->next,b));
+        return new nodo(a->info, copy(a->next,b));//copia profonda dei nodi
     }
 }
 
 template<class T>
-Lista<T>::Lista():last(nullptr),first(nullptr){}
+Lista<T>::Lista():last(nullptr),first(nullptr){}//first e last inizializzati a nullptr
 
 template<class T>
-Lista<T>::Lista(const Lista &c): first(copy(c.first, last)){}
+Lista<T>::Lista(const Lista &c): first(copy(c.first, last)){}//costruttore di copia invoca copy
 
 template<class T>
-Lista<T> &Lista<T>::operator=(const Lista<T> &c){
+Lista<T> &Lista<T>::operator=(const Lista<T> &c){//assegnazione utilizza copy
     if(this != &c){
         delete first;
         first=copy(c.first, last);
@@ -59,10 +59,10 @@ void Lista<T>::push_back(const T &t)
 }
 
 template<class T>
-T& Lista<T>::operator[](int i) const { //se non esiste, throw overflow error
+T& Lista<T>::operator[](int i) const {
     int j=0;
     Lista<T>::const_iterator cit=begin();
-    bool out=false;
+    bool out=false;//out==true se cit punta a last->next
 
     while(j!=i && !out){
         if(cit==end())
@@ -76,7 +76,7 @@ T& Lista<T>::operator[](int i) const { //se non esiste, throw overflow error
         return cit.punt->info;
     }
     else{
-        throw new std::overflow_error("Out of Bounds");
+        throw new std::overflow_error("Out of Bounds");//non esiste elemento alla posizione i errore di overflow
     }
 }
 
@@ -123,7 +123,7 @@ typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc
 
         return first;
     }
-    else{   //nodo da cancellare e' in mezzo
+    else{   //nodo da cancellare è all'interno della lista
         Lista<T>::const_iterator prec=begin();
         Lista<T>::const_iterator cit=begin();
         cit++;
@@ -131,12 +131,12 @@ typename Lista<T>::const_iterator Lista<T>::erase(Lista<T>::const_iterator& canc
             prec++;
         }
 
-        succ=canc.punt->next;
-        prec.punt->next=succ;
+        succ=canc.punt->next;//assegna a succ il nodo next
+        prec.punt->next=succ;//il campo next del nodo precedente punta a succ
 
-        if(last==canc.punt)last=prec.punt; //cancellato ultimo elemento, last si sposta indietro
+        if(last==canc.punt)last=prec.punt; //last punta al penultimo nodo se il nodo da cancellare è l'ultimo
 
-        canc.punt->next=nullptr;
+        canc.punt->next=nullptr;//assegno al campo next del nodo da cancellare nullptr
         delete canc.punt;
 
         return succ;
@@ -152,5 +152,5 @@ typename Lista<T>::const_iterator Lista<T>::begin() const
 template<class T>
 typename Lista<T>::const_iterator Lista<T>::end() const
 {
-    return nullptr;
+    return nullptr;//restituisce il punt al nodo successivo a last, ovvero nullptr
 }
