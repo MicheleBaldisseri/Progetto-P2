@@ -13,7 +13,7 @@ Lista<SmartEvento>::const_iterator Model::search(Evento *e)const
 {
     Lista<SmartEvento>::const_iterator find=nullptr;//iteratore utilizzato per la restituzione dell'occorrenza
     for(Lista<SmartEvento>::const_iterator cit=l.begin();cit!=l.end()&&find==nullptr; ++cit){
-        if(**cit==*e){
+        if(*cit==e){
             find=cit;
         }
     }

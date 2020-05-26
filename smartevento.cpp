@@ -18,15 +18,15 @@ Evento& SmartEvento::operator*() const{return *ptr;}
 Evento* SmartEvento::operator->() const{return ptr;}
 
 bool SmartEvento::operator==(const SmartEvento& x) const {
-    return ptr == x.ptr;
+    return *ptr == *(x.ptr);
 }
 
 bool SmartEvento::operator>(const SmartEvento& x) const {
-    return ptr > x.ptr;
+    return *ptr > *(x.ptr);
 }
 
 bool SmartEvento::operator<(const SmartEvento& x) const {
-    return ptr < x.ptr;
+    return *ptr < *(x.ptr);
 }
 
 SmartEvento::~SmartEvento(){delete ptr;}
