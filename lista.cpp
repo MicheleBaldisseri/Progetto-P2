@@ -59,28 +59,6 @@ void Lista<T>::push_back(const T &t)
 }
 
 template<class T>
-T& Lista<T>::operator[](int i) const {
-    int j=0;
-    Lista<T>::const_iterator cit=begin();
-    bool out=false;//out==true se cit punta a last->next
-
-    while(j!=i && !out){
-        if(cit==end())
-            out=true;
-        else{
-            ++j;
-            ++cit;
-        }
-    }
-    if(j==i) {
-        return cit.punt->info;
-    }
-    else{
-        throw new std::overflow_error("Out of Bounds");//non esiste elemento alla posizione i errore di overflow
-    }
-}
-
-template<class T>
 typename Lista<T>::const_iterator &Lista<T>::const_iterator::operator++() {
     if (punt)
         punt = punt->next;

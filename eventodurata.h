@@ -7,6 +7,7 @@ private:
     Dataora dataFine;
 public:
     EventoDurata();
+    //costruttore con campi
     EventoDurata(const string& tit, const Dataora& di, const Dataora& df, const Color& c);
 
     virtual string descrizioneMin() const = 0;

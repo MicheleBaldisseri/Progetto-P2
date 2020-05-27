@@ -6,7 +6,7 @@ EventoRicorrente::EventoRicorrente(const string& tit, const Dataora& di, const v
     : Evento(tit,di,c), ricorrenze(ric){}
 
 void EventoRicorrente::addRicorrenza(const Data& d){
-    ricorrenze.push_back(d);     //controllare condivisione di memoria!
+    ricorrenze.push_back(d);
 }
 
 vector<Data> EventoRicorrente::getRicorrenze() const{
