@@ -28,7 +28,6 @@ public:
         ~Lista();
         void push_front(const T& t);//inserisce nodo all'inizio
         void push_back(const T& t);//inserisce nodo alla fine
-        T& operator[](int i) const;
         class const_iterator{//classe iteratore costante amica della classe lista
             friend class Lista<T>;
             private:
