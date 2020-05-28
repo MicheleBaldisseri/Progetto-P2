@@ -19,7 +19,7 @@ public:
      * @param mese
      * @param anno
      */
-    Data(unsigned int gg, unsigned int mm, unsigned int aa);
+    Data(const unsigned int& gg,const unsigned int& mm,const unsigned int& aa);
     //distruttore
     ~Data();
     //costruttore di copia
@@ -40,17 +40,17 @@ public:
      * @brief modifica l'oggetto d'invocazione aumentandone i giorni
      * @param giorni da aumentare
      */
-    void avanzaGiorni(unsigned int g);
+    void avanzaGiorni(const unsigned int& g);
     /**
      * @brief modifica l'oggetto d'invocazione aumentandone i mesi
      * @param mesi da aumentare
      */
-    void avanzaMesi(unsigned int m);
+    void avanzaMesi(const unsigned int& m);
     /**
      * @brief modifica l'oggetto d'invocazione aumentandone gli anni
      * @param anni da aumentare
      */
-    void avanzaAnni(unsigned int a);
+    void avanzaAnni(const unsigned int& a);
     /**
      * @brief comunica quanti giorni mancano per arrivare a fine mese dal giorno corrente
      * @return ritorna il numero di giorno per arrivare a fine mese
@@ -77,13 +77,13 @@ public:
     /**
      * @return ritorna il giorno della settimana sottoforma di stringa
      */
-    std::string getStringGs(int g) const;
+    std::string getStringGs(const int& g) const;
 
     //setters
-    void setGiorno(unsigned int x);
-    void setMese(unsigned int x);
-    void setAnno(unsigned int x);
-    void setData(unsigned int gg,unsigned int mm,unsigned int aa);
+    void setGiorno(const unsigned int& x);
+    void setMese(const unsigned int& x);
+    void setAnno(const unsigned int& x);
+    void setData(const unsigned int& gg,const unsigned int& mm,const unsigned int& aa);
 
     //overload operatori
     bool operator==(const Data& d) const;

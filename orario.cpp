@@ -1,12 +1,12 @@
 #include "orario.h"
 
-Orario::Orario(int o, int m, int s){
+Orario::Orario(const int& o, const int& m, const int& s){
     if(o<0 || o>23 || m<0 || m>59 || s<0 || s>59)
         sec=0;
     else sec= o*3600+ m*60+ s;
 }
 
-Orario::Orario(unsigned int s):sec(s){}
+Orario::Orario(const unsigned int &s):sec(s){}
 
 Orario::Orario(const Orario & o):sec(o.sec){}
 
@@ -33,17 +33,17 @@ int Orario::getSecondi() const
     return sec%60;
 }
 
-void Orario::setOre(int o)
+void Orario::setOre(const int &o)
 {
     sec=o*3600+getMinuti()*60+getSecondi();
 }
 
-void Orario::setMinuti(int m)
+void Orario::setMinuti(const int &m)
 {
     sec=getOre()*3600+m*60+getSecondi();
 }
 
-void Orario::setSecondi(int s)
+void Orario::setSecondi(const int &s)
 {
     sec=getOre()*3600+getMinuti()*60+s;
 }

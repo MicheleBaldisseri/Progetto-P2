@@ -24,6 +24,8 @@ AppunWindow::AppunWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): 
 
     setFixedSize(340,180);
 
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
         setForm(e);

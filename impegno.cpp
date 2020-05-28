@@ -7,28 +7,29 @@ Impegno::Impegno(const string& tit, const Dataora& di, const Dataora& df, const 
 
 Impegno::Impegno(const string& tit, const Dataora& di, const Dataora& df, const ModeRicorrenza& mode, const int& interval, const int& nRic, const Color& c) : Evento(tit,di,c), EventoDurata(tit,di,df,c){
     Data d=getDataInizio();
-    switch (mode) { //creazione automatica delle ricorrenze, in base al tipo di intervallo
-    case 0: //giorni
-        for(int i=0;i<nRic;i++){
-            d.avanzaGiorni(interval);
-            addRicorrenza(d);
+    if(interval>=1){
+        switch (mode) { //creazione automatica delle ricorrenze, in base al tipo di intervallo
+        case 0: //giorni
+            for(int i=0;i<nRic;i++){
+                d.avanzaGiorni(interval);
+                addRicorrenza(d);
+            }
+            break;
+        case 1: //settimane
+            for(int i=0;i<nRic;i++){
+                d.avanzaGiorni(interval*7);
+                addRicorrenza(d);
+            }
+            break;
+        case 2: //mesi
+            for(int i=0;i<nRic;i++){
+                d.avanzaMesi(interval);
+                addRicorrenza(d);
+            }
+            break;
+        default: //non crea le ricorrenze
+            break;
         }
-        break;
-    case 1: //settimane
-        for(int i=0;i<nRic;i++){
-            d.avanzaGiorni(interval*7);
-            addRicorrenza(d);
-        }
-        break;
-    case 2: //mesi
-        for(int i=0;i<nRic;i++){
-            d.avanzaMesi(interval);
-            addRicorrenza(d);
-        }
-        break;
-    default:
-        //some kind of error
-        break;
     }
 }
 

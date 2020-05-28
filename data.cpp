@@ -2,7 +2,7 @@
 
 Data::Data():giorno(1),mese(1),anno(1980),giorno_settimana(martedi){}
 
-Data::Data(unsigned int gg, unsigned int mm, unsigned int aa):Data(){
+Data::Data(const unsigned int &gg, const unsigned int &mm, const unsigned int &aa):Data(){
     if(mm<=12){
         mese=mm;
         if(gg<=getGiorniMese())
@@ -32,7 +32,7 @@ unsigned int Data::getGiorniMese() const{
     return gg;
 }
 
-void Data::avanzaAnni(unsigned int a){
+void Data::avanzaAnni(const unsigned int &a){
     anno+=a;
 }
 
@@ -45,7 +45,7 @@ unsigned int Data::giorniFineMese() const
     return g;
 }
 
-void Data::avanzaMesi(unsigned int m){
+void Data::avanzaMesi(const unsigned int &m){
     for(unsigned int i=0; i<m; i++){
 
         //se sono all'ultimo mese dell'anno passo all'anno successivo
@@ -57,7 +57,7 @@ void Data::avanzaMesi(unsigned int m){
     }
 }
 
-void Data::avanzaGiorni(unsigned int g){
+void Data::avanzaGiorni(const unsigned int &g){
     //salvo i giorni del mese corrente in una variabile
     unsigned int ggMese=getGiorniMese();
     //aggiungo i giorni con un ciclo
@@ -126,29 +126,29 @@ unsigned int Data::getGiornoDellAnno() const
     return gg;
 }
 
-std::string Data::getStringGs(int g) const{
+std::string Data::getStringGs(const int &g) const{
     std::string gs[7]={"sabato","domenica","lunedi","martedi","mercoledi","giovedi","venerdi"};
     return gs[g];
 }
 
-void Data::setGiorno(unsigned int x)
+void Data::setGiorno(const unsigned int& x)
 {
     if(x>0 && x<getGiorniMese())
         giorno=x;
 }
 
-void Data::setMese(unsigned int x)
+void Data::setMese(const unsigned int &x)
 {
     if(x>0 && x<12)
         mese=x;
 }
 
-void Data::setAnno(unsigned int x)
+void Data::setAnno(const unsigned int &x)
 {
     anno=x;
 }
 
-void Data::setData(unsigned int gg, unsigned int mm, unsigned int aa)
+void Data::setData(const unsigned int &gg, const unsigned int &mm, const unsigned int &aa)
 {
     giorno=gg;
     mese=mm;

@@ -1,9 +1,8 @@
 #include "dataora.h"
 
-
 Dataora::Dataora():Data(),Orario(){}
 
-Dataora::Dataora(int gg, int mm, int aa, int o, int m, int s):Data(gg,mm,aa),Orario(o,m,s){}
+Dataora::Dataora(const int &gg, const int &mm, const int &aa, const int &o, const int &m, const int &s):Data(gg,mm,aa),Orario(o,m,s){}
 
 Dataora::Dataora(const Dataora &d):Data(d.getGiorno(),d.getMese(),d.getAnno()), Orario(d.getOre(),d.getMinuti(),d.getSecondi()){}
 
@@ -61,13 +60,13 @@ unsigned int Dataora::operator-(const Dataora &d) const
 
 }
 
-double Dataora::secondsToHours(unsigned int s)
+double Dataora::secondsToHours(const unsigned int &s)
 {
     double sec=s, secInHour=3600;
     return (sec/secInHour);
 }
 
-double Dataora::secondsToMinutes(unsigned int s)
+double Dataora::secondsToMinutes(const unsigned int &s)
 {
     double sec=s, secInMinute=60;
     return (sec/secInMinute);

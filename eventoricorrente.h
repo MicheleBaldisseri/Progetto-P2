@@ -10,11 +10,13 @@ private:
     vector<Data> ricorrenze;
 public:
     EventoRicorrente();
+    //costruttore con campi
     EventoRicorrente(const string& tit, const Dataora& di, const vector<Data>& ric, const Color& c);
 
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
 
+    //aggiunge le ricorrenze uno a uno nel vettore delle ricorrenze
     void addRicorrenza(const Data&);
     //ritorna il vettore delle ricorrenze
     vector<Data> getRicorrenze() const;

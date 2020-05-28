@@ -14,6 +14,7 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
     //solo se l'inserimento è confermato l'evento viene creato
     connect(buttonBox,SIGNAL(accepted()),this,SLOT(creaEvento()));
 
@@ -26,6 +27,8 @@ PromWindow::PromWindow(QWidget *parent, const QDate &selDate, DatiEvento* e): QD
     setWindowTitle(tr("Promemoria"));
 
     setFixedSize(280,210);
+
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     modifica=false;
     if(e){ //se viene passato un evento, allora e' una modifica e setto il form
@@ -58,7 +61,6 @@ void PromWindow::creaEvento()
 
 void PromWindow::addPromItems()
 {
-
     QFormLayout *layout = new QFormLayout;
     layout->setContentsMargins(10,18,10,10);
 

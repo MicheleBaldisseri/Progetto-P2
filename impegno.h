@@ -15,9 +15,9 @@ public:
     Impegno(const string& tit, const Dataora& di, const Dataora& df, const vector<Data>& v, const Color& c =colorePred);
     /*
      * costruttore con date ricorrenti create automaticamente
-     * ModeRicorrenza: definisce il tipo di intervallo
+     * mode: definisce il tipo di intervallo (giorni,settimane o mesi)
      * interval: indica ogni quanti intervalli
-     * nRic: indica quante ricorrenze scrivere
+     * nRic: indica quante ricorrenze scrivere (oltre all'evento base)
     */
     Impegno(const string& tit, const Dataora& di, const Dataora& df, const ModeRicorrenza& mode, const int& interval, const int& nRic, const Color& c =colorePred);
 

@@ -1,3 +1,5 @@
+#include "esporta.h"
+#include "importa.h"
 #include "model.h"
 
 bool Model::insert(Evento *e)
