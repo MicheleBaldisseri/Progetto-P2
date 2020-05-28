@@ -1,7 +1,6 @@
 #ifndef IMPORTA_H
 #define IMPORTA_H
 #include <QXmlStreamReader>
-#include <QFile>
 #include "model.h"
 
 class Model;
