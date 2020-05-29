@@ -9,6 +9,16 @@ void EventoRicorrente::addRicorrenza(const Data& d){
     ricorrenze.push_back(d);
 }
 
+void EventoRicorrente::clearRicorrenze()
+{
+    ricorrenze.clear();
+}
+
+void EventoRicorrente::setRicorrenze(const vector<Data> & v)
+{
+    ricorrenze=v;
+}
+
 vector<Data> EventoRicorrente::getRicorrenze() const{
     return ricorrenze;
 }

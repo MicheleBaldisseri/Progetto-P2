@@ -20,7 +20,11 @@ public:
 
     //aggiunge le ricorrenze uno a uno nel vettore delle ricorrenze
     void addRicorrenza(const Data&);
-    //ritorna il vettore delle ricorrenze
+    //pulisce il vettore delle ricorrenze
+    void clearRicorrenze();
+
+    //setters and getters
+    void setRicorrenze(const vector<Data>&);
     vector<Data> getRicorrenze() const;
 
     //operatori di confronto
