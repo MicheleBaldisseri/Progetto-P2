@@ -24,6 +24,15 @@ std::string Promemoria::descrizioneFull() const{
     return text.str();
 }
 
+void Promemoria::setDesc(const string & d)
+{
+    desc=d;
+    std::size_t pos = 0;
+    while ((pos = desc.find('|',pos)) != std::string::npos) {
+         desc.replace(pos, 1, " ");
+    }
+}
+
 std::string Promemoria::getDesc() const{
     return desc;
 }

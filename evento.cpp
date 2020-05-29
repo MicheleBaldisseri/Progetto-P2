@@ -16,6 +16,20 @@ void Evento::setColore(const Color& c){
     colore=c;
 }
 
+void Evento::setTitolo(const std::string & tit)
+{
+    titolo=tit;
+    std::size_t pos = 0;
+    while ((pos = titolo.find('|',pos)) != std::string::npos) {
+         titolo.replace(pos, 1, " ");
+    }
+}
+
+void Evento::setDataInizio(const Dataora & di)
+{
+    dataInizio=di;
+}
+
 Color Evento::getColore() const{
     return colore;
 }

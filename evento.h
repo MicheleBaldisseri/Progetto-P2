@@ -18,15 +18,18 @@ private:
 public:
     //costruttore standard
     Evento();
-    //costruttore con campi classico per classi derivate
+    //costruttore con parametri
     Evento(const string& tit, const Dataora& di, const Color& c);
 
-    //Descrizione delle informazioni basi, con formattazione e descrizione per migliore lettura
+    //Descrizione delle informazioni basi, con formattazione per migliore lettura
     virtual string descrizioneMin() const = 0;
     //Stampa di tutte le informazioni
     virtual string descrizioneFull() const = 0;
 
+    //setters and getters
     void setColore(const Color&);
+    void setTitolo(const string&);
+    void setDataInizio(const Dataora&);
     Color getColore() const;
     string getTitolo() const;
     Dataora getDataInizio() const;
@@ -39,7 +42,10 @@ public:
     virtual bool operator>(const Evento&) const;
     virtual bool operator<(const Evento&) const;
 
+    //distruttore
     virtual ~Evento() = default;
+
+    //clone
     virtual Evento* clone() const = 0;
 
 

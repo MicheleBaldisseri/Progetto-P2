@@ -34,6 +34,15 @@ std::string Appuntamento::descrizioneFull() const{
     return text.str();
 }
 
+void Appuntamento::setLuogo(const string & l)
+{
+    luogo=l;
+    std::size_t pos = 0;
+    while ((pos = luogo.find('|',pos)) != std::string::npos) {
+         luogo.replace(pos, 1, " ");
+    }
+}
+
 std::string Appuntamento::getLuogo() const{
     return luogo;
 }

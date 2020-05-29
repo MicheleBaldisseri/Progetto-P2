@@ -9,10 +9,12 @@ private:
     //vettore di Date, poichè gli eventi ricorrenti mantengono l'orario dell'evento originale
     vector<Data> ricorrenze;
 public:
+    //costruttore di default
     EventoRicorrente();
-    //costruttore con campi
+    //costruttore con parametri
     EventoRicorrente(const string& tit, const Dataora& di, const vector<Data>& ric, const Color& c);
 
+    //metodi polimorfi
     virtual string descrizioneMin() const = 0;
     virtual string descrizioneFull() const = 0;
 
@@ -21,10 +23,13 @@ public:
     //ritorna il vettore delle ricorrenze
     vector<Data> getRicorrenze() const;
 
+    //operatori di confronto
     virtual bool operator==(const Evento&) const;
     virtual bool operator!=(const Evento&) const;
 
+    //distruttore
     virtual ~EventoRicorrente()=default;
+    //clone
     virtual EventoRicorrente* clone() const = 0;
 };
 

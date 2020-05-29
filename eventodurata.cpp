@@ -8,6 +8,13 @@ EventoDurata::EventoDurata(const string& tit, const Dataora& di, const Dataora& 
     }
 }
 
+void EventoDurata::setDataFine(const Dataora & df)
+{
+    if(dataFine<getDataInizio()){
+        dataFine=getDataInizio();
+    }else dataFine=df;
+}
+
 Dataora EventoDurata::getDataFine() const{
     return dataFine;
 }

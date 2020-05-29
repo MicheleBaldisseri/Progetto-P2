@@ -27,6 +27,11 @@ std::string Compleanno::descrizioneFull() const{
     return text.str();
 }
 
+void Compleanno::setDataNascita(const Data & dn)
+{
+    dataNascita=dn;
+}
+
 Data Compleanno::getDataNascita() const{
     return dataNascita;
 }
