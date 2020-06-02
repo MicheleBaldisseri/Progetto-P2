@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Progetto-P2
+TARGET = QAgenda
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,13 +24,59 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    appuntamento.cpp \
+    compleanno.cpp \
+    esporta.cpp \
+    evento.cpp \
+    eventodurata.cpp \
+    eventoricorrente.cpp \
+    impegno.cpp \
+    importa.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    data.cpp \
+    orario.cpp \
+    dataora.cpp \
+    promemoria.cpp \
+    model.cpp \
+    controller.cpp \
+    promwindow.cpp \
+    appunwindow.cpp \
+    impwindow.cpp \
+    compwindow.cpp \
+    lista.cpp \
+    datievento.cpp \
+    smartevento.cpp
+
 
 HEADERS += \
-        mainwindow.h
+    appuntamento.h \
+    compleanno.h \
+    esporta.h \
+    evento.h \
+    eventodurata.h \
+    eventoricorrente.h \
+    impegno.h \
+    importa.h \
+    mainwindow.h \
+    data.h \
+    orario.h \
+    dataora.h \
+    promemoria.h \
+    model.h \
+    controller.h \
+    promwindow.h \
+    appunwindow.h \
+    impwindow.h \
+    compwindow.h \
+    lista.h \
+    datievento.h \
+    smartevento.h
 
-FORMS += \
-        mainwindow.ui
+
+FORMS +=
+
+DISTFILES +=
+
+RESOURCES += \
+    resources.qrc
